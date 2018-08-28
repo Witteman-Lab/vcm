@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Méthodes de clarification des valeurs</title>
+		<link rel="icon" href="../../../../witteman-lab.ico">
+		
+		<!-- META -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Méthodes de clarification des valeurs avec contraintes mutuelles">
+		<meta name="author" content="VDPDPC">
+		<!-- Still relevant at this stage? -->
+		<meta name="robots" content="noindex, nofollow">
+		
+		<!-- SCRIPTS -->
+		<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+		<!-- init.js: various stuff required to prepare the application -->
+		<script type="text/javascript" src="../js/init.js" defer></script>
+		<!-- Manager.js: custom class used to manage the interface -->
+		<script type="text/javascript" src="./js/Manager.js" defer></script>
+		<!-- rangeslider.min.js: library used for allowing the sliders to be used using touch design -->
+		<script type="text/javascript" src="../js/rangeslider.min.js" defer></script>
+		
+		<!-- STYLES -->
+		<link rel="stylesheet" type="text/css" href="../css/sliders.css">
+		<link rel="stylesheet" type="text/css" href="../css/rangeslider.css">
+	</head>
+
+	<body>
+		<noscript>Javascript n'est pas activé pour votre navigateur. Javascript devrait être activé afin de pouvoir utiliser l'interface adéquatement.</noscript>
+		<div id="content">
+			<h1>Ce qui compte pour vous</h1>
+			
+			<p id="description">Avant de choisir entre les deux chirurgies, veuillez prendre un instant pour considérer ce qui compte le plus pour vous.
+								Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments.<br />
+								Sachez qu’il n’y a pas de mauvaise réponse.
+			</p>
+			
+			<div id="container" class="container vertical rounded clearfix">
+				
+				<!-- Sliders section -->
+				<div id="sliders">
+					
+					<!-- For displaying the scales for the sliders -->
+					<div id="slidersScale">
+						<span class="sliderScale editableText" id="scaleLeft">Pas du tout important</span>
+						<span class="sliderScale editableText" id="scaleRight">Très important</span>
+					</div>
+					
+					<!-- Container for the sliders -->
+					<div class="slidersContainer">
+						
+						<!-- Container for the slider 1 -->
+						<div class="sliders" id="slider1">
+							
+							<!-- Slider 1 -->
+							<!-- id="rangeslider0" -->
+							<input
+								type="range"
+								class="ranges"
+								id="rangeslider0"
+								step="1"
+								min="0"
+								max="100"
+								value="50" />
+							<input type="hidden" id="rangeslider0_value" name="rangeslider0_value" value="50">
+							
+							<!-- Slider 1 label -->
+							<span class="slidersText editableText" id="colostomy">Éviter une colostomie</span>
+						</div>
+						
+						<!-- Container for the slider 2 -->
+						<div class="sliders" id="slider2">
+							
+							<!-- Slider 2 -->
+							<input
+								type="range"
+								class="ranges"
+								id="rangeslider1"
+								step="1"
+								min="0"
+								max="100"
+								value="50" />
+							<input type="hidden" id="rangeslider1_value" name="rangeslider1_value" value="50">
+							
+							<!-- Slider 2 label -->
+							<span class="slidersText editableText" id="death">Éviter la mort</span>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Graph section -->
+				<div id="graph">
+					
+					<!-- Container for the graphs -->
+					<div id="graphs" class="clearfix">
+						
+						<!-- Graph 1 -->
+						<div class="progress-bar" id="option1">
+							<div class="progress-track">
+								<div id="bar1" class="progress-fill">
+								</div>
+							</div>
+							<p id="option1_text">
+								<span id="option1_value" class="editableText"></span>
+								<span></span>
+							</p>
+						</div>
+						
+						<!-- Graph 2 -->
+						<div class="progress-bar" id="option2">
+							<div class="progress-track">
+								<div id="bar2" class="progress-fill">
+								</div>
+							</div>
+							<p id="option2_text">
+								<span id="option2_value" class="editableText"></span>
+								<span></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</body>
+</html>

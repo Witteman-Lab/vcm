@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Values Clarification Methods</title>
+		<link rel="icon" href="../../../../witteman-lab.ico">
+		
+		<!-- META -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Values Clarification Methods with mutual constraints">
+		<meta name="author" content="VDPDPC">
+		<!-- Still relevant at this stage? -->
+		<meta name="robots" content="noindex, nofollow">
+		
+		<!-- SCRIPTS -->
+		<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+		<!-- init.js: various stuff required to prepare the application -->
+		<script type="text/javascript" src="../js/init.js" defer></script>
+		<!-- Manager.js: custom class used to manage the interface -->
+		<script type="text/javascript" src="./js/Manager.js" defer></script>
+		<!-- rangeslider.min.js: library used for allowing the sliders to be used using touch design -->
+		<script type="text/javascript" src="../js/rangeslider.min.js" defer></script>
+		
+		<!-- STYLES -->
+		<link rel="stylesheet" type="text/css" href="../css/sliders.css">
+		<link rel="stylesheet" type="text/css" href="../css/rangeslider.css">
+	</head>
+
+	<body>
+		<noscript>JavaScript is disabled on your browser. JavaScript needs to be enabled in order to use the interface efficiently.</noscript>
+		<div id="content">
+			<h1>What matters to you</h1>
+
+			<p id="description">Before you make a choice between the two surgeries, please take a moment to consider what matters most to you.
+								Use the sliders below while you consider your feelings.<br />
+								Remember that there are no wrong answers.
+			</p>
+			
+			<div id="container" class="container vertical rounded clearfix">
+				
+				<!-- Sliders section -->
+				<div id="sliders">
+					
+					<!-- For displaying the scales for the sliders -->
+					<div id="slidersScale">
+						<span class="sliderScale editableText" id="scaleLeft">Doesn't matter at all</span>
+						<span class="sliderScale editableText" id="scaleRight">Matters a lot</span>
+					</div>
+					
+					<!-- Container for the sliders -->
+					<div class="slidersContainer">
+						
+						<!-- Container for the slider 1 -->
+						<div class="sliders" id="slider1">
+							
+							<!-- Slider 1 -->
+							<!-- id="rangeslider0" -->
+							<input
+								type="range"
+								class="ranges"
+								id="rangeslider0"
+								step="1"
+								min="0"
+								max="100"
+								value="50" />
+							<input type="hidden" id="rangeslider0_value" name="rangeslider0_value" value="50">
+							
+							<!-- Slider 1 label -->
+							<span class="slidersText editableText" id="colostomy">Avoiding a colostomy</span>
+						</div>
+						
+						<!-- Container for the slider 2 -->
+						<div class="sliders" id="slider2">
+							
+							<!-- Slider 2 -->
+							<input
+								type="range"
+								class="ranges"
+								id="rangeslider1"
+								step="1"
+								min="0"
+								max="100"
+								value="50" />
+							<input type="hidden" id="rangeslider1_value" name="rangeslider1_value" value="50">
+							
+							<!-- Slider 2 label -->
+							<span class="slidersText editableText" id="death">Avoiding death</span>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Graph section -->
+				<div id="graph">
+					
+					<!-- Container for the graphs -->
+					<div id="graphs" class="clearfix">
+						
+						<!-- Graph 1 -->
+						<div class="progress-bar" id="option1">
+							<div class="progress-track">
+								<div id="bar1" class="progress-fill">
+								</div>
+							</div>
+							<p id="option1_text">
+								<span id="option1_value" class="editableText"></span>
+								<span></span>
+							</p>
+						</div>
+						
+						<!-- Graph 2 -->
+						<div class="progress-bar" id="option2">
+							<div class="progress-track">
+								<div id="bar2" class="progress-fill">
+								</div>
+							</div>
+							<p id="option2_text">
+								<span id="option2_value" class="editableText"></span>
+								<span></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
