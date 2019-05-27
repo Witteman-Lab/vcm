@@ -1,0 +1,15 @@
+{
+  "currentLanguage" : "en",
+  "title" : "What matters to you",
+  "description1" : "Before you make a choice between the two options, please take a moment to consider what matters most to you.",
+  "description2" : "Use the sliders below while you consider your feelings.",
+  "description3" : "Remember that there are no wrong answers.",
+  "language": "Change language",
+  "left scale label": "Matters a lot",
+  "right scale label": "Doesn’t matter at all",
+  "top slider’s label":"Reason(s) to choose option 1",
+  "LabelGraph1": "Option 1",
+  "LabelGraph2": "Option 2",
+  "labelSelecctedGraph1":"Option 1 fits best with what matters to you",
+  "labelSelecctedGraph2":"Option 2 fits best with what matters to you"
+}
