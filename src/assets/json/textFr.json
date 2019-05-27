@@ -4,12 +4,11 @@
   "description1" : "Avant de choisir entre les deux options, veuillez prendre un instant pour considérer ce qui compte le plus pour vous.",
   "description2" : "Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments.",
   "description3" : "Sachez qu’il n’y a pas de mauvaise réponse.",
-  "language": "Changer la langue",
+  "language": "EN",
   "left scale label": "Très important",
   "right scale label": "Pas important du tout",
   "top slider’s label":"Raison(s) pour choisir l'option 1",
   "LabelGraph1": "Option 1",
   "LabelGraph2": "Option 2",
-  "labelSelecctedGraph1":"Option 1 correspond le mieux à ce qui vous importe",
-  "labelSelecctedGraph2":"Option 2 correspond le mieux à ce qui vous importe"
+  "selecctedGraph": "correspond le mieux à ce qui vous importe"
 }
