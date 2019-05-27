@@ -28,7 +28,11 @@
     import SliderRangeTest from './components/SliderRange_test.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
+<<<<<<< HEAD
+
+=======
     import config from "./assets/json/config.json";
+>>>>>>> b953129a74a58c4d94c0c0998ca80819417305e0
 
     export default {
         name: 'app',

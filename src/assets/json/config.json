@@ -1,7 +1,21 @@
 {
-  "lineHeight":"10",
-  "min": "",
-  "max": "",
-  "backgroundColor": "",
-  "numberOfSlider": 2
+<<<<<<< HEAD
+  "lineHeight":30,
+  "min": 1,
+  "max": 100,
+  "backgroundColor1": "#410e73",
+  "backgroundColor2": "#a8a873",
+  "computedColor1": "#f1f4b6",
+  "computedColor2": "#e6e5ff",
+  "numberSlider": "2",
+  "value1": 50,
+  "value2": 50,
+  "interval": 1,
+  "dotSize": 40
+
+
+
+=======
+
+>>>>>>> b953129a74a58c4d94c0c0998ca80819417305e0
 }
