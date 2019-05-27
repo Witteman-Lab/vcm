@@ -16,7 +16,7 @@
             <!-- <SliderRangeTest></SliderRangeTest> -->
             <!-- <div ref="sliders" v-for="(slider) in this.numberOfSlider" :key="SliderRangeTest.id"> -->
             <div v-for="(slider) in this.numberOfSlider">
-                <SliderRange></SliderRange>
+                <SliderRangeTest></SliderRangeTest>
             </div>
             <span >{{this.labels["top slider’s label"]}}</span>
         </div>
@@ -25,14 +25,14 @@
 </template>
 
 <script>
-    import SliderRangeTest from './components/SliderRange.vue';
+    import SliderRangeTest from './components/SliderRange_test.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
     import config from "./assets/json/config.json";
 
     export default {
         name: 'app',
-        components: {SliderRange},
+        components: {SliderRangeTest},
         data() {
           return {
               isLangauageChanged: true,
