@@ -3,7 +3,8 @@
         <div class="column is-half is-center">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
             <!--<h1>{{this.labels.title}}</h1>-->
-            <a id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</a><br><br/>
+            <!-- <a id="selectLanguage" class="button" v-on:click="this.selectCurrentLanguage">{{this.labels.language}}</a><br><br/> -->
+            <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <p id="description">{{this.labels.description1}}
                 {{this.labels.description2}}
                 {{this.labels.description3}}</p>
@@ -28,27 +29,28 @@
     import SliderRangeTest from './components/SliderRange_test.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
-<<<<<<< HEAD
-
-=======
     import config from "./assets/json/config.json";
->>>>>>> b953129a74a58c4d94c0c0998ca80819417305e0
 
     export default {
         name: 'app',
         components: {SliderRangeTest},
         data() {
           return {
-              isLangauageChanged: true,
+              isLanguageChanged: true,
+              currentLanguage: "",
               sliderRanges: [],
               numberOfSlider: 0
           };
         },
         props: {
-
+            labelSelected: String
         },
         methods: {
-            // METHOD DESCRIPTION
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             * @param none
+             * @return none
+             */
             changeLanguage() {
                 if (this.isLanguageChanged)
                     this.labels = textFr;
@@ -70,9 +72,11 @@
         },
         created(){
             this.labels = textEn;
-
         },
         mounted(){
+            //this.labelSelected = textEn;
+            //localStorage.setItem("language", this.labelSelected);
+            //this.selectCurrentLanguage(this.labelSelected);
             this.numberOfSlider = config.numberOfSlider;
         }
     }
