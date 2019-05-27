@@ -52,7 +52,7 @@
 <script>
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
-    import slider from "./assets/json/config.json";
+    // import slider from "./assets/json/config.json";
     import SliderRange from './components/SliderRange.vue';
 
     export default {
