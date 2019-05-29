@@ -4,12 +4,14 @@
             <vue-slider ref="slider"
                         v-model="value"
                         v-bind="option"
+                        :max="100"
                         :processStyle="option.processStyle"
-                        @change="this.handlechange "
+                        @change="this.handlechange"
                         :contained="true"
                         :duration="inDragging ? 0 : 0.5"
                         @drag-start="() => inDragging = true"
                         @drag-end="() => inDragging = false"
+                        @dragging="drag(value)"
 
             ></vue-slider>
 
@@ -45,7 +47,8 @@
                     inDragging: false,
                     height: config.lineHeight,
                     processStyle: {
-                        backgroundColor:"blue",
+                        //backgroundColor:"blue",
+                        backgroundColor: this.color,
                   },
 
                     dotSize:config.dotSize,
@@ -58,7 +61,9 @@
                 value: 50,
             }
         },
-
+        props: {
+            color: String
+        },
         methods: {
             handlechange() {
                 // i have to use a for loop here to handle the change properly.
@@ -66,6 +71,7 @@
                 // let value = this.$refs.slider.getValue();
                 // console.log("value" , value);
                 let value = this.$refs.slider.getValue();
+                console.log("handlechange", value);
                 return value;
 
 
@@ -78,6 +84,18 @@
                 return index;
 
             },
+            drag(valeur){
+                // console.log("value", this.$refs.slider.getIndex());
+                console.log("drag", valeur);
+                let curIndex = this.$refs.slider.getIndex();
+                valeur  = config.max - curIndex;
+                console.log("valeur opposee", valeur);
+                return valeur;
+                // this.$refs.slider.setValue(valeur);
+
+                // return valeur;
+
+            }
             // setSliderProcessColor(process){
             //
             //     process = this.$refs.slider.processStyle.backgroundColor;
@@ -100,7 +118,7 @@
                     this.value--;
                 }
             })
-
+            console.log(this.color);
         },
 
 

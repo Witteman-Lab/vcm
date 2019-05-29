@@ -18,11 +18,11 @@
             <!-- <div ref="sliders" v-for="(slider) in this.numberOfSlider" :key="SliderRangeTest.id"> -->
 
             <div  v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
-                <SliderRange v-bind:ref="slider"></SliderRange>
-
+                <SliderRange v-bind:ref="slider" :color="red"></SliderRange>
+                <!--<span>{{this.labels.topSliderLabel}}</span>-->
 
             </div>
-            <span >{{this.labels.topSliderLabel}}</span>
+
         </div>
 
   </div>
@@ -68,13 +68,12 @@
                 for(let i=0; i<=this.$refs["its"].length; i++ ) {
                     if (i % 2 == 0) {
 
-                        this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv1;
+                        //this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv1;
                     } else {
 
-                        this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv2;
+                        //this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv2;
                     }
                 }
-         it
 
 
 
@@ -90,18 +89,20 @@
             //this.selectCurrentLanguage(this.labelSelected);
             this.numberOfSlider = config.numberOfSlider;
             document.addEventListener('DOMContentLoaded', () => {
-                //let process = this.$refs[1][0].setSliderProcessColor();
-
-                let process = this.$refs[1][0].setSliderProcessColor("yellow");
-                console.log("process", process);
                 var src = this.$refs[1][0].handlechange();
                 var target = this.$refs[2][0].handlechange();
-                console.log("src", src);
-                console.log("target", target);
-                this.$refs.its[0].style.border = "1px solid red";
-                this.setBackgroundColor();
-            });
 
+                var currDrag = this.$refs[1][0].drag();
+                // if(src <=50){
+                //     console.log(100 - src);
+                //     this.$refs[2][0].setSlider(100-src);
+                // }
+                // console.log("src", src);
+                // console.log("target", target);
+
+                this.setBackgroundColor();
+
+            });
 
         }
     }

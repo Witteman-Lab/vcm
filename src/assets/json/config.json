@@ -3,10 +3,7 @@
   "min": 0,
   "max": 100,
   "processSliderColor" : [
-    {
-      "process1": "#410e73",
-      "process2": "#a8a873"
-    }
+       "#410e73", "#a8a873"
   ],
   "backgroundDivColor" : [
     {
