@@ -3,7 +3,8 @@
         <div class="column is-half is-center">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
             <!--<h1>{{this.labels.title}}</h1>-->
-            <a id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</a><br><br/>
+            <!-- <a id="selectLanguage" class="button" v-on:click="this.selectCurrentLanguage">{{this.labels.language}}</a><br><br/> -->
+            <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <p id="description">{{this.labels.description1}}
                 {{this.labels.description2}}
                 {{this.labels.description3}}</p>
@@ -15,8 +16,11 @@
             <br>
             <!-- <SliderRangeTest></SliderRangeTest> -->
             <!-- <div ref="sliders" v-for="(slider) in this.numberOfSlider" :key="SliderRangeTest.id"> -->
+
             <div  v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
                 <SliderRange v-bind:ref="slider"></SliderRange>
+
+
             </div>
             <span >{{this.labels.topSliderLabel}}</span>
 
@@ -28,27 +32,32 @@
 </template>
 
 <script>
+
     import SliderRange from './components/SliderRange.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
     import config from "./assets/json/config.json";
-
 
     export default {
         name: 'app',
         components: {SliderRange},
         data() {
           return {
-              isLangauageChanged: true,
+              isLanguageChanged: true,
+              currentLanguage: "",
               sliderRanges: [],
               numberOfSlider: 0
           };
         },
         props: {
-
+            labelSelected: String
         },
         methods: {
-            // METHOD DESCRIPTION
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             * @param none
+             * @return none
+             */
             changeLanguage() {
                 if (this.isLanguageChanged)
                     this.labels = textFr;
@@ -132,10 +141,14 @@
         created(){
             this.labels = textEn;
 
-
-
         },
         mounted() {
+
+        },
+        mounted(){
+            //this.labelSelected = textEn;
+            //localStorage.setItem("language", this.labelSelected);
+            //this.selectCurrentLanguage(this.labelSelected);
             this.numberOfSlider = config.numberOfSlider;
             // this.$refs.its[0].style.border = "1px solid red";
              //var value = this.$refs.its[1].handlechange();
