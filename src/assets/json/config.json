@@ -1,11 +1,19 @@
 {
   "lineHeight":30,
-  "min": 1,
+  "min": 0,
   "max": 100,
-  "backgroundColor": "#410e73",
-  "backgroundColor2": "#a8a873",
-  "computedColor": "#f1f4b6",
-  "computedColor2": "#e6e5ff",
+  "processSliderColor" : [
+    {
+      "process1": "#410e73",
+      "process2": "#a8a873"
+    }
+  ],
+  "backgroundDivColor" : [
+    {
+      "backgroundDiv1": "#f1f4b6",
+      "backgroundDiv2": "#e6e5ff"
+    }
+  ],
   "numberOfSlider": 2,
   "value": 50,
   "interval": 1,

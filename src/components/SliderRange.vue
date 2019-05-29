@@ -45,7 +45,7 @@
                     inDragging: false,
                     height: config.lineHeight,
                     processStyle: {
-                        backgroundColor:config.backgroundColor,
+                        backgroundColor:"blue",
                   },
 
                     dotSize:config.dotSize,
@@ -77,12 +77,19 @@
                 let index = this.$refs.slider.getIndex();
                 return index;
 
+            },
+            setSliderProcessColor(process){
+
+                process = this.$refs.slider.processStyle.backgroundColor;
+                // console.log("color", process);
             }
 
 
 
         },
         mounted () {
+
+
             document.body.addEventListener('keydown', (e) => {
                 // console.log("test", this.value1);
                 if (e.keyCode === 39) {
