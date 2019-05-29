@@ -5,9 +5,9 @@
   "description2" : "Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments.",
   "description3" : "Sachez qu’il n’y a pas de mauvaise réponse.",
   "language": "EN",
-  "left scale label": "Très important",
-  "right scale label": "Pas important du tout",
-  "top slider’s label":"Raison(s) pour choisir l'option 1",
+  "leftScaleLabel": "Très important",
+  "rightScaleLabel": "Pas important du tout",
+  "topSliderLabel":"Raison(s) pour choisir l'option 1",
   "LabelGraph1": "Option 1",
   "LabelGraph2": "Option 2",
   "selecctedGraph": "correspond le mieux à ce qui vous importe"
