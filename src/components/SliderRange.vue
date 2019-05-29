@@ -78,11 +78,11 @@
                 return index;
 
             },
-            setSliderProcessColor(process){
-
-                process = this.$refs.slider.processStyle.backgroundColor;
-                // console.log("color", process);
-            }
+            // setSliderProcessColor(process){
+            //
+            //     process = this.$refs.slider.processStyle.backgroundColor;
+            //     // console.log("color", process);
+            // }
 
 
 

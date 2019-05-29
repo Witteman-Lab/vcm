@@ -74,7 +74,7 @@
                         this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv2;
                     }
                 }
-                let process = this.$refs[1][0].setSliderProcessColor();
+         it
 
 
 
