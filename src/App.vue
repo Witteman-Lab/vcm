@@ -10,20 +10,29 @@
                 {{this.labels.description3}}</p>
             <br/>
         </div>
-        <div class="column is-half has-text-centered">
-            <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
-            <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
-            <br>
-            <!-- <SliderRangeTest></SliderRangeTest> -->
-            <!-- <div ref="sliders" v-for="(slider) in this.numberOfSlider" :key="SliderRangeTest.id"> -->
+        <div class="columns is-half is-flex has-text-centered">
+            <!--<span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>-->
+            <!--<span id="scaleRight">{{this.labels.rightScaleLabel}}</span>-->
+            <!--<br>-->
 
-            <div  v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
-                <SliderRange v-bind:ref="slider" :color="red"></SliderRange>
-                <!--<span>{{this.labels.topSliderLabel}}</span>-->
+            <div class="column is-three-quarters-quarter ">
+                <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
+                <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
+                <br>
+                <div v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
+                    <SliderRange v-bind:ref="slider" :processStyle="red"></SliderRange>
 
+                    <!--<span>{{this.labels.topSliderLabel}}</span>-->
+                </div>
+            </div>
+            <div  class="column is-flex ">
+                <Graphics ></Graphics>
             </div>
 
+
+
         </div>
+        <!--<SliderRange v-bind:title="message"></SliderRange>-->
 
   </div>
 </template>
@@ -31,24 +40,26 @@
 <script>
 
     import SliderRange from './components/SliderRange.vue';
+    import Graphics from './components/Graphics.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
     import config from "./assets/json/config.json";
 
     export default {
         name: 'app',
-        components: {SliderRange},
+        components: {SliderRange, Graphics},
         data() {
           return {
               isLanguageChanged: true,
               currentLanguage: "",
               sliderRanges: [],
-              numberOfSlider: 0
+              numberOfSlider: 0,
+              message: "yes",
+
+
           };
         },
-        props: {
-            labelSelected: String
-        },
+        props:{},
         methods: {
             /**
              * ---> ------------------ will be completed soon -------------------

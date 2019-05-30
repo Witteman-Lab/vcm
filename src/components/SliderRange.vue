@@ -1,11 +1,12 @@
 <template>
     <div >
         <div class="flex">
+
             <vue-slider ref="slider"
                         v-model="value"
                         v-bind="option"
                         :max="100"
-                        :processStyle="option.processStyle"
+                        :processStyle="null"
                         @change="this.handlechange"
                         :contained="true"
                         :duration="inDragging ? 0 : 0.5"
@@ -15,15 +16,9 @@
 
             ></vue-slider>
 
-
-            <!--some test to get  value of slider-->
-            <!--<div class="btn-group">-->
-            <!--<button @click="$refs.slider.setValue(50)">setValue</button>-->
-            <!--<button @click="logValue($refs.slider.getValue())">getValue</button>-->
-            <!--<button @click="$refs.slider.setIndex(50)">setIndex</button>-->
-            <!--<button @click="logIndex($refs.slider.getIndex())">getIndex</button>-->
-            <!--</div>-->
         </div>
+        <!--title is just for test purpose-->
+        <div>{{title}}</div>
     </div>
 
 </template>
@@ -35,20 +30,19 @@
     export default {
         components: {VueSlider},
         name: "SliderRange",
+        props:{
+            title: String,
+        },
         data () {
             return {
                 inDragging: false,
-                slider: [],
-                // styleObject1:{
-                //   backgroundColor: config.computedColor1,
-                // },
                 initialValue: config.value,
                 option:{
                     inDragging: false,
                     height: config.lineHeight,
                     processStyle: {
-                        //backgroundColor:"blue",
-                        backgroundColor: this.color,
+                        backgroundColor:"blue",
+
                   },
 
                     dotSize:config.dotSize,
@@ -60,9 +54,6 @@
                 },
                 value: 50,
             }
-        },
-        props: {
-            color: String
         },
         methods: {
             handlechange() {
