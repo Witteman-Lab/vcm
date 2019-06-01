@@ -55,33 +55,7 @@
                 sliderRanges: [],
                 numberOfSlider: 0,
                 message: "yes",
-                options : [
-                    {
-                        inDragging: false,
-                        height: config.lineHeight,
-                        processStyle: {
-                            backgroundColor: '',
-                        },
-                        dotSize:config.dotSize,
-                        min: config.min,
-                        max: config.max,
-                        interval: config.interval,
-                        tooltip: 'none',
-                    },
-                    {
-                        inDragging: false,
-                        height: config.lineHeight,
-                        processStyle: {
-                            backgroundColor: config.processSliderColor[1],
-                        },
-                        dotSize:config.dotSize,
-                        min: config.min,
-                        max: config.max,
-                        interval: config.interval,
-                        tooltip: 'none',
-                    },
-                ],
-
+                options : [],
             };
         },
         props:{},
@@ -102,15 +76,27 @@
             //method for setting background on divq
             setBackgroundColor() {
                 for (let i = 0; i < this.$refs["its"].length; i++) {
-                    for (let j = 0; j < config.backgroundDivColor.length; j++) {
+                    for (let j = 0; j < this.numberOfSlider; j++) {
                         this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[j];
                         i++;
                     }
                 }
             },
-            setSliderColor() {
-                for (let i = 0; i < config.processSliderColor.length; i++) {
-                    this.options[i].processStyle.backgroundColor = config.processSliderColor[i];
+            setOptions() {
+                for (let i = 0; i < this.numberOfSlider; i++) {
+                    let option = {
+                        inDragging: false,
+                        height: config.lineHeight,
+                        processStyle: {
+                            backgroundColor: config.processSliderColor[i],
+                        },
+                        dotSize:config.dotSize,
+                        min: config.min,
+                        max: config.max,
+                        interval: config.interval,
+                        tooltip: 'none',
+                    };
+                    this.options.push(option);
                 }
             }
         },
@@ -129,7 +115,7 @@
                 var currDrag = this.$refs[1][0].drag();
                 this.setBackgroundColor();
             });
-            this.setSliderColor();
+            this.setOptions();
         }
     }
 </script>

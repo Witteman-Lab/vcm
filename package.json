@@ -12,7 +12,8 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
     "vue-slide-bar": "^1.1.9",
-    "vue-slider-component": "^3.0.31"
+    "vue-slider-component": "^3.0.31",
+    "vuejs-progress-bar": "^1.0.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
