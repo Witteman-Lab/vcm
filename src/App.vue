@@ -22,11 +22,9 @@
                 <!--<span>{{this.labels.topSliderLabel}}</span>-->
             </div>
             <br/>
-            <div id="graphics">
-                <Graphics></Graphics>
-                <div>
-
-                </div>
+            <div v-for="(progress, index) in this.numberOfSlider" id="graphics" :key="progress + 'progress'">
+<!--                <Graphics></Graphics>-->
+                <VerticalProgressBar v-bind:ref="progress" :value="getProgressValue(index)"></VerticalProgressBar>
             </div>
 
 
@@ -40,19 +38,21 @@
 <script>
 
     import SliderRange from './components/SliderRange.vue';
-    import Graphics from './components/Graphics.vue';
+    // import Graphics from './components/Graphics.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
     import config from "./assets/json/config.json";
+    import VerticalProgressBar from "./components/VerticalProgressBar";
+
 
     export default {
         name: 'app',
-        components: {SliderRange, Graphics},
+        components: {VerticalProgressBar, SliderRange},
         data() {
             return {
                 isLanguageChanged: true,
                 currentLanguage: "",
-                sliderRanges: [],
+                progressValues: [],
                 numberOfSlider: 0,
                 message: "yes",
                 options : [],
@@ -95,27 +95,45 @@
                         max: config.max,
                         interval: config.interval,
                         tooltip: 'none',
+                        defaultValue: config.value,
+                        position: i
                     };
                     this.options.push(option);
+                    this.progressValues.push(option.defaultValue);
                 }
+            },
+            setCurrentProgressValue(value, position, inverseValue) {
+                for (let i = 0; i < this.numberOfSlider; i++) {
+                    if (i === position) {
+                        console.log("change current : " + i);
+                        this.progressValues[i] = value;
+                    } else {
+                        console.log("change others : " + i);
+                        this.$refs[i + 1][0].setSlider(inverseValue);
+                        this.progressValues[i] = inverseValue;
+                    }
+                }
+                this.$forceUpdate();
+            },
+            getProgressValue(index) {
+                return this.progressValues[index];
             }
         },
         created(){
             this.labels = textEn;
-
         },
         mounted(){
             //this.labelSelected = textEn;
             //localStorage.setItem("language", this.labelSelected);
             //this.selectCurrentLanguage(this.labelSelected);
             this.numberOfSlider = config.numberOfSlider;
+            this.setOptions();
             document.addEventListener('DOMContentLoaded', () => {
-                var src = this.$refs[1][0].handlechange();
-                var target = this.$refs[2][0].handlechange();
-                var currDrag = this.$refs[1][0].drag();
+                // var src = this.$refs[1][0].handlechange();
+                // var target = this.$refs[2][0].handlechange();
+                // var currDrag = this.$refs[1][0].drag();
                 this.setBackgroundColor();
             });
-            this.setOptions();
         }
     }
 </script>

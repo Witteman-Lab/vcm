@@ -30,7 +30,8 @@
         components: {VueSlider},
         name: "SliderRange",
         props:{
-            option: Object
+            option: Object,
+            defaultValue: Number
         },
         data () {
             return {
@@ -48,7 +49,7 @@
                 //     interval: config.interval,
                 //     tooltip: 'none',
                 // },
-                value: 50,
+                value: 0,
             }
         },
         methods: {
@@ -57,11 +58,11 @@
                 //i can see change on th slider
                 // let value = this.$refs.slider.getValue();
                 // console.log("value" , value);
-                let value = this.$refs.slider.getValue();
-                console.log("handlechange", value);
-                return value;
-
-
+                // let value = this.$refs.slider.getValue();
+                // let inverseValue  = config.max - value;
+                // console.log("handlechange", value);
+                // this.$parent.setCurrentProgressValue(value, this.option.position, inverseValue);
+                // return value;
             },
             setSlider(value){
                 this.$refs.slider.setValue(value);
@@ -74,12 +75,14 @@
             setProcessStyle(){
 
             },
-            drag(valeur){
+            drag(valeur) {
                 // console.log("value", this.$refs.slider.getIndex());
-                console.log("drag", valeur);
                 let curIndex = this.$refs.slider.getIndex();
-                valeur  = config.max - curIndex;
+                let inverseValue  = config.max - curIndex;
+                console.log("drag", valeur);
                 console.log("valeur opposee", valeur);
+                let value = this.$refs.slider.getValue();
+                this.$parent.setCurrentProgressValue(value, this.option.position, inverseValue);
                 return valeur;
                 // this.$refs.slider.setValue(valeur);
 
@@ -96,25 +99,8 @@
 
         },
         mounted () {
-
-
-            document.body.addEventListener('keydown', (e) => {
-                // console.log("test", this.value1);
-                if (e.keyCode === 39) {
-                    this.value++
-                }
-                if (e.keyCode === 37) {
-
-                    this.value--;
-                }
-            })
-            console.log(this.color);
-        },
-
-
-
-
-
+            this.value = this.option.defaultValue;
+        }
     }
 </script>
 
