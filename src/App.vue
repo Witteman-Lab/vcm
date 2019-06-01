@@ -17,16 +17,16 @@
             <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
             <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
             <br>
-            <div v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
-                <SliderRange v-bind:ref="slider" :processStyle="red"></SliderRange>
+            <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
+                <SliderRange class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
                 <!--<span>{{this.labels.topSliderLabel}}</span>-->
             </div>
             <br/>
             <div id="graphics">
-                <Graphics ></Graphics>
-             <div>
+                <Graphics></Graphics>
+                <div>
 
-        </div>
+                </div>
             </div>
 
 
@@ -34,7 +34,7 @@
         </div>
         <!--<SliderRange v-bind:title="message"></SliderRange>-->
 
-  </div>
+    </div>
 </template>
 
 <script>
@@ -49,15 +49,40 @@
         name: 'app',
         components: {SliderRange, Graphics},
         data() {
-          return {
-              isLanguageChanged: true,
-              currentLanguage: "",
-              sliderRanges: [],
-              numberOfSlider: 0,
-              message: "yes",
+            return {
+                isLanguageChanged: true,
+                currentLanguage: "",
+                sliderRanges: [],
+                numberOfSlider: 0,
+                message: "yes",
+                options : [
+                    {
+                        inDragging: false,
+                        height: config.lineHeight,
+                        processStyle: {
+                            backgroundColor: '',
+                        },
+                        dotSize:config.dotSize,
+                        min: config.min,
+                        max: config.max,
+                        interval: config.interval,
+                        tooltip: 'none',
+                    },
+                    {
+                        inDragging: false,
+                        height: config.lineHeight,
+                        processStyle: {
+                            backgroundColor: config.processSliderColor[1],
+                        },
+                        dotSize:config.dotSize,
+                        min: config.min,
+                        max: config.max,
+                        interval: config.interval,
+                        tooltip: 'none',
+                    },
+                ],
 
-
-          };
+            };
         },
         props:{},
         methods: {
@@ -76,17 +101,18 @@
             },
             //method for setting background on divq
             setBackgroundColor() {
-                for(let i=0; i<=this.$refs["its"].length; i++ ) {
-                    for(let j=0; j<=config.backgroundDivColor.length; j++){
+                for (let i = 0; i < this.$refs["its"].length; i++) {
+                    for (let j = 0; j < config.backgroundDivColor.length; j++) {
                         this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[j];
                         i++;
                     }
-
                 }
-
-
-
             },
+            setSliderColor() {
+                for (let i = 0; i < config.processSliderColor.length; i++) {
+                    this.options[i].processStyle.backgroundColor = config.processSliderColor[i];
+                }
+            }
         },
         created(){
             this.labels = textEn;
@@ -100,50 +126,41 @@
             document.addEventListener('DOMContentLoaded', () => {
                 var src = this.$refs[1][0].handlechange();
                 var target = this.$refs[2][0].handlechange();
-
-
                 var currDrag = this.$refs[1][0].drag();
-                // if(src <=50){
-                //     console.log(100 - src);
-                //     this.$refs[2][0].setSlider(100-src);
-                // }
-                // console.log("src", src);
-                // console.log("target", target);
-
                 this.setBackgroundColor();
-                this.refs["slider"][0].style.processStyle.backgroundColor = config.processSliderColor[2];
-
-
             });
-
-
+            this.setSliderColor();
         }
     }
 </script>
 
 <style>
     #app {
-      font-family: 'Avenir', Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: left;
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: left;
+    }
+
+    .space_between_slider {
+        margin-bottom: 10px;
     }
 
     h1 {
-      color:#70ada6;
-      font-size:1.4em;
+        color:#70ada6;
+        font-size:1.4em;
     }
     #scaleLeft {
-      float: left;
-      margin-left: 5px;
-      text-align: left;
+        float: left;
+        margin-left: 5px;
+        text-align: left;
     }
     #scaleRight {
-      float: right;
-      margin-right: 5px;
-      text-align: right;
+        float: right;
+        margin-right: 5px;
+        text-align: right;
     }
     #slidersScale {
-      overflow:auto;
+        overflow:auto;
     }
 </style>

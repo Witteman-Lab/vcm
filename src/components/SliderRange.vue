@@ -18,7 +18,6 @@
 
         </div>
         <!--title is just for test purpose-->
-        <div>{{title}}</div>
     </div>
 
 </template>
@@ -31,27 +30,24 @@
         components: {VueSlider},
         name: "SliderRange",
         props:{
-            title: String,
+            option: Object
         },
         data () {
             return {
                 inDragging: false,
                 initialValue: config.value,
-                option:{
-                    inDragging: false,
-                    height: config.lineHeight,
-                    processStyle: {
-                        backgroundColor: "blue",
-
-                  },
-
-                    dotSize:config.dotSize,
-                    min: config.min,
-                    max: config.max,
-                    interval: config.interval,
-                    tooltip: 'none',
-
-                },
+                // option:{
+                //     inDragging: false,
+                //     height: config.lineHeight,
+                //     processStyle: {
+                //         backgroundColor: "blue",
+                //     },
+                //     dotSize:config.dotSize,
+                //     min: config.min,
+                //     max: config.max,
+                //     interval: config.interval,
+                //     tooltip: 'none',
+                // },
                 value: 50,
             }
         },
