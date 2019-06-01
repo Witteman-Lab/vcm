@@ -10,24 +10,28 @@
                 {{this.labels.description3}}</p>
             <br/>
         </div>
-        <div class="column is-half-desktop  has-text-centered">
+        <div class="columns">
             <!--<span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>-->
             <!--<span id="scaleRight">{{this.labels.rightScaleLabel}}</span>-->
             <!--<br>-->
-            <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
-            <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
-            <br>
-            <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
-                <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
+            <div class="column">
+                <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
+                <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
+                <br>
+                <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
+                    <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
+                </div>
+                <br/>
+                <br/>
+                <br/>
             </div>
-            <br/>
-            <div v-for="(progress, index) in this.numberOfSlider" id="graphics" :key="progress + 'progress'">
-                <!--                <Graphics></Graphics>-->
-                <VerticalProgressBar v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
+
+            <div class="column is-centered" style="display: flex;">
+                <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
+                    <!--                <Graphics></Graphics>-->
+                    <VerticalProgressBar  v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
+                </div>
             </div>
-
-
-
         </div>
         <!--<SliderRange v-bind:title="message"></SliderRange>-->
 
@@ -121,7 +125,7 @@
                         },
                         layout: {
                             height: 70,
-                            width: 280,
+                            width:  220,
                             verticalTextAlign: 61,
                             horizontalTextAlign: 43,
                             zeroOffset: 0,
@@ -147,6 +151,7 @@
                         this.progressValues[i] = value;
                     } else {
                         console.log("change others : " + i);
+                        console.log(this.$refs[i + 1]);
                         this.$refs[i + 1][0].setSlider(inverseValue);
                         this.progressValues[i] = inverseValue;
                     }
@@ -192,6 +197,10 @@
         margin-bottom: 10px;
     }
 
+    .space_between_progress {
+        margin: 0 auto;
+    }
+
     h1 {
         color:#70ada6;
         font-size:1.4em;
@@ -209,4 +218,8 @@
     #slidersScale {
         overflow:auto;
     }
+
+    /*@media screen max-width{*/
+    /*    */
+    /*}*/
 </style>

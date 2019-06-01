@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="transform: rotate(-90deg);transform-origin: 70% 90%">
         <progress-bar :options="parameters" :value="value"/>
     </div>
 </template>

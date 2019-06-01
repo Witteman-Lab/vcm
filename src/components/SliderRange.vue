@@ -1,22 +1,18 @@
 <template>
-    <div >
-        <div class="flex" v-on:click="drag(value)">
+    <div class="has-text-centered" v-on:click="drag(value)">
+        <vue-slider ref="slider"
+                    v-model="value"
+                    v-bind="option"
+                    @change="this.handlechange"
+                    :contained="true"
+                    :duration="inDragging ? 0 : 0"
+                    @drag-start="() => inDragging = true"
+                    @drag-end="() => inDragging = false"
+                    @dragging="drag(value)"
 
-            <vue-slider ref="slider"
-                        v-model="value"
-                        v-bind="option"
-                        @change="this.handlechange"
-                        :contained="true"
-                        :duration="inDragging ? 0 : 0"
-                        @drag-start="() => inDragging = true"
-                        @drag-end="() => inDragging = false"
-                        @dragging="drag(value)"
-
-            ></vue-slider>
-        <span>{{topSliderLabel}}</span>
-        </div>
+        ></vue-slider>
+        <span style="text-align: center">{{topSliderLabel}}</span>
     </div>
-
 </template>
 
 <script>
