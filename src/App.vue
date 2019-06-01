@@ -10,23 +10,23 @@
                 {{this.labels.description3}}</p>
             <br/>
         </div>
-        <div class="columns is-half is-flex has-text-centered">
+        <div class="column is-half-desktop  has-text-centered">
             <!--<span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>-->
             <!--<span id="scaleRight">{{this.labels.rightScaleLabel}}</span>-->
             <!--<br>-->
-
-            <div class="column is-three-quarters-quarter ">
-                <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
-                <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
-                <br>
-                <div v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
-                    <SliderRange v-bind:ref="slider" :processStyle="red"></SliderRange>
-
-                    <!--<span>{{this.labels.topSliderLabel}}</span>-->
-                </div>
+            <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
+            <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
+            <br>
+            <div v-for="(slider) in this.numberOfSlider" ref="its"  :key="slider">
+                <SliderRange v-bind:ref="slider" :processStyle="red"></SliderRange>
+                <!--<span>{{this.labels.topSliderLabel}}</span>-->
             </div>
-            <div  class="column is-flex ">
+            <br/>
+            <div id="graphics">
                 <Graphics ></Graphics>
+             <div>
+
+        </div>
             </div>
 
 
@@ -74,16 +74,14 @@
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
-
+            //method for setting background on divq
             setBackgroundColor() {
                 for(let i=0; i<=this.$refs["its"].length; i++ ) {
-                    if (i % 2 == 0) {
-
-                        //this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv1;
-                    } else {
-
-                        //this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[0].backgroundDiv2;
+                    for(let j=0; j<=config.backgroundDivColor.length; j++){
+                        this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[j];
+                        i++;
                     }
+
                 }
 
 
@@ -103,6 +101,7 @@
                 var src = this.$refs[1][0].handlechange();
                 var target = this.$refs[2][0].handlechange();
 
+
                 var currDrag = this.$refs[1][0].drag();
                 // if(src <=50){
                 //     console.log(100 - src);
@@ -112,8 +111,11 @@
                 // console.log("target", target);
 
                 this.setBackgroundColor();
+                this.refs["slider"][0].style.processStyle.backgroundColor = config.processSliderColor[2];
+
 
             });
+
 
         }
     }

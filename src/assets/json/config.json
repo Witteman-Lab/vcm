@@ -6,10 +6,7 @@
        "#410e73", "#a8a873"
   ],
   "backgroundDivColor" : [
-    {
-      "backgroundDiv1": "#f1f4b6",
-      "backgroundDiv2": "#e6e5ff"
-    }
+     "#f1f4b6", "#e6e5ff"
   ],
   "numberOfSlider": 2,
   "value": 50,

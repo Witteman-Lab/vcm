@@ -6,7 +6,7 @@
                         v-model="value"
                         v-bind="option"
                         :max="100"
-                        :processStyle="null"
+                        :processStyle="option.processStyle"
                         @change="this.handlechange"
                         :contained="true"
                         :duration="inDragging ? 0 : 0.5"
@@ -41,7 +41,7 @@
                     inDragging: false,
                     height: config.lineHeight,
                     processStyle: {
-                        backgroundColor:"blue",
+                        backgroundColor: "blue",
 
                   },
 
@@ -73,6 +73,9 @@
             getSliderIndex(){
                 let index = this.$refs.slider.getIndex();
                 return index;
+
+            },
+            setProcessStyle(){
 
             },
             drag(valeur){
