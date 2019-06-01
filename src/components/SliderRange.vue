@@ -37,21 +37,16 @@
         methods: {
             /**
              *
+             * @param value
              */
-            handlechange() {
-                // i have to use a for loop here to handle the change properly.
-                //i can see change on th slider
-                // let value = this.$refs.slider.getValue();
-                // console.log("value" , value);
-                // let value = this.$refs.slider.getValue();
-                // let inverseValue  = config.max - value;
-                // console.log("handlechange", value);
-                // this.$parent.setCurrentProgressValue(value, this.option.position, inverseValue);
-                // return value;
-            },
             setSlider(value){
                 this.$refs.slider.setValue(value);
             },
+            /**
+             *
+             * @param valeur
+             * @returns {*}
+             */
             drag(valeur) {
                 // console.log("value", this.$refs.slider.getIndex());
                 let curIndex = this.$refs.slider.getIndex();

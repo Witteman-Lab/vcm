@@ -1,23 +1,21 @@
 <template>
     <div id="app" class="container">
+        <!--instructions -->
         <div class="column is-half-desktop is-center">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
-            <!--<h1>{{this.labels.title}}</h1>-->
-            <!-- <a id="selectLanguage" class="button" v-on:click="this.selectCurrentLanguage">{{this.labels.language}}</a><br><br/> -->
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <p id="description">{{this.labels.description1}}
                 {{this.labels.description2}}
                 {{this.labels.description3}}</p>
             <br/>
         </div>
-        <div class="columns">
-            <!--<span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>-->
-            <!--<span id="scaleRight">{{this.labels.rightScaleLabel}}</span>-->
-            <!--<br>-->
-            <div class="column">
+        <!--descriptions on sliders-->
+        <div class="columns is-center">
+            <div class="column is-center">
                 <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
                 <br>
+                <!--slider-->
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
                     <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
                 </div>
@@ -25,15 +23,14 @@
                 <br/>
                 <br/>
             </div>
-
+            <!--graphics-->
             <div class="column is-centered" style="display: flex;">
                 <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
-                    <!--                <Graphics></Graphics>-->
                     <VerticalProgressBar  v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
                 </div>
             </div>
         </div>
-        <!--<SliderRange v-bind:title="message"></SliderRange>-->
+
 
     </div>
 </template>
@@ -218,8 +215,4 @@
     #slidersScale {
         overflow:auto;
     }
-
-    /*@media screen max-width{*/
-    /*    */
-    /*}*/
 </style>
