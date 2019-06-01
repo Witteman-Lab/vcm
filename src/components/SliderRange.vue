@@ -7,7 +7,7 @@
                         v-bind="option"
                         @change="this.handlechange"
                         :contained="true"
-                        :duration="inDragging ? 0 : 0.5"
+                        :duration="inDragging ? 0 : 0"
                         @drag-start="() => inDragging = true"
                         @drag-end="() => inDragging = false"
                         @dragging="drag(value)"

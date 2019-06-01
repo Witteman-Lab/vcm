@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="container">
-        <div class="column is-half is-center">
+        <div class="column is-half-desktop is-center">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
             <!--<h1>{{this.labels.title}}</h1>-->
             <!-- <a id="selectLanguage" class="button" v-on:click="this.selectCurrentLanguage">{{this.labels.language}}</a><br><br/> -->
@@ -134,7 +134,7 @@
                                 progressPadding: 0,
                                 type: 'line'
                         }
-                    }
+                    };
                     this.parametre.push(option);
                     this.progressValues.push(option.defaultValue);
                 }
@@ -177,6 +177,7 @@
             this.setOptions();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
+
             });
         }
     }

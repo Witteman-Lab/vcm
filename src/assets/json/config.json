@@ -11,5 +11,13 @@
   "numberOfSlider": 2,
   "value": 50,
   "interval": 1,
-  "dotSize": 40
+  "dotSize": 40,
+  "progressColor": "",
+  "frontSize":"",
+  "progressHeight":"",
+  "progressWidth":"",
+  "progressStokeWIdth": ""
+
 }
+
+
