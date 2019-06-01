@@ -1,8 +1,6 @@
 <template>
     <div>
-        <progress-bar
-                      v-bind:="parameters"
-                      :value="value"/>
+        <progress-bar :options="parameters" :value="value"/>
     </div>
 </template>
 

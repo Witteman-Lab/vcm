@@ -18,13 +18,12 @@
             <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
             <br>
             <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
-                <SliderRange class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
-                <!--<span>{{this.labels.topSliderLabel}}</span>-->
+                <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
             </div>
             <br/>
             <div v-for="(progress, index) in this.numberOfSlider" id="graphics" :key="progress + 'progress'">
-<!--                <Graphics></Graphics>-->
-                <VerticalProgressBar v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="parametre[index]"></VerticalProgressBar>
+                <!--                <Graphics></Graphics>-->
+                <VerticalProgressBar v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
             </div>
 
 
@@ -56,7 +55,8 @@
                 numberOfSlider: 0,
                 message: "yes",
                 options : [],
-                parametre:[]
+                parametre:[],
+                topSliderLabel: ""
             };
         },
         props:{},
@@ -71,6 +71,7 @@
                     this.labels = textFr;
                 else
                     this.labels = textEn;
+                this.topSliderLabel = this.labels.topSliderLabel;
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
@@ -108,37 +109,30 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
-            setProgressParams(){
+            setProgressParams() {
                 for (let i = 0; i < this.numberOfSlider; i++) {
-                  let  option  = {
+                    let  option  = {
                         text: {
-                            color: '#FFFFFF',
-                                shadowEnable: true,
-                                shadowColor: '#000000',
-                                fontSize: 14,
-                                fontFamily: 'Helvetica',
-                                dynamicPosition: false,
-                                hideText: false
+                            hideText: true
                         },
                         progress: {
-                            color: '#2dbd2d',
-                                backgroundColor: '#C0C0C0'
+                            color: config.processSliderColor[i],
+                            backgroundColor: config.backgroundDivColor[i]
                         },
                         layout: {
-                            height: 35,
-                                width: 140,
-                                verticalTextAlign: 61,
-                                horizontalTextAlign: 43,
-                                zeroOffset: 0,
-                                strokeWidth: 30,
-                                progressPadding: 0,
-                                type: 'line'
+                            height: 70,
+                            width: 280,
+                            verticalTextAlign: 61,
+                            horizontalTextAlign: 43,
+                            zeroOffset: 0,
+                            strokeWidth: 30,
+                            progressPadding: 0,
+                            type: 'line'
                         }
                     };
                     this.parametre.push(option);
                     this.progressValues.push(option.defaultValue);
                 }
-
             },
             /**
              *
@@ -166,18 +160,21 @@
              */
             getProgressValue(index) {
                 return this.progressValues[index];
-            }
+            },
+            getParameters(index) {
+                return this.parametre[index];
+            },
         },
-        created(){
+        created() {
             this.labels = textEn;
         },
-        mounted(){
-
+        mounted() {
             this.numberOfSlider = config.numberOfSlider;
+            this.topSliderLabel = this.labels.topSliderLabel;
             this.setOptions();
+            this.setProgressParams();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
-
             });
         }
     }

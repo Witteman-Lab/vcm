@@ -1,6 +1,6 @@
 <template>
     <div >
-        <div class="flex">
+        <div class="flex" v-on:click="drag(value)">
 
             <vue-slider ref="slider"
                         v-model="value"
@@ -13,7 +13,7 @@
                         @dragging="drag(value)"
 
             ></vue-slider>
-
+        <span>{{topSliderLabel}}</span>
         </div>
     </div>
 
@@ -28,7 +28,8 @@
         name: "SliderRange",
         props:{
             option: Object,
-            defaultValue: Number
+            defaultValue: Number,
+            topSliderLabel: String
         },
         data () {
             return {

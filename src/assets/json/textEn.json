@@ -7,7 +7,7 @@
   "language": "FR",
   "leftScaleLabel": "Matters a lot",
   "rightScaleLabel": "Doesn’t matter at all",
-  "topSliderLabel":"Reason(s) to choose option 1",
+  "topSliderLabel":"Reason(s) to choose option ",
   "LabelGraph1": "Option 1",
   "LabelGraph2": "Option 2",
   "labelSelecctedGraph1":"Option 1 fits best with what matters to you",
