@@ -5,8 +5,6 @@
             <vue-slider ref="slider"
                         v-model="value"
                         v-bind="option"
-                        :max="100"
-                        :processStyle="option.processStyle"
                         @change="this.handlechange"
                         :contained="true"
                         :duration="inDragging ? 0 : 0.5"
@@ -17,7 +15,6 @@
             ></vue-slider>
 
         </div>
-        <!--title is just for test purpose-->
     </div>
 
 </template>
@@ -37,22 +34,13 @@
             return {
                 inDragging: false,
                 initialValue: config.value,
-                // option:{
-                //     inDragging: false,
-                //     height: config.lineHeight,
-                //     processStyle: {
-                //         backgroundColor: "blue",
-                //     },
-                //     dotSize:config.dotSize,
-                //     min: config.min,
-                //     max: config.max,
-                //     interval: config.interval,
-                //     tooltip: 'none',
-                // },
                 value: 0,
             }
         },
         methods: {
+            /**
+             *
+             */
             handlechange() {
                 // i have to use a for loop here to handle the change properly.
                 //i can see change on th slider
@@ -67,14 +55,6 @@
             setSlider(value){
                 this.$refs.slider.setValue(value);
             },
-            getSliderIndex(){
-                let index = this.$refs.slider.getIndex();
-                return index;
-
-            },
-            setProcessStyle(){
-
-            },
             drag(valeur) {
                 // console.log("value", this.$refs.slider.getIndex());
                 let curIndex = this.$refs.slider.getIndex();
@@ -84,18 +64,7 @@
                 let value = this.$refs.slider.getValue();
                 this.$parent.setCurrentProgressValue(value, this.option.position, inverseValue);
                 return valeur;
-                // this.$refs.slider.setValue(valeur);
-
-                // return valeur;
-
             }
-            // setSliderProcessColor(process){
-            //
-            //     process = this.$refs.slider.processStyle.backgroundColor;
-            //     // console.log("color", process);
-            // }
-
-
 
         },
         mounted () {

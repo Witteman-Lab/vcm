@@ -24,7 +24,7 @@
             <br/>
             <div v-for="(progress, index) in this.numberOfSlider" id="graphics" :key="progress + 'progress'">
 <!--                <Graphics></Graphics>-->
-                <VerticalProgressBar v-bind:ref="progress" :value="getProgressValue(index)"></VerticalProgressBar>
+                <VerticalProgressBar v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="parametre[index]"></VerticalProgressBar>
             </div>
 
 
@@ -56,6 +56,7 @@
                 numberOfSlider: 0,
                 message: "yes",
                 options : [],
+                parametre:[]
             };
         },
         props:{},
@@ -73,7 +74,9 @@
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
-            //method for setting background on divq
+            /**
+             *
+             */
             setBackgroundColor() {
                 for (let i = 0; i < this.$refs["its"].length; i++) {
                     for (let j = 0; j < this.numberOfSlider; j++) {
@@ -82,6 +85,9 @@
                     }
                 }
             },
+            /**
+             *
+             */
             setOptions() {
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let option = {
@@ -102,6 +108,44 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
+            setProgressParams(){
+                for (let i = 0; i < this.numberOfSlider; i++) {
+                  let  option  = {
+                        text: {
+                            color: '#FFFFFF',
+                                shadowEnable: true,
+                                shadowColor: '#000000',
+                                fontSize: 14,
+                                fontFamily: 'Helvetica',
+                                dynamicPosition: false,
+                                hideText: false
+                        },
+                        progress: {
+                            color: '#2dbd2d',
+                                backgroundColor: '#C0C0C0'
+                        },
+                        layout: {
+                            height: 35,
+                                width: 140,
+                                verticalTextAlign: 61,
+                                horizontalTextAlign: 43,
+                                zeroOffset: 0,
+                                strokeWidth: 30,
+                                progressPadding: 0,
+                                type: 'line'
+                        }
+                    }
+                    this.parametre.push(option);
+                    this.progressValues.push(option.defaultValue);
+                }
+
+            },
+            /**
+             *
+             * @param value
+             * @param position
+             * @param inverseValue
+             */
             setCurrentProgressValue(value, position, inverseValue) {
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     if (i === position) {
@@ -115,6 +159,11 @@
                 }
                 this.$forceUpdate();
             },
+            /**
+             *
+             * @param index
+             * @returns {*}
+             */
             getProgressValue(index) {
                 return this.progressValues[index];
             }
@@ -123,15 +172,10 @@
             this.labels = textEn;
         },
         mounted(){
-            //this.labelSelected = textEn;
-            //localStorage.setItem("language", this.labelSelected);
-            //this.selectCurrentLanguage(this.labelSelected);
+
             this.numberOfSlider = config.numberOfSlider;
             this.setOptions();
             document.addEventListener('DOMContentLoaded', () => {
-                // var src = this.$refs[1][0].handlechange();
-                // var target = this.$refs[2][0].handlechange();
-                // var currDrag = this.$refs[1][0].drag();
                 this.setBackgroundColor();
             });
         }
