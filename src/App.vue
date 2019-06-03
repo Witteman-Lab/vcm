@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="container">
         <!--instructions -->
-        <div class="column is-half-desktop is-center">
+        <div class="column is-half-desktop is-center ">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <p id="description">{{this.labels.description1}}
@@ -10,7 +10,7 @@
             <br/>
         </div>
         <!--descriptions on sliders-->
-        <div class="columns is-center">
+        <div class="columns is-center ">
             <div class="column is-center">
                 <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
@@ -110,6 +110,10 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
+            /**
+             *
+             */
+
             setProgressParams() {
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let  option  = {
@@ -118,7 +122,7 @@
                         },
                         progress: {
                             color: config.processSliderColor[i],
-                            backgroundColor: config.backgroundDivColor[i]
+                            backgroundColor: config.progressColor,
                         },
                         layout: {
                             height: 70,
@@ -163,6 +167,11 @@
             getProgressValue(index) {
                 return this.progressValues[index];
             },
+            /**
+             *
+             * @param index
+             * @returns {*}
+             */
             getParameters(index) {
                 return this.parametre[index];
             },
@@ -213,6 +222,7 @@
         text-align: right;
     }
     #slidersScale {
-        overflow:auto;
+        overflow:auto
+
     }
 </style>
