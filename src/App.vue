@@ -104,7 +104,7 @@
                         interval: config.interval,
                         tooltip: 'none',
                         defaultValue: config.value,
-                        position: i
+                        position: i,
                     };
                     this.options.push(option);
                     this.progressValues.push(option.defaultValue);
@@ -130,7 +130,7 @@
                             verticalTextAlign: 61,
                             horizontalTextAlign: 43,
                             zeroOffset: 0,
-                            strokeWidth: 30,
+                            strokeWidth:100,
                             progressPadding: 0,
                             type: 'line'
                         }
@@ -204,7 +204,8 @@
     }
 
     .space_between_progress {
-        margin: 0 auto;
+        margin-right: -25%;
+
     }
 
     h1 {
