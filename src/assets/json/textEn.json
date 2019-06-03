@@ -10,6 +10,5 @@
   "topSliderLabel":"Reason(s) to choose option ",
   "LabelGraph1": "Option 1",
   "LabelGraph2": "Option 2",
-  "labelSelecctedGraph1":"Option 1 fits best with what matters to you",
-  "labelSelecctedGraph2":"Option 2 fits best with what matters to you"
+  "labelSelectedGraph":" fits best with what matters to you"
 }
