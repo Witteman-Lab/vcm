@@ -1,7 +1,11 @@
 <template>
-    <div style="transform: rotate(-90deg);transform-origin: 70% 90%">
-        <progress-bar :options="parameters" :value="value"/>
+    <div class="container">
+        <div style="transform: rotate(-90deg);transform-origin: 70% 90%">
+            <progress-bar :options="parameters" :value="value"/>
+        </div>
+        <span style="text-align: center">hello</span>
     </div>
+
 </template>
 
 <script>
@@ -13,7 +17,8 @@
         },
         props: {
             value: Number,
-            parameters: Object
+            parameters: Object,
+            optionGraphLabel: String
         }
     }
 </script>

@@ -1,34 +1,35 @@
 <template>
     <div id="app" class="container">
         <!--instructions -->
-        <div class="column is-half-desktop is-center ">
+        <div class="column is-half-desktop is-centered ">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <p id="description">{{this.labels.description1}}
-                {{this.labels.description2}}
-                {{this.labels.description3}}</p>
-            <br/>
+                {{this.labels.description2}}{{this.labels.description3}}</p><button class="collapsible">Instructions</button>
         </div>
         <!--descriptions on sliders-->
-        <div class="columns is-center ">
-            <div class="column is-center">
-                <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
-                <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
-                <br>
-                <!--slider-->
-                <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
-                    <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
+        <div class="container">
+            <div class="columns is-center ">
+                <div class="column is-center">
+                    <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
+                    <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
+                    <br>
+                    <!--slider-->
+                    <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
+                        <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
                 </div>
-                <br/>
-                <br/>
-                <br/>
-            </div>
-            <!--graphics-->
-            <div class="column is-centered" style="display: flex;">
-                <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
-                    <VerticalProgressBar  v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
+                <!--graphics-->
+                <div class="column is-centered" style="display: flex;">
+                    <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
+                        <VerticalProgressBar :top-slider-label="topSliderLabel + (index + 1)" v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
+                    </div>
                 </div>
             </div>
+
         </div>
 
 
@@ -57,7 +58,8 @@
                 message: "yes",
                 options : [],
                 parametre:[],
-                topSliderLabel: ""
+                topSliderLabel: "",
+                optionGraphLabel: ""
             };
         },
         props:{},
@@ -73,6 +75,7 @@
                 else
                     this.labels = textEn;
                 this.topSliderLabel = this.labels.topSliderLabel;
+                this.optionGraphLabel = this.labels.topSliderLabel;
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
@@ -108,6 +111,22 @@
                     };
                     this.options.push(option);
                     this.progressValues.push(option.defaultValue);
+                }
+            },
+            activeInstruction(){
+                var coll = document.getElementsByClassName("collapsible");
+                var i;
+
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.previousElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
                 }
             },
             /**
@@ -182,6 +201,8 @@
         mounted() {
             this.numberOfSlider = config.numberOfSlider;
             this.topSliderLabel = this.labels.topSliderLabel;
+            this.optionGraphLabel = this.labels.topSliderLabel;
+            this.activeInstruction();
             this.setOptions();
             this.setProgressParams();
             document.addEventListener('DOMContentLoaded', () => {
@@ -204,7 +225,7 @@
     }
 
     .space_between_progress {
-        margin-right: -25%;
+        margin-right: -15%;
 
     }
 
@@ -225,5 +246,40 @@
     #slidersScale {
         overflow:auto
 
+    }
+    .collapsible {
+        color: black;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: center;
+        outline: none;
+        font-size: 15px;
+    }
+
+    /*.active, .collapsible:hover {*/
+        /*!*background-color: #555;*!*/
+    /*}*/
+
+    #description {
+        display: none;
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 600px) {
+        .collapsible{
+            display: none;
+        }
+        #description{
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        #description{
+            border: 2px solid #DDDDDD;
+
+        }
     }
 </style>
