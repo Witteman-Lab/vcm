@@ -1,35 +1,42 @@
 <template>
     <div id="app" class="container">
         <!--instructions -->
-        <div class="column is-half-desktop is-centered ">
+        <div class="column is-half-desktop is-full-mobile is-centered ">
             <h1 class="title has-text-primary">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
+            <br>
+            <br>
             <p id="description">{{this.labels.description1}}
                 {{this.labels.description2}}{{this.labels.description3}}</p><button class="collapsible">Instructions</button>
         </div>
         <!--descriptions on sliders-->
-        <div class="container">
-            <div class="columns is-center ">
-                <div class="column is-center">
-                    <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
-                    <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
-                    <br>
-                    <!--slider-->
-                    <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
-                        <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
-                    </div>
-                    <br/>
-                    <br/>
-                    <br/>
+
+        <div class="columns is-centered">
+            <div class="column is-center">
+                <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
+                <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
+                <br>
+                <!--slider-->
+                <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
+                    <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
                 </div>
-                <!--graphics-->
-                <div class="column is-centered" style="display: flex;">
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            <!--graphics-->
+            <div class="column is-centered has-text-centered">
+                <div class="is-flex">
                     <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
-                        <VerticalProgressBar :top-slider-label="topSliderLabel + (index + 1)" v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
+                        <VerticalProgressBar :option-graph-label="optionGraphLabel[index] " v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
+                </div>
+
+                <div class="results" id="result" style="display: none">
+                   <p>{{this.labels.optionGraphLabel[0]}}
+                   {{this.labels.result}}</p>
                 </div>
             </div>
-
         </div>
 
 
@@ -59,7 +66,7 @@
                 options : [],
                 parametre:[],
                 topSliderLabel: "",
-                optionGraphLabel: ""
+                optionGraphLabel: [],
             };
         },
         props:{},
@@ -75,7 +82,7 @@
                 else
                     this.labels = textEn;
                 this.topSliderLabel = this.labels.topSliderLabel;
-                this.optionGraphLabel = this.labels.topSliderLabel;
+                this.optionGraphLabel = this.labels.optionGraphLabel;
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
@@ -158,6 +165,22 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
+            setResult(){
+               let divElement = document.getElementById("result");
+               console.log("divElement", divElement);
+                for(let i=0; i < this.numberOfSlider; i++){
+                    let value = this.$refs[i + 1][0].getSliderValue();
+                    if(value > 50){
+                        divElement.style.display="block";
+                        divElement.style.color = config.processSliderColor[i];
+                        divElement.style.border = "1px solid" + config.processSliderColor[i];
+                    }else if(value === 50){
+                        divElement.style.display='none';
+                    }
+                }
+
+
+            },
             /**
              *
              * @param value
@@ -167,11 +190,13 @@
             setCurrentProgressValue(value, position, inverseValue) {
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     if (i === position) {
-                        console.log("change current : " + i);
+                        // console.log("change current : " + i);
                         this.progressValues[i] = value;
+                        console.log("la valeur du premier slider", value);
                     } else {
-                        console.log("change others : " + i);
-                        console.log(this.$refs[i + 1]);
+                        // console.log("change others : " + i);
+                        // console.log(this.$refs[i + 1]);
+                        console.log("la valeur du deuxieme slider", inverseValue);
                         this.$refs[i + 1][0].setSlider(inverseValue);
                         this.progressValues[i] = inverseValue;
                     }
@@ -201,12 +226,13 @@
         mounted() {
             this.numberOfSlider = config.numberOfSlider;
             this.topSliderLabel = this.labels.topSliderLabel;
-            this.optionGraphLabel = this.labels.topSliderLabel;
+            this.optionGraphLabel = this.labels.optionGraphLabel;
             this.activeInstruction();
             this.setOptions();
             this.setProgressParams();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
+
             });
         }
     }
@@ -225,8 +251,12 @@
     }
 
     .space_between_progress {
-        margin-right: -15%;
-
+        /*margin-right: -15%;*/
+        /*margin-bottom: 10px;*/
+        margin: 0 auto;
+        padding: 12px;
+        /*transform: rotate(-90deg);*/
+        /*transform-origin: 70%;*/
     }
 
     h1 {
@@ -266,7 +296,7 @@
         display: none;
         overflow: hidden;
     }
-
+    /*on destop*/
     @media screen and (min-width: 600px) {
         .collapsible{
             display: none;
@@ -275,10 +305,13 @@
             display: block;
         }
     }
-
+    /* on small screen */
     @media screen and (max-width: 600px) {
         #description{
             border: 2px solid #DDDDDD;
+
+        }
+        .column {
 
         }
     }

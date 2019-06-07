@@ -8,7 +8,8 @@
   "leftScaleLabel": "Doesn’t matter at all",
   "rightScaleLabel": "Matters a lot",
   "topSliderLabel":"Reason(s) to choose option ",
-  "LabelGraph1": "Option 1",
-  "LabelGraph2": "Option 2",
-  "labelSelectedGraph":" fits best with what matters to you"
+  "result":" fits best with what matters to you",
+  "optionGraphLabel":[ "Option 1", "Option 2"]
+
+
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="has-text-centered" v-on:click="drag(value)">
+    <div class="has-text-centered" v-on:click="drag()">
         <vue-slider ref="slider"
                     v-model="value"
                     v-bind="option"
@@ -7,7 +7,8 @@
                     :duration="inDragging ? 0 : 0"
                     @drag-start="() => inDragging = true"
                     @drag-end="() => inDragging = false"
-                    @dragging="drag(value)"
+                    @dragging="drag()"
+
 
         ></vue-slider>
         <span style="text-align: center">{{topSliderLabel}}</span>
@@ -46,15 +47,16 @@
              * @param valeur
              * @returns {*}
              */
-            drag(valeur) {
-                // console.log("value", this.$refs.slider.getIndex());
+            drag() {
                 let curIndex = this.$refs.slider.getIndex();
                 let inverseValue  = config.max - curIndex;
-                //console.log("drag", valeur);
-                //console.log("valeur opposee", valeur);
                 let value = this.$refs.slider.getValue();
                 this.$parent.setCurrentProgressValue(value, this.option.position, inverseValue);
-                return valeur;
+                this.$parent.setResult();
+            },
+            getSliderValue(){
+              let value =  this.$refs.slider.getValue();
+              return value;
             }
 
         },

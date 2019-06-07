@@ -1,9 +1,7 @@
 <template>
-    <div class="container">
-        <div style="transform: rotate(-90deg);transform-origin: 70% 90%">
-            <progress-bar :options="parameters" :value="value"/>
-        </div>
-        <span style="text-align: center">hello</span>
+    <div>
+        <progress-bar :options="parameters" :value="value"/>
+        <span style="text-align: center">{{optionGraphLabel}}</span>
     </div>
 
 </template>
