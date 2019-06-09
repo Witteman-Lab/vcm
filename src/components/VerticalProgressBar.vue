@@ -39,6 +39,11 @@
         text-align: center;
         padding-top: 10vh;
     }
+    .resize-vertical-bar-mobile {
+        margin-left: 2vw;
+        margin-top: 10vh;
+    }
+
 
     @media screen and (max-width: 420px) {
         .resize-vertical-bar-mobile {

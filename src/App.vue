@@ -267,13 +267,9 @@
     .space_between_progress {
         display: flex;
         justify-content: center;
-        /*margin-right: -15%;*/
-        /*margin-bottom: 10px;*/
-        margin: 0 auto;
+        margin-right: -25%;
         overflow-x: hidden;
-        /*padding: 12px;*/
-        /*transform: rotate(-90deg);*/
-        /*transform-origin: 70%;*/
+
     }
 
     h1 {
