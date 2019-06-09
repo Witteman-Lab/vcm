@@ -41,7 +41,7 @@
     }
     .resize-vertical-bar-mobile {
         margin-left: 2vw;
-        margin-top: 10vh;
+        margin-top: 8vh;
     }
 
 
