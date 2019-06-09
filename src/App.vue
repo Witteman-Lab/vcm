@@ -2,19 +2,18 @@
     <div id="app" class="container">
         <!--instructions -->
         <div class="column is-half-desktop is-full-mobile is-centered ">
-            <h1 class="title has-text-primary">{{this.labels.title}}</h1>
+            <h1 class="title has-text-primary has-text-left-mobile is-size-4-mobile">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
-            <br>
-            <br>
-            <p id="description">{{this.labels.description1}}
-                {{this.labels.description2}}{{this.labels.description3}}</p><button id="collapsible" class="collapsible">Instructions</button>
+            <br/>
+            <br/>
+            <p id="description" class="has-text-left">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p><button id="collapsible" class="collapsible">Instructions</button>
         </div>
         <!--descriptions on sliders-->
 
         <div class="columns is-centered">
             <div class="column is-center description-align" >
-                <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
-                <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
+                <span id="scaleLeft" class="has-text-left-mobile">{{this.labels.leftScaleLabel}}</span>
+                <span id="scaleRight" class="has-text-right-mobile">{{this.labels.rightScaleLabel}}</span>
                 <br>
                 <!--slider-->
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
@@ -30,8 +29,8 @@
                     </div>
                 </div>
 
-                <div class="results" id="result" style="display: none">
-                    <p>{{this.message}} {{this.labels.result}}</p>
+                <div class="results " id="result" style="display: none">
+                    <p class="has-text-centered">{{this.message}} {{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -181,10 +180,11 @@
                         if (divElement.style.display !== "block")
                             divElement.style.display = "block";
                         divElement.style.color = config.processSliderColor[i];
-                        divElement.style.border = "1px solid" + config.processSliderColor[i];
+                        divElement.style.border = "2px solid" + config.processSliderColor[i];
                         divElement.style.marginTop = "3vh";
-                        divElement.style.marginLeft = "3vw";
+                        divElement.style.marginLeft = "7vw";
                         divElement.style.marginRight = "2vw";
+                        divElement.style.width = "30%";
                         this.message = this.labels.optionGraphLabel[i];
                     } else if (value === 50) {
                         divElement.style.display = 'none';
@@ -267,7 +267,7 @@
     .space_between_progress {
         display: flex;
         justify-content: center;
-        margin-right: -25%;
+        margin-right: -22%;
         overflow-x: hidden;
 
     }
@@ -319,12 +319,9 @@
         #description{
             border: 2px solid #DDDDDD;
         }
-        .column {
+        .results{
 
         }
-        .description-align {
-            margin-left: 3vw;
-            margin-right: 3vw;
-        }
+
     }
 </style>

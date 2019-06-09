@@ -37,7 +37,7 @@
 
     .resize-option-label {
         text-align: center;
-        padding-top: 10vh;
+        padding-top: 12vh;
     }
     .resize-vertical-bar-mobile {
         margin-left: 2vw;
