@@ -44,7 +44,6 @@
             },
             /**
              *
-             * @param valeur
              * @returns {*}
              */
             drag() {
@@ -55,8 +54,7 @@
                 this.$parent.setResult();
             },
             getSliderValue(){
-              let value =  this.$refs.slider.getValue();
-              return value;
+              return this.$refs.slider.getValue();
             }
 
         },
