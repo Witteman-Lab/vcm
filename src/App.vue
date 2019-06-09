@@ -129,7 +129,6 @@
                 var coll = document.getElementById("collapsible");
                 coll.addEventListener("click", function() {
                     this.classList.toggle("active");
-                    description.classList.toggle("isVisible");
                     var content = this.previousElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";
