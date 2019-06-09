@@ -7,7 +7,7 @@
             <br>
             <br>
             <p id="description">{{this.labels.description1}}
-                {{this.labels.description2}}{{this.labels.description3}}</p><button class="collapsible">Instructions</button>
+                {{this.labels.description2}}{{this.labels.description3}}</p><button id="collapsible" class="collapsible">Instructions</button>
         </div>
         <!--descriptions on sliders-->
 
@@ -120,21 +120,20 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
-            activeInstruction(){
-                var coll = document.getElementsByClassName("collapsible");
-                var i;
 
-                for (i = 0; i < coll.length; i++) {
-                    coll[i].addEventListener("click", function() {
-                        this.classList.toggle("active");
-                        var content = this.previousElementSibling;
-                        if (content.style.display === "block") {
-                            content.style.display = "none";
-                        } else {
-                            content.style.display = "block";
-                        }
-                    });
-                }
+
+            activeInstruction(){
+                var coll = document.getElementById("collapsible");
+                coll.addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    description.classList.toggle("isVisible");
+                    var content = this.previousElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
             },
             /**
              *
