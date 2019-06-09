@@ -12,7 +12,7 @@
         <!--descriptions on sliders-->
 
         <div class="columns is-centered">
-            <div class="column is-center">
+            <div class="column is-center description-align" >
                 <span id="scaleLeft">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight">{{this.labels.rightScaleLabel}}</span>
                 <br>
@@ -20,9 +20,7 @@
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
                     <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
                 </div>
-                <br/>
-                <br/>
-                <br/>
+
             </div>
             <!--graphics-->
             <div class="column is-centered has-text-centered">
@@ -33,8 +31,7 @@
                 </div>
 
                 <div class="results" id="result" style="display: none">
-                   <p>{{this.labels.optionGraphLabel[0]}}
-                   {{this.labels.result}}</p>
+                    <p>{{this.message}} {{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -73,7 +70,6 @@
         methods: {
             /**
              * ---> ------------------ will be completed soon -------------------
-             * @param none
              * @return none
              */
             changeLanguage() {
@@ -86,7 +82,9 @@
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
+
             /**
+             * ---> ------------------ will be completed soon -------------------
              *
              */
             setBackgroundColor() {
@@ -97,7 +95,9 @@
                     }
                 }
             },
+
             /**
+             * ---> ------------------ will be completed soon -------------------
              *
              */
             setOptions() {
@@ -121,7 +121,10 @@
                 }
             },
 
-
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             *
+             */
             activeInstruction(){
                 var coll = document.getElementById("collapsible");
                 coll.addEventListener("click", function() {
@@ -135,10 +138,11 @@
                     }
                 });
             },
+
             /**
+             * ---> ------------------ will be completed soon -------------------
              *
              */
-
             setProgressParams() {
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let  option  = {
@@ -164,24 +168,35 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
-            setResult(){
-               let divElement = document.getElementById("result");
-               console.log("divElement", divElement);
-                for(let i=0; i < this.numberOfSlider; i++){
+
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             *
+             */
+            setResult() {
+                let divElement = document.getElementById("result");
+                console.log("divElement", divElement);
+                for (let i = 0; i < this.numberOfSlider; i++){
                     let value = this.$refs[i + 1][0].getSliderValue();
-                    if(value > 50){
-                        divElement.style.display="block";
+                    if (value > 50) {
+                        if (divElement.style.display !== "block")
+                            divElement.style.display = "block";
                         divElement.style.color = config.processSliderColor[i];
                         divElement.style.border = "1px solid" + config.processSliderColor[i];
-                    }else if(value === 50){
-                        divElement.style.display='none';
+                        divElement.style.marginTop = "3vh";
+                        divElement.style.marginLeft = "3vw";
+                        divElement.style.marginRight = "2vw";
+                        this.message = this.labels.optionGraphLabel[i];
+                    } else if (value === 50) {
+                        divElement.style.display = 'none';
                     }
                 }
 
 
             },
+
             /**
-             *
+             * ---> ------------------ will be completed soon -------------------
              * @param value
              * @param position
              * @param inverseValue
@@ -202,16 +217,18 @@
                 }
                 this.$forceUpdate();
             },
+
             /**
-             *
+             * ---> ------------------ will be completed soon -------------------
              * @param index
              * @returns {*}
              */
             getProgressValue(index) {
                 return this.progressValues[index];
             },
+
             /**
-             *
+             * ---> ------------------ will be completed soon -------------------
              * @param index
              * @returns {*}
              */
@@ -231,7 +248,6 @@
             this.setProgressParams();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
-
             });
         }
     }
@@ -250,10 +266,13 @@
     }
 
     .space_between_progress {
+        display: flex;
+        justify-content: center;
         /*margin-right: -15%;*/
         /*margin-bottom: 10px;*/
         margin: 0 auto;
-        padding: 12px;
+        overflow-x: hidden;
+        /*padding: 12px;*/
         /*transform: rotate(-90deg);*/
         /*transform-origin: 70%;*/
     }
@@ -272,10 +291,6 @@
         margin-right: 5px;
         text-align: right;
     }
-    #slidersScale {
-        overflow:auto
-
-    }
     .collapsible {
         color: black;
         cursor: pointer;
@@ -288,7 +303,7 @@
     }
 
     /*.active, .collapsible:hover {*/
-        /*!*background-color: #555;*!*/
+    /*!*background-color: #555;*!*/
     /*}*/
 
     #description {
@@ -308,10 +323,13 @@
     @media screen and (max-width: 600px) {
         #description{
             border: 2px solid #DDDDDD;
-
         }
         .column {
 
+        }
+        .description-align {
+            margin-left: 3vw;
+            margin-right: 3vw;
         }
     }
 </style>
