@@ -4,14 +4,15 @@
         <div class="column is-half-desktop is-full-mobile is-centered ">
             <h1 class="title has-text-primary has-text-left-mobile is-size-4-mobile">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
-            <br/>
-            <br/>
-            <p id="description" class="has-text-left">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p><button id="collapsible" class="collapsible">Instructions</button>
+            <button id="collapsible" class="button is-hidden-desktop collapsible">Instructions</button>
+            <p id="description" class="notification has-text-left has-background-white">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>
+            <!--<p id="description" class="notification has-text-left">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>-->
+            <!--<button id="collapsible" class="collapsible">Instructions</button>-->
         </div>
         <!--descriptions on sliders-->
 
         <div class="columns is-centered">
-            <div class="column is-center description-align" >
+            <div class="column sliders is-center description-align" >
                 <span id="scaleLeft" class="has-text-left-mobile">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight" class="has-text-right-mobile">{{this.labels.rightScaleLabel}}</span>
                 <br>
@@ -126,9 +127,10 @@
              */
             activeInstruction(){
                 var coll = document.getElementById("collapsible");
+                // coll.classList.add("is-active");
                 coll.addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var content = this.previousElementSibling;
+                    this.classList.toggle("is-active");
+                    var content = this.nextElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";
                     } else {
@@ -173,7 +175,6 @@
              */
             setResult() {
                 let divElement = document.getElementById("result");
-                console.log("divElement", divElement);
                 for (let i = 0; i < this.numberOfSlider; i++){
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if (value > 50) {
@@ -287,16 +288,18 @@
         text-align: right;
     }
     .collapsible {
-        color: black;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: center;
-        outline: none;
-        font-size: 15px;
+        /*color: black;*/
+        /*cursor: pointer;*/
+        /*padding: 5px;*/
+        /*margin-top: 5px;*/
+        /*width: 100%;*/
+        /*border: none;*/
+        /*text-align: center;*/
+        /*outline: none;*/
+        /*font-size: 15px;*/
+        margin: 0 10px;
+        width: auto;
     }
-
     /*.active, .collapsible:hover {*/
     /*!*background-color: #555;*!*/
     /*}*/
@@ -304,6 +307,7 @@
     #description {
         display: none;
         overflow: hidden;
+        padding: 0;
     }
     /*on destop*/
     @media screen and (min-width: 600px) {
@@ -313,15 +317,32 @@
         #description{
             display: block;
         }
+
     }
     /* on small screen */
     @media screen and (max-width: 600px) {
+
         #description{
             border: 2px solid #DDDDDD;
+            position: absolute;
+            z-index: 999;
+            margin-top: 10px;
+            padding: 12px;
         }
-        .results{
+        .column {
+           width: 100%;
+           margin: 0 auto;
+           padding: 0;
+           line-height: 1;
+        }
+
+        #result {
+            position: relative;
+            left: 15vh;
+            bottom: 3vw;
 
         }
+
 
     }
 </style>
