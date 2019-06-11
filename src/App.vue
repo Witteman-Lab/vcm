@@ -329,7 +329,7 @@
     #description {
         display: none;
         overflow: hidden;
-        line-height: 2;
+        line-height: 1.5;
         padding: 0;
     }
 
@@ -364,6 +364,25 @@
            margin: 0 auto;
            padding: 0;
            line-height: 1;
+        }
+
+
+    }
+    @media screen and (orientation: landscape) {
+
+        .column.slider {
+            width: 50%;
+        }
+        .column.sliders{
+            width:50%;
+
+        }
+        .columns{
+            display: flex;
+        }
+        #result{
+            position: relative;
+            top: 1vw;
         }
 
 
