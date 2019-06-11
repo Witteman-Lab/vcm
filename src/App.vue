@@ -1,8 +1,8 @@
 <template>
     <div id="app" class="container">
         <!--instructions -->
-        <div class="column is-half-desktop is-full-mobile is-centered ">
-            <h1 class="title has-text-primary has-text-left-mobile is-size-4-mobile">{{this.labels.title}}</h1>
+        <div class="column is-half-desktop is-full-mobile is-centered">
+            <h1 class="title has-text-primary is-size-4-mobile is-marginless is-paddingless">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <button id="collapsible" class="button is-hidden-desktop collapsible">Instructions</button>
             <p id="description" class="notification has-text-left has-background-white">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>
@@ -10,28 +10,27 @@
             <!--<button id="collapsible" class="collapsible">Instructions</button>-->
         </div>
         <!--descriptions on sliders-->
-
         <div class="columns is-centered">
-            <div class="column sliders is-center description-align" >
+            <div class="column sliders is-center">
                 <span id="scaleLeft" class="has-text-left-mobile">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight" class="has-text-right-mobile">{{this.labels.rightScaleLabel}}</span>
                 <br>
                 <!--slider-->
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
-                    <SliderRange :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
+                    <SliderRange  :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
                 </div>
 
             </div>
             <!--graphics-->
-            <div class="column is-centered has-text-centered">
+            <div class="column slider is-centered has-text-centered">
                 <div class="is-flex">
                     <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
                         <VerticalProgressBar :option-graph-label="optionGraphLabel[index] " v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
 
-                <div class="results " id="result" style="display: none">
-                    <p class="has-text-centered">{{this.message}} {{this.labels.result}}</p>
+                <div class="results" id="result">
+                    <p class=" options has-text-centered">{{this.message}} {{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -168,6 +167,23 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             *
+             */
+            setResultsWidth(x, elt){
+                if (x.matches) {
+                    elt.style.width = "8em";
+                    elt.style.marginLeft = "auto";
+                    elt.style.marginRight = "auto";
+                    // elt.style.marginTop = "7vw";
+                    elt.style.position = "relative";
+                    elt.style.height = "auto";
+                    elt.style.bottom = "5vw";
+                } else {
+                    elt.style.width = "30%";
+                }
+            },
 
             /**
              * ---> ------------------ will be completed soon -------------------
@@ -175,6 +191,7 @@
              */
             setResult() {
                 let divElement = document.getElementById("result");
+                var x = window.matchMedia("(max-width: 700px)")
                 for (let i = 0; i < this.numberOfSlider; i++){
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if (value > 50) {
@@ -185,7 +202,7 @@
                         divElement.style.marginTop = "3vh";
                         divElement.style.marginLeft = "7vw";
                         divElement.style.marginRight = "2vw";
-                        divElement.style.width = "30%";
+                        this.setResultsWidth(x,divElement);
                         this.message = this.labels.optionGraphLabel[i];
                     } else if (value === 50) {
                         divElement.style.display = 'none';
@@ -268,12 +285,14 @@
     .space_between_progress {
         display: flex;
         justify-content: center;
-        margin-right: -22%;
+        margin-right: 0%;
         overflow-x: hidden;
 
     }
-
-    h1 {
+    #result{
+        display: none;
+    }
+    h1{
         color:#70ada6;
         font-size:1.4em;
     }
@@ -300,15 +319,20 @@
         margin: 0 10px;
         width: auto;
     }
-    /*.active, .collapsible:hover {*/
-    /*!*background-color: #555;*!*/
-    /*}*/
+    .column.slider{
+        padding: 0;
+    }
+    .column.sliders{
+        margin: 0 20px;
+    }
 
     #description {
         display: none;
         overflow: hidden;
+        line-height: 2;
         padding: 0;
     }
+
     /*on destop*/
     @media screen and (min-width: 600px) {
         .collapsible{
@@ -317,7 +341,13 @@
         #description{
             display: block;
         }
+        .space_between_progress {
+            display: flex;
+            justify-content: center;
+            margin-right: -21%;
+            overflow-x: hidden;
 
+        }
     }
     /* on small screen */
     @media screen and (max-width: 600px) {
@@ -334,13 +364,6 @@
            margin: 0 auto;
            padding: 0;
            line-height: 1;
-        }
-
-        #result {
-            position: relative;
-            left: 15vh;
-            bottom: 3vw;
-
         }
 
 

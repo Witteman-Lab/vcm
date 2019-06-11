@@ -1,6 +1,6 @@
 <template>
     <div class="has-text-centered" v-on:click="drag()">
-        <vue-slider ref="slider"
+        <vue-slider class="vueSlider" ref="slider"
                     v-model="value"
                     v-bind="option"
                     :contained="true"
@@ -65,5 +65,8 @@
 </script>
 
 <style scoped>
+    .vueSlider{
+        padding: 0;
+    }
 
 </style>
