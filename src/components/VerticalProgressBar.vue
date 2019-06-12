@@ -42,19 +42,19 @@
     .resize-vertical-bar-mobile {
         margin-left: 2vw;
         margin-top: 8vh;
-
+        /*z-index: 999;*/
     }
 
 
     @media screen and (max-width: 420px) {
-        .resize-vertical-bar-mobile {
-            margin-left: 2vw;
-            margin-top: 10vh;
-        }
+        /*.resize-vertical-bar-mobile {*/
+            /*margin-left: 2vw;*/
+            /*margin-top: 10vh;*/
+        /*}*/
 
-        .resize-option-label {
-            text-align: center;
-            padding-top: 14vh;
-        }
+        /*.resize-option-label {*/
+            /*text-align: center;*/
+            /*padding-top: 14vh;*/
+        /*}*/
     }
 </style>

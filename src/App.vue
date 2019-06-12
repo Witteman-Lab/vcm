@@ -2,7 +2,7 @@
     <div id="app" class="container">
         <!--instructions -->
         <div class="column is-half-desktop is-full-mobile is-centered">
-            <h1 class="title has-text-primary is-size-4-mobile is-marginless is-paddingless">{{this.labels.title}}</h1>
+            <h1 id="title" class="title has-text-primary is-size-4-mobile">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <button id="collapsible" class="button is-hidden-desktop collapsible">Instructions</button>
             <p id="description" class="notification has-text-left has-background-white">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>
@@ -11,9 +11,9 @@
         </div>
         <!--descriptions on sliders-->
         <div class="columns is-centered">
-            <div class="column sliders is-center">
-                <span id="scaleLeft" class="has-text-left-mobile">{{this.labels.leftScaleLabel}}</span>
-                <span id="scaleRight" class="has-text-right-mobile">{{this.labels.rightScaleLabel}}</span>
+            <div class="column sliders is-center descriptionAlign">
+                <span id="scaleLeft" class="has-text-left">{{this.labels.leftScaleLabel}}</span>
+                <span id="scaleRight" class="has-text-right">{{this.labels.rightScaleLabel}}</span>
                 <br>
                 <!--slider-->
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="results" id="result">
-                    <p class=" options has-text-centered">{{this.message}} {{this.labels.result}}</p>
+                    <p id="options" class="options has-text-centered">{{this.message}} {{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -202,7 +202,7 @@
                         divElement.style.marginTop = "3vh";
                         divElement.style.marginLeft = "7vw";
                         divElement.style.marginRight = "2vw";
-                        this.setResultsWidth(x,divElement);
+                        //this.setResultsWidth(x,divElement);
                         this.message = this.labels.optionGraphLabel[i];
                     } else if (value === 50) {
                         divElement.style.display = 'none';
@@ -289,13 +289,16 @@
         overflow-x: hidden;
 
     }
+
     #result{
         display: none;
     }
-    h1{
-        color:#70ada6;
+
+    h1#title{
         font-size:1.4em;
+        margin: 0 0 12px;
     }
+
     #scaleLeft {
         float: left;
         margin-left: 5px;
@@ -333,6 +336,11 @@
         padding: 0;
     }
 
+    p#options {
+        width: 100%;
+        padding: 2px;
+    }
+
     /*on destop*/
     @media screen and (min-width: 600px) {
         .collapsible{
@@ -341,13 +349,13 @@
         #description{
             display: block;
         }
-        .space_between_progress {
-            display: flex;
-            justify-content: center;
-            margin-right: -21%;
-            overflow-x: hidden;
+        /*.space_between_progress {*/
+            /*display: flex;*/
+            /*justify-content: center;*/
+            /*margin-right: -50%;*/
+            /*!*overflow-x: hidden;*!*/
 
-        }
+        /*}*/
     }
     /* on small screen */
     @media screen and (max-width: 600px) {
@@ -367,14 +375,15 @@
         }
 
 
+
     }
     @media screen and (orientation: landscape) {
 
         .column.slider {
-            width: 50%;
+            width: 10%;
         }
         .column.sliders{
-            width:50%;
+            width:100%;
 
         }
         .columns{
@@ -384,6 +393,16 @@
             position: relative;
             top: 1vw;
         }
+        /*#scaleLeft {*/
+            /*position: relative;*/
+            /*margin-left: 0px;*/
+            /*width: 15vw;*/
+            /*text-align: center;*/
+            /*float: left;*/
+        /*}*/
+        /*#scaleRight {*/
+
+        /*}*/
 
 
     }
