@@ -4,7 +4,7 @@
         <div class="column is-half-desktop is-full-mobile is-centered">
             <h1 id="title" class="title has-text-primary is-size-4-mobile">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
-            <button id="collapsible" class="button is-hidden-desktop collapsible">Instructions</button>
+            <button id="collapsible" class="button  is-hidden-desktop collapsible">{{this.labels.instruction[0]}}</button>
             <p id="description" class="notification has-text-left has-background-white">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>
             <!--<p id="description" class="notification has-text-left">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>-->
             <!--<button id="collapsible" class="collapsible">Instructions</button>-->
@@ -60,6 +60,8 @@
                 progressValues: [],
                 numberOfSlider: 0,
                 message: "yes",
+                message2: "yes",
+                instruction: [],
                 options : [],
                 parametre:[],
                 topSliderLabel: "",
@@ -79,6 +81,7 @@
                     this.labels = textEn;
                 this.topSliderLabel = this.labels.topSliderLabel;
                 this.optionGraphLabel = this.labels.optionGraphLabel;
+                this.instruction = this.labels.instruction;
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
@@ -126,15 +129,36 @@
              *
              */
             activeInstruction(){
-                var coll = document.getElementById("collapsible");
+                var coll = document.getElementById("collapsible");  // le button
                 // coll.classList.add("is-active");
+                coll.style.animation = "collapsible 2s linear infinite";
+                 //coll.style.background = "linear-gradient(90deg, #00D1B2, #00D1B2)";
+                 coll.style.background = "#00D1B2";
+                coll.style.color = "white";
+
+                let value = this.labels.instruction[0];
+                let value2 = this.labels.instruction[1];
+
                 coll.addEventListener("click", function() {
                     this.classList.toggle("is-active");
+                    // coll.style.animation = "collapsible 1s linear infinite";
                     var content = this.nextElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";
+                        // this.message2 = this.innerHTML;
+                        // this.message2 = this.labels.instruction[0];
+                        // console.log(this.message2);
+                        // pas completer
+                        this.innerHTML = value;
+
+
                     } else {
                         content.style.display = "block";
+                        coll.style.animation = "";
+                        this.innerHTML = value2;
+
+
+
                     }
                 });
             },
@@ -272,9 +296,11 @@
             this.numberOfSlider = config.numberOfSlider;
             this.topSliderLabel = this.labels.topSliderLabel;
             this.optionGraphLabel = this.labels.optionGraphLabel;
-            this.activeInstruction();
+            this.instruction =this.labels.instruction;
+
             this.setOptions();
             this.setProgressParams();
+            this.activeInstruction();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
                 this.moveProgressBars();
@@ -289,6 +315,17 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: left;
+    }
+    /*#collapsible {*/
+        /*!*-webkit-animation:collapsible 1s linear infinite;*!*/
+        /*!*-moz-animation:collapsible 1s linear infinite;*!*/
+        /*animation: collapsible 1s linear infinite;*/
+
+    /*}*/
+    @keyframes collapsible {
+        0%{opacity:1;}
+        50%{opacity:0.25;}
+        100%{opacity:1;}
     }
 
     .space_between_slider {
@@ -338,14 +375,9 @@
         /*text-align: center;*/
         /*outline: none;*/
         /*font-size: 15px;*/
-        margin: 0 10px;
         width: auto;
-    }
-    .column.slider{
-        padding: 0;
-    }
-    .column.sliders{
         margin: 0 20px;
+        font-weight: bold;
     }
 
     #description {
