@@ -18,6 +18,17 @@
             value: Number,
             parameters: Object,
             optionGraphLabel: String
+        },
+        methods: {
+            moveProgressBars() {
+                console.log("VerticalProgressBar -> moveProgressBars");
+            }
+        },
+        created() {},
+        mounted() {
+            document.addEventListener('DOMContentLoaded', () => {
+                //this.moveProgressBars();
+            });
         }
     }
 </script>
@@ -28,11 +39,17 @@
         -moz-transform: rotate(270deg);
         -ms-transform: rotate(270deg);
         transform: rotate(270deg);
-        -webkit-transform-origin: center;
+        /* -webkit-transform-origin: center;
         -moz-transform-origin: center;
         -ms-transform-origin: center;
-        transform-origin: center;
+        transform-origin: center; */
         padding-right: 0.5vw;
+    }
+
+    .progressBar:after {
+        content: "";
+        /* float: left; */
+        /* margin-top: 100%; */
     }
 
     .resize-option-label {

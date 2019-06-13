@@ -23,9 +23,9 @@
             </div>
             <!--graphics-->
             <div class="column slider is-centered has-text-centered">
-                <div class="is-flex">
-                    <div v-for="(progress, index) in this.numberOfSlider" class="space_between_progress" id="graphics" :key="progress + 'progress'">
-                        <VerticalProgressBar :option-graph-label="optionGraphLabel[index] " v-bind:ref="progress" :value="getProgressValue(index)"  :parameters="getParameters(index)" ></VerticalProgressBar>
+                <div id="newParent" class="is-flex">
+                    <div v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
+                        <VerticalProgressBar :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
 
@@ -223,11 +223,11 @@
                     if (i === position) {
                         // console.log("change current : " + i);
                         this.progressValues[i] = value;
-                        console.log("la valeur du premier slider", value);
+                        //console.log("la valeur du premier slider", value);
                     } else {
                         // console.log("change others : " + i);
                         // console.log(this.$refs[i + 1]);
-                        console.log("la valeur du deuxieme slider", inverseValue);
+                        //console.log("la valeur du deuxieme slider", inverseValue);
                         this.$refs[i + 1][0].setSlider(inverseValue);
                         this.progressValues[i] = inverseValue;
                     }
@@ -252,6 +252,16 @@
             getParameters(index) {
                 return this.parametre[index];
             },
+
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             * @param
+             * @returns {*}
+             */
+            moveProgressBars() {
+                console.log("App -> moveProgressBars");
+                console.log("this.$refs", this.$refs);
+            }
         },
         created() {
             this.labels = textEn;
@@ -265,6 +275,7 @@
             this.setProgressParams();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
+                this.moveProgressBars();
             });
         }
     }
@@ -283,11 +294,17 @@
     }
 
     .space_between_progress {
-        display: flex;
+        /* display: flex;
         justify-content: center;
         margin-right: 0%;
-        overflow-x: hidden;
+        overflow-x: hidden; */
+    }
 
+    div.space_between_progress{
+        /* writing-mode: vertical-rl; */
+        white-space: nowrap;
+        display: inline-block;
+        overflow: visible;
     }
 
     #result{
