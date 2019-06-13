@@ -30,7 +30,8 @@
                 </div>
 
                 <div class="results" id="result">
-                    <p id="options" class="options has-text-centered">{{this.message}} {{this.labels.result}}</p>
+                    <p id="options" class="options has-text-centered"><b>{{this.message}}</b> {{this.labels.result}}</p>
+
                 </div>
             </div>
         </div>
@@ -191,7 +192,7 @@
              */
             setResult() {
                 let divElement = document.getElementById("result");
-                var x = window.matchMedia("(max-width: 700px)")
+                // var x = window.matchMedia("(max-width: 700px)")
                 for (let i = 0; i < this.numberOfSlider; i++){
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if (value > 50) {
@@ -204,6 +205,7 @@
                         divElement.style.marginRight = "2vw";
                         //this.setResultsWidth(x,divElement);
                         this.message = this.labels.optionGraphLabel[i];
+
                     } else if (value === 50) {
                         divElement.style.display = 'none';
                     }
@@ -396,13 +398,13 @@
     }
     @media screen and (orientation: landscape) {
 
-        .column.slider {
-            width: 10%;
+        .slider {
+            width: 30%;
         }
-        .column.sliders{
-            width:100%;
+        /*.column.sliders{*/
+            /*width:100%;*/
 
-        }
+        /*}*/
         .columns{
             display: flex;
         }
