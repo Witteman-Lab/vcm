@@ -1,36 +1,38 @@
 <template>
     <div id="app" class="container">
-        <!--instructions -->
+        <!--Instructions -->
         <div class="column is-half-desktop is-full-mobile is-centered">
             <h1 id="title" class="title has-text-primary is-size-4-mobile">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
-            <button id="collapsible" class="button  is-hidden-desktop collapsible">{{this.labels.instruction[0]}}</button>
-            <p id="description" class="notification has-text-left has-background-white">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>
-            <!--<p id="description" class="notification has-text-left">{{this.labels.description1}}{{this.labels.description2}}{{this.labels.description3}}</p>-->
-            <!--<button id="collapsible" class="collapsible">Instructions</button>-->
+            <button id="collapsible" class="button is-primary is-hidden-desktop collapsible">{{this.labels.instruction[0]}}</button>
+            <p id="description" class="notification has-text-left has-background-white">
+                {{this.labels.description1}}<br />
+                {{this.labels.description2}}<br />
+                {{this.labels.description3}}
+            </p>
         </div>
-        <!--descriptions on sliders-->
+        <!--Sliders scales-->
         <div class="columns is-centered">
             <div class="column sliders is-center descriptionAlign">
                 <span id="scaleLeft" class="has-text-left">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight" class="has-text-right">{{this.labels.rightScaleLabel}}</span>
                 <br>
-                <!--slider-->
+                <!--Sliders-->
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
                     <SliderRange  :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
                 </div>
 
             </div>
-            <!--graphics-->
+            <!--Graphics-->
             <div class="column slider is-centered has-text-centered">
-                <div id="newParent" class="is-flex">
+                <div class="is-flex">
                     <div v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
                         <VerticalProgressBar :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
 
                 <div class="results" id="result">
-                    <p id="options" class="options has-text-centered"><b>{{this.message}}</b> {{this.labels.result}}</p>
+                    <p id="options" class="options has-text-centered"><strong>{{this.message}}</strong> {{this.labels.result}}</p>
 
                 </div>
             </div>
@@ -43,7 +45,6 @@
 <script>
 
     import SliderRange from './components/SliderRange.vue';
-    // import Graphics from './components/Graphics.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
     import config from "./assets/json/config.json";
@@ -133,8 +134,8 @@
                 // coll.classList.add("is-active");
                 coll.style.animation = "collapsible 2s linear infinite";
                  //coll.style.background = "linear-gradient(90deg, #00D1B2, #00D1B2)";
-                 coll.style.background = "#00D1B2";
-                coll.style.color = "white";
+                 // coll.style.background = "#00D1B2";
+                // coll.style.color = "white";
 
                 let value = this.labels.instruction[0];
                 let value2 = this.labels.instruction[1];
@@ -247,13 +248,8 @@
             setCurrentProgressValue(value, position, inverseValue) {
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     if (i === position) {
-                        // console.log("change current : " + i);
                         this.progressValues[i] = value;
-                        //console.log("la valeur du premier slider", value);
                     } else {
-                        // console.log("change others : " + i);
-                        // console.log(this.$refs[i + 1]);
-                        //console.log("la valeur du deuxieme slider", inverseValue);
                         this.$refs[i + 1][0].setSlider(inverseValue);
                         this.progressValues[i] = inverseValue;
                     }
@@ -278,16 +274,6 @@
             getParameters(index) {
                 return this.parametre[index];
             },
-
-            /**
-             * ---> ------------------ will be completed soon -------------------
-             * @param
-             * @returns {*}
-             */
-            moveProgressBars() {
-                console.log("App -> moveProgressBars");
-                console.log("this.$refs", this.$refs);
-            }
         },
         created() {
             this.labels = textEn;
@@ -303,7 +289,6 @@
             this.activeInstruction();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
-                this.moveProgressBars();
             });
         }
     }
@@ -315,13 +300,9 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: left;
+        padding: 10px;
     }
-    /*#collapsible {*/
-        /*!*-webkit-animation:collapsible 1s linear infinite;*!*/
-        /*!*-moz-animation:collapsible 1s linear infinite;*!*/
-        /*animation: collapsible 1s linear infinite;*/
 
-    /*}*/
     @keyframes collapsible {
         0%{opacity:1;}
         50%{opacity:0.25;}
@@ -330,20 +311,6 @@
 
     .space_between_slider {
         margin-bottom: 10px;
-    }
-
-    .space_between_progress {
-        /* display: flex;
-        justify-content: center;
-        margin-right: 0%;
-        overflow-x: hidden; */
-    }
-
-    div.space_between_progress{
-        /* writing-mode: vertical-rl; */
-        white-space: nowrap;
-        display: inline-block;
-        overflow: visible;
     }
 
     #result{
@@ -366,17 +333,8 @@
         text-align: right;
     }
     .collapsible {
-        /*color: black;*/
-        /*cursor: pointer;*/
-        /*padding: 5px;*/
-        /*margin-top: 5px;*/
-        /*width: 100%;*/
-        /*border: none;*/
-        /*text-align: center;*/
-        /*outline: none;*/
-        /*font-size: 15px;*/
         width: auto;
-        margin: 0 20px;
+        margin: 0 0 10px 10px;
         font-weight: bold;
     }
 
@@ -400,13 +358,6 @@
         #description{
             display: block;
         }
-        /*.space_between_progress {*/
-            /*display: flex;*/
-            /*justify-content: center;*/
-            /*margin-right: -50%;*/
-            /*!*overflow-x: hidden;*!*/
-
-        /*}*/
     }
     /* on small screen */
     @media screen and (max-width: 600px) {
@@ -415,7 +366,7 @@
             border: 2px solid #DDDDDD;
             position: absolute;
             z-index: 999;
-            margin-top: 10px;
+            /* margin-top: 10px; */
             padding: 12px;
         }
         .column {
@@ -444,16 +395,6 @@
             position: relative;
             top: 1vw;
         }
-        /*#scaleLeft {*/
-            /*position: relative;*/
-            /*margin-left: 0px;*/
-            /*width: 15vw;*/
-            /*text-align: center;*/
-            /*float: left;*/
-        /*}*/
-        /*#scaleRight {*/
-
-        /*}*/
 
 
     }
