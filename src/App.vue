@@ -25,15 +25,13 @@
             </div>
             <!--Graphics-->
             <div class="column slider is-centered has-text-centered">
-                <div class="is-flex">
+                <div style="display: flex;justify-content: space-evenly">
                     <div v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
                         <VerticalProgressBar :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
-
                 <div class="results" id="result">
                     <p id="options" class="options has-text-centered"><strong>{{this.message}}</strong> {{this.labels.result}}</p>
-
                 </div>
             </div>
         </div>
@@ -226,8 +224,6 @@
                         divElement.style.color = config.processSliderColor[i];
                         divElement.style.border = "2px solid" + config.processSliderColor[i];
                         divElement.style.marginTop = "3vh";
-                        divElement.style.marginLeft = "7vw";
-                        divElement.style.marginRight = "2vw";
                         //this.setResultsWidth(x,divElement);
                         this.message = this.labels.optionGraphLabel[i];
 
@@ -311,6 +307,12 @@
 
     .space_between_slider {
         margin-bottom: 10px;
+    }
+
+    .space_between_progress {
+        display: flex;
+        justify-content: center;
+        width: 30%;
     }
 
     #result{

@@ -39,11 +39,11 @@
         -moz-transform: rotate(270deg);
         -ms-transform: rotate(270deg);
         transform: rotate(270deg);
-        /* -webkit-transform-origin: center;
+         -webkit-transform-origin: center;
         -moz-transform-origin: center;
         -ms-transform-origin: center;
-        transform-origin: center; */
-        padding-right: 0.5vw;
+        transform-origin: center;
+        /*padding-right: 0.5vw;*/
     }
 
     .progressBar:after {
@@ -57,7 +57,6 @@
         padding-top: 12vh;
     }
     .resize-vertical-bar-mobile {
-        margin-left: 2vw;
         margin-top: 8vh;
         /*z-index: 999;*/
     }
@@ -65,7 +64,6 @@
 
     @media screen and (max-width: 420px) {
         .resize-vertical-bar-mobile {
-            margin-left: 2vw;
             margin-top: 10vh;
         }
 
