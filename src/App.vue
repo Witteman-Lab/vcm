@@ -1,8 +1,8 @@
 <template>
     <div id="app" class="container">
         <!--Instructions -->
-        <div class="column is-half-desktop is-full-mobile is-centered">
-            <h1 id="title" class="title has-text-primary is-size-4-mobile">{{this.labels.title}}</h1>
+        <div id="descriptionTitle" class="column is-half-desktop is-full-mobile is-centered">
+            <h1 id="title" class="title has-text-primary is-size-5-mobile is-size-3-desktop">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <button id="collapsible" class="button is-primary is-hidden-desktop collapsible">{{this.labels.instruction[0]}}</button>
             <p id="description" class="notification has-text-left has-background-white">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="results" id="result">
-                    <p id="options" class="options has-text-centered"><strong>{{this.message}}</strong> {{this.labels.result}}</p>
+                    <p id="options" class="options has-text-centered"><b>{{this.message}}</b> {{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -135,26 +135,19 @@
                  // coll.style.background = "#00D1B2";
                 // coll.style.color = "white";
 
-                let value = this.labels.instruction[0];
-                let value2 = this.labels.instruction[1];
 
                 coll.addEventListener("click", function() {
                     this.classList.toggle("is-active");
-                    // coll.style.animation = "collapsible 1s linear infinite";
                     var content = this.nextElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";
-                        // this.message2 = this.innerHTML;
-                        // this.message2 = this.labels.instruction[0];
-                        // console.log(this.message2);
-                        // pas completer
-                        this.innerHTML = value;
+                        // this.innerHTML = this.labels.instruction[0];
 
 
                     } else {
                         content.style.display = "block";
                         coll.style.animation = "";
-                        this.innerHTML = value2;
+
 
 
 
@@ -184,7 +177,7 @@
                             zeroOffset: 0,
                             strokeWidth:100,
                             progressPadding: 0,
-                            type: 'line'
+                            type: 'line',
                         }
                     };
                     this.parametre.push(option);
@@ -377,6 +370,13 @@
            padding: 0;
            line-height: 1;
         }
+        h1#title{
+            font-size:1.4em;
+            margin: 0 0 8px;
+        }
+        div#descriptionTitle{
+            padding: 0;
+        }
 
 
 
@@ -384,18 +384,22 @@
     @media screen and (orientation: landscape) {
 
         .slider {
-            width: 30%;
+            width: 10%;
         }
-        /*.column.sliders{*/
-            /*width:100%;*/
+        .column.sliders{
+            width: 100%;
 
-        /*}*/
+        }
         .columns{
             display: flex;
         }
         #result{
             position: relative;
             top: 1vw;
+        }
+        h1#title{
+            font-size:1.4em;
+            margin: 0 0 8px;
         }
 
 
