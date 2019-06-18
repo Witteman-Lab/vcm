@@ -3,7 +3,7 @@
         <vue-slider class="vueSlider" ref="slider"
                     v-model="value"
                     v-bind="option"
-                    :contained="true"
+                    :contained="false"
                     :duration="inDragging ? 0 : 0"
                     @drag-start="() => inDragging = true"
                     @drag-end="() => inDragging = false"
