@@ -12,7 +12,7 @@
             </p>
         </div>
         <!--Sliders scales-->
-        <div class="columns is-centered">
+        <div id="SliderGraphics" class="columns is-centered ">
             <div class="column sliders is-center descriptionAlign">
                 <span id="scaleLeft" class="has-text-left">{{this.labels.leftScaleLabel}}</span>
                 <span id="scaleRight" class="has-text-right">{{this.labels.rightScaleLabel}}</span>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="results" id="result">
-                    <p id="options" class="options has-text-centered"><b>{{this.message}}</b> {{this.labels.result}}</p>
+                    <p id="options " class="options has-text-centered"><b>{{this.message}}</b> {{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
                     var content = this.nextElementSibling;
                     if (content.style.display === "block") {
                         content.style.display = "none";
-                        // this.innerHTML = this.labels.instruction[0];
+                        this.innerHTML = this.labels.instruction[0];
 
 
                     } else {
@@ -188,19 +188,19 @@
              * ---> ------------------ will be completed soon -------------------
              *
              */
-            setResultsWidth(x, elt){
-                if (x.matches) {
-                    elt.style.width = "8em";
-                    elt.style.marginLeft = "auto";
-                    elt.style.marginRight = "auto";
-                    // elt.style.marginTop = "7vw";
-                    elt.style.position = "relative";
-                    elt.style.height = "auto";
-                    elt.style.bottom = "5vw";
-                } else {
-                    elt.style.width = "30%";
-                }
-            },
+            // setResultsWidth(x, elt){
+            //     if (x.matches) {
+            //         elt.style.width = "8em";
+            //         elt.style.marginLeft = "auto";
+            //         elt.style.marginRight = "auto";
+            //         elt.style.marginTop = "0vw";
+            //         elt.style.position = "relative";
+            //         elt.style.height = "auto";
+            //         elt.style.bottom = "5vw";
+            //     } else {
+            //         elt.style.width = "30%";
+            //     }
+            // },
 
             /**
              * ---> ------------------ will be completed soon -------------------
@@ -208,20 +208,20 @@
              */
             setResult() {
                 let divElement = document.getElementById("result");
-                // var x = window.matchMedia("(max-width: 700px)")
+                // var x = window.matchMedia("(max-width: 812px)")
                 for (let i = 0; i < this.numberOfSlider; i++){
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if (value > 50) {
-                        if (divElement.style.display !== "block")
-                            divElement.style.display = "block";
+                        if (divElement.style.visibility !== "hide")
+                            divElement.style.visibility = "visible";
                         divElement.style.color = config.processSliderColor[i];
                         divElement.style.border = "2px solid" + config.processSliderColor[i];
-                        divElement.style.marginTop = "3vh";
-                        //this.setResultsWidth(x,divElement);
+                        divElement.style.marginTop = "1vh";
+                        // this.setResultsWidth(x,divElement);
                         this.message = this.labels.optionGraphLabel[i];
 
                     } else if (value === 50) {
-                        divElement.style.display = 'none';
+                        divElement.style.visibility = 'hide';
                     }
                 }
 
@@ -290,6 +290,7 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: left;
         padding: 10px;
+
     }
 
     @keyframes collapsible {
@@ -309,7 +310,8 @@
     }
 
     #result{
-        display: none;
+        /*display: none;*/
+        visibility: hidden;
     }
 
     h1#title{
@@ -322,11 +324,13 @@
         margin-left: 5px;
         text-align: left;
     }
+
     #scaleRight {
         float: right;
         margin-right: 5px;
         text-align: right;
     }
+
     .collapsible {
         width: auto;
         margin: 0 0 10px 10px;
@@ -341,21 +345,23 @@
     }
 
     p#options {
-        width: 100%;
         padding: 2px;
     }
 
     /*on destop*/
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: 750px) {
+
         .collapsible{
             display: none;
         }
+
         #description{
             display: block;
         }
+
     }
     /* on small screen */
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 420px) {
 
         #description{
             border: 2px solid #DDDDDD;
@@ -364,44 +370,78 @@
             /* margin-top: 10px; */
             padding: 12px;
         }
+
         .column {
            width: 100%;
            margin: 0 auto;
            padding: 0;
            line-height: 1;
         }
+
         h1#title{
             font-size:1.4em;
             margin: 0 0 8px;
         }
+
         div#descriptionTitle{
             padding: 0;
+        }
+
+        .space_between_slider {
+            margin-bottom: 3px;
         }
 
 
 
     }
-    @media screen and (orientation: landscape) {
+    @media screen and (max-width: 812px) and (orientation: landscape) {
+
+
+        #description{
+            border: 2px solid #DDDDDD;
+            position: absolute;
+            z-index: 999;
+            padding: 12px;
+        }
 
         .slider {
             width: 10%;
         }
+
         .column.sliders{
             width: 100%;
-
+            padding: 5px 0 0 7px;
         }
+
         .columns{
             display: flex;
+
         }
+
         #result{
             position: relative;
             top: 1vw;
         }
+
         h1#title{
             font-size:1.4em;
             margin: 0 0 8px;
         }
 
+        #descriptionTitle {
+            padding: 0;
+        }
 
+        #SliderGraphics .slider{
+            padding: 0 0 0 12px;
+        }
+
+        .space_between_slider {
+            margin-bottom: 3px;
+        }
+
+        #app{
+            padding: 5px 0 0 7px;
+        }
     }
 </style>

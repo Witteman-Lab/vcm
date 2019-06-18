@@ -72,10 +72,10 @@
             padding-top: 14vh;
         }
     }
-    @media (orientation: landscape) and (max-width: 600px){
-        /*.resize-vertical-bar-mobile {*/
-            /*margin-top: 10vh;*/
-        /*}*/
+    @media (orientation: landscape) and (max-width: 812px){
+        .resize-vertical-bar-mobile {
+            margin-top: 10vh;
+        }
 
         .resize-option-label {
             /*text-align: center;*/
