@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div class="resize-option-label">{{optionGraphLabel}}</div>
+        <div id="optionLabel" class="resize-option-label">{{optionGraphLabel}}</div>
     </div>
 </template>
 
@@ -20,14 +20,23 @@
             optionGraphLabel: String
         },
         methods: {
-            moveProgressBars() {
-                console.log("VerticalProgressBar -> moveProgressBars");
+            // moveProgressBars() {
+            //     console.log("VerticalProgressBar -> moveProgressBars");
+            // },
+            setOptionColor(elementcolor){
+                var val = document.getElementById("optionLabel");
+
+                val.style.color = elementcolor;
+                console.log("la coleur", elementcolor);
+                console.log("la valeur", val);
             }
         },
         created() {},
         mounted() {
+            // this.setOptionColor();
             document.addEventListener('DOMContentLoaded', () => {
                 //this.moveProgressBars();
+                // this.setOptionColor();
             });
         }
     }
@@ -55,6 +64,7 @@
     .resize-option-label {
         text-align: center;
         padding-top: 12vh;
+
     }
     .resize-vertical-bar-mobile {
         margin-top: 8vh;

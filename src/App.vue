@@ -26,12 +26,12 @@
             <!--Graphics-->
             <div class="column slider is-centered has-text-centered">
                 <div style="display: flex;justify-content: space-evenly">
-                    <div v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
-                        <VerticalProgressBar :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
+                    <div   v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
+                        <VerticalProgressBar id="optionLabel"  :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
                 <div class="results" id="result">
-                    <p id="options " class="options has-text-centered"><b>{{this.message}}</b> {{this.labels.result}}</p>
+                    <p id="options " class="options has-text-centered"><b>{{this.message}}</b>{{this.labels.result}}</p>
                 </div>
             </div>
         </div>
@@ -69,7 +69,8 @@
         },
         props:{},
         methods: {
-            /**
+
+             /**
              * ---> ------------------ will be completed soon -------------------
              * @return none
              */
@@ -84,6 +85,26 @@
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             *
+             */
+
+            // changeColorOption(){
+            //     // let valeur = document.getElementById("optionLabel");
+            //     // console.log(valeur.innerText);
+            //     let val = this.optionGraphLabel;
+            //     console.log(val);
+            //       for(let i=0; i < this.optionGraphLabel.length; i++){
+            //           // val.color = "red";
+            //           // console.log(val.color);
+            //           // console.log("ces valeur", val[i]);
+            //           // console.log("ces valeur", valeur);
+            //
+            //       }
+            //
+            //
+            // },
 
             /**
              * ---> ------------------ will be completed soon -------------------
@@ -128,28 +149,22 @@
              *
              */
             activeInstruction(){
-                var coll = document.getElementById("collapsible");  // le button
-                // coll.classList.add("is-active");
+                let coll = document.getElementById("collapsible");
                 coll.style.animation = "collapsible 2s linear infinite";
-                 //coll.style.background = "linear-gradient(90deg, #00D1B2, #00D1B2)";
-                 // coll.style.background = "#00D1B2";
-                // coll.style.color = "white";
 
+                //todo: the labels changes after the click is done, till to be done
+                coll.addEventListener("click", (el) => {
+                    el.target.classList.toggle("is-active");
 
-                coll.addEventListener("click", function() {
-                    this.classList.toggle("is-active");
-                    var content = this.nextElementSibling;
+                    let content = el.target.nextElementSibling;
+
                     if (content.style.display === "block") {
                         content.style.display = "none";
-                        this.innerHTML = this.labels.instruction[0];
-
-
+                        el.target.innerHTML = this.labels.instruction[0];
                     } else {
                         content.style.display = "block";
                         coll.style.animation = "";
-
-
-
+                        el.target.innerHTML = this.labels.instruction[1];
 
                     }
                 });
@@ -184,23 +199,6 @@
                     this.progressValues.push(option.defaultValue);
                 }
             },
-            /**
-             * ---> ------------------ will be completed soon -------------------
-             *
-             */
-            // setResultsWidth(x, elt){
-            //     if (x.matches) {
-            //         elt.style.width = "8em";
-            //         elt.style.marginLeft = "auto";
-            //         elt.style.marginRight = "auto";
-            //         elt.style.marginTop = "0vw";
-            //         elt.style.position = "relative";
-            //         elt.style.height = "auto";
-            //         elt.style.bottom = "5vw";
-            //     } else {
-            //         elt.style.width = "30%";
-            //     }
-            // },
 
             /**
              * ---> ------------------ will be completed soon -------------------
@@ -278,6 +276,7 @@
             this.activeInstruction();
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
+                // this.changeColorOption();
             });
         }
     }
