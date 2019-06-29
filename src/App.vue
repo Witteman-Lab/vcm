@@ -30,7 +30,7 @@
                         <VerticalProgressBar id="optionLabel"  :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
-                <div class="results" id="result">
+                <div class="results" id="result" style="border: 2px solid">
                     <p id="options " class="options has-text-centered"><b>{{this.message}}</b>{{this.labels.result}}</p>
                 </div>
             </div>
@@ -345,6 +345,7 @@
 
     p#options {
         padding: 2px;
+        border: 1px solid;
     }
 
     /*on destop*/
