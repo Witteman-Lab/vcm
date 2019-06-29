@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div id="optionLabel" class="resize-option-label">{{optionGraphLabel}}</div>
+        <div  class="resize-option-label"><span v-bind:style="{color: textColor}">{{optionGraphLabel}}</span></div>
     </div>
 </template>
 
@@ -12,12 +12,14 @@
     export default {
         name: "VerticalProgressBar",
         data() {
-            return {}
+            return {
+                textColor: String
+            }
         },
         props: {
             value: Number,
             parameters: Object,
-            optionGraphLabel: String
+            optionGraphLabel: String,
         },
         methods: {
             // moveProgressBars() {
@@ -33,6 +35,8 @@
         },
         created() {},
         mounted() {
+            console.log(this.parameters.progress.color);
+            this.textColor = this.parameters.progress.color;
             // this.setOptionColor();
             document.addEventListener('DOMContentLoaded', () => {
                 //this.moveProgressBars();
