@@ -22,25 +22,13 @@
             optionGraphLabel: String,
         },
         methods: {
-            // moveProgressBars() {
-            //     console.log("VerticalProgressBar -> moveProgressBars");
-            // },
-            setOptionColor(elementcolor){
-                var val = document.getElementById("optionLabel");
 
-                val.style.color = elementcolor;
-                console.log("la coleur", elementcolor);
-                console.log("la valeur", val);
-            }
         },
         created() {},
         mounted() {
             console.log(this.parameters.progress.color);
             this.textColor = this.parameters.progress.color;
-            // this.setOptionColor();
             document.addEventListener('DOMContentLoaded', () => {
-                //this.moveProgressBars();
-                // this.setOptionColor();
             });
         }
     }
