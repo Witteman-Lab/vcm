@@ -10,6 +10,7 @@
   "dependencies": {
     "bulma": "^0.7.5",
     "core-js": "^2.6.5",
+    "include-media": "^1.4.9",
     "vue": "^2.6.6",
     "vue-slide-bar": "^1.1.9",
     "vue-slider-component": "^3.0.31",

@@ -42,6 +42,7 @@
 
 <script>
 
+    // import mediaQuery from './scss/main.scss'
     import SliderRange from './components/SliderRange.vue';
     import textEn from "./assets/json/textEn.json";
     import textFr from "./assets/json/textFr.json";
@@ -282,13 +283,16 @@
     }
 </script>
 
-<style>
+<style lang="scss" >
+    @import "./scss/mediaQuery.scss";
+
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: left;
         padding: 10px;
+
 
     }
 
@@ -347,6 +351,7 @@
         padding: 2px;
         border: 1px solid;
     }
+
 
     /*on destop*/
     @media screen and (min-width: 750px) {
@@ -408,10 +413,10 @@
             width: 10%;
         }
 
-        .column.sliders{
-            width: 100%;
-            padding: 5px 0 0 7px;
-        }
+        /*.column.sliders{*/
+        /*    width: 100%;*/
+        /*    padding: 5px 0 0 7px;*/
+        /*}*/
 
         .columns{
             display: flex;
