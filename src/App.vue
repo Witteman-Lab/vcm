@@ -27,7 +27,7 @@
             <div class="column slider is-centered has-text-centered">
                 <div style="display: flex;justify-content: space-evenly">
                     <div   v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
-                        <VerticalProgressBar id="optionLabel"  :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
+                        <VerticalProgressBar id="optionLabel"  :border-text="getBorderText(index)" :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
                 <div class="results" id="result" style="border: 2px solid">
@@ -66,6 +66,7 @@
                 parametre:[],
                 topSliderLabel: "",
                 optionGraphLabel: [],
+                borderText: []
             };
         },
         props:{},
@@ -86,26 +87,6 @@
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
             },
-            /**
-             * ---> ------------------ will be completed soon -------------------
-             *
-             */
-
-            // changeColorOption(){
-            //     // let valeur = document.getElementById("optionLabel");
-            //     // console.log(valeur.innerText);
-            //     let val = this.optionGraphLabel;
-            //     console.log(val);
-            //       for(let i=0; i < this.optionGraphLabel.length; i++){
-            //           // val.color = "red";
-            //           // console.log(val.color);
-            //           // console.log("ces valeur", val[i]);
-            //           // console.log("ces valeur", valeur);
-            //
-            //       }
-            //
-            //
-            // },
 
             /**
              * ---> ------------------ will be completed soon -------------------
@@ -226,6 +207,22 @@
 
 
             },
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             *
+             */
+            setBorderOption(){
+                for (let i = 0; i < this.numberOfSlider; i++) {
+                    let value = this.$refs[i + 1][0].getSliderValue();
+                    if(value > 50 ){
+                        this.borderText[i] = '2px solid ' + this.getParameters(i).progress.color;
+                        // console.log("borderText", this.borderText);
+                    }else {
+                        this.borderText[i] = "";
+                    }
+
+                }
+            },
 
             /**
              * ---> ------------------ will be completed soon -------------------
@@ -252,6 +249,14 @@
              */
             getProgressValue(index) {
                 return this.progressValues[index];
+            },
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             * @param index
+             * @returns {*}
+             */
+            getBorderText(index) {
+                return this.borderText[index];
             },
 
             /**

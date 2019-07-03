@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div  class="resize-option-label"><span v-bind:style="{color: textColor}">{{optionGraphLabel}}</span></div>
+        <div  class="resize-option-label"><span v-bind:style="{color: textColor, border: borderText}">{{optionGraphLabel}}</span></div>
     </div>
 </template>
 
@@ -20,15 +20,20 @@
             value: Number,
             parameters: Object,
             optionGraphLabel: String,
+            borderText: String
+
         },
         methods: {
+
+
 
         },
         created() {},
         mounted() {
-            console.log(this.parameters.progress.color);
+            // console.log(this.parameters.progress.color);
             this.textColor = this.parameters.progress.color;
             document.addEventListener('DOMContentLoaded', () => {
+
             });
         }
     }

@@ -52,6 +52,7 @@
                 let value = this.$refs.slider.getValue();
                 this.$parent.setCurrentProgressValue(value, this.option.position, inverseValue);
                 this.$parent.setResult();
+                this.$parent.setBorderOption();
             },
             getSliderValue(){
               return this.$refs.slider.getValue();
