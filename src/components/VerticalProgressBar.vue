@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div  class="resize-option-label"><span v-bind:style="{color: textColor, border: borderText}">{{optionGraphLabel}}</span></div>
+        <div  id="space_between_div" class="resize-option-label"><span v-bind:style="{color: textColor, border: borderText}">{{optionGraphLabel}}</span></div>
     </div>
 </template>
 
@@ -66,6 +66,14 @@
     .resize-vertical-bar-mobile {
         margin-top: 8vh;
         /*z-index: 999;*/
+    }
+    #space_between_div {
+        /*!*display: flex;*!*/
+        /*justify-content: center;*/
+        /*width: 100%;*/
+        /*display: inline-block;*/
+        margin: auto;
+        width: 80%;
     }
 
 
