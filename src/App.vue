@@ -201,7 +201,7 @@
                         this.message = this.labels.optionGraphLabel[i];
 
                     } else if (value === 50) {
-                        divElement.style.visibility = 'hide';
+                        divElement.style.visibility = 'hidden';
                     }
                 }
 
