@@ -396,7 +396,7 @@
     }
 
     /* orientation: landscape*/
-   @media screen and (orientation: landscape) {
+   @media screen and (max-width: $breakpoint-tablet) and (orientation: landscape) {
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
