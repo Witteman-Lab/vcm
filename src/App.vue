@@ -4,7 +4,7 @@
         <div id="descriptionTitle" class="column is-half-desktop is-full-mobile is-centered">
             <h1 id="title" class="title has-text-primary is-size-5-mobile is-size-3-desktop">{{this.labels.title}}</h1>
             <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
-            <button id="collapsible" class="button is-primary is-hidden-desktop collapsible">{{this.labels.instruction[0]}}</button>
+            <button id="collapsible" class="button is-primary collapsible">{{this.labels.instruction[0]}}</button>
             <p id="description" class="notification has-text-left has-background-white">
                 {{this.labels.description1}}<br />
                 {{this.labels.description2}}<br />
@@ -299,7 +299,6 @@
         text-align: left;
         padding: 10px;
 
-
     }
 
     @keyframes collapsible {
@@ -319,7 +318,6 @@
     }
 
     #result{
-        /*display: none;*/
         visibility: hidden;
     }
 
@@ -358,56 +356,47 @@
         border: 1px solid;
     }
 
-
-    /*on destop*/
-    @media screen and (min-width: 750px) {
-
-        .collapsible{
+    /*for larger and medium devices (desktop)*/
+    @media screen and (min-width: $breakpoint-desktop){
+        button#collapsible{
             display: none;
-        }
 
+        }
         #description{
             display: block;
         }
-
     }
-    /* on small screen */
-    @media screen and (max-width: 420px) {
+
+    /*ajuste css media queries for phone and tablets*/
+    @media screen and (min-width: $breakpoint-phone)  and (max-width: $breakpoint-tablet){
+
 
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
             z-index: 999;
-            /* margin-top: 10px; */
             padding: 12px;
         }
-
         .column {
-           width: 100%;
-           margin: 0 auto;
-           padding: 0;
-           line-height: 1;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            line-height: 1;
         }
-
         h1#title{
             font-size:1.4em;
             margin: 0 0 8px;
         }
-
         div#descriptionTitle{
             padding: 0;
         }
-
         .space_between_slider {
             margin-bottom: 3px;
         }
-
-
-
     }
-    @media screen and (max-width: 812px) and (orientation: landscape) {
 
-
+    /* orientation: landscape*/
+   @media screen and (orientation: landscape) {
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
@@ -418,11 +407,6 @@
         .slider {
             width: 10%;
         }
-
-        /*.column.sliders{*/
-        /*    width: 100%;*/
-        /*    padding: 5px 0 0 7px;*/
-        /*}*/
 
         .columns{
             display: flex;
