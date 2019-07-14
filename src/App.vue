@@ -3,7 +3,7 @@
         <!--Instructions -->
         <div id="descriptionTitle" class="column is-half-desktop is-full-mobile is-centered">
             <h1 id="title" class="title has-text-primary is-size-5-mobile is-size-3-desktop">{{this.labels.title}}</h1>
-            <button id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
+            <button v-if="!selectedLanguage" id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <button id="collapsible" class="button is-primary collapsible">{{this.labels.instruction[0]}}</button>
             <p id="description" class="notification has-text-left has-background-white">
                 {{this.labels.description1}}<br />
@@ -69,8 +69,21 @@
                 borderText: []
             };
         },
-        props:{},
+        props:{
+            selectedLanguage: String
+        },
         methods: {
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             * @return none
+             */
+            btnTestOff(){
+                // document.getElementById("selectLanguageVcm").disabled = true;
+                // document.getElementById("selectLanguageVcm").style.visibility= "hidden";
+                // if (!this.selectedLanguage)
+                this.changeLanguage();
+                //     document.getElementById("selectLanguageVcm").style.display = "none";
+            },
 
              /**
              * ---> ------------------ will be completed soon -------------------
