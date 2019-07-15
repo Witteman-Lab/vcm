@@ -89,7 +89,7 @@
             padding-top: 14vh;
         }
     }
-    @media (orientation: landscape) and (max-width: 812px){
+    @media (orientation: landscape) and (max-width: 823px){
         .resize-vertical-bar-mobile {
             margin-top: 10vh;
         }

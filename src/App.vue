@@ -392,7 +392,7 @@
     }
 
     /*ajuste css media queries for phone and tablets*/
-    @media screen and (min-width: $breakpoint-phone)  and (max-width: $breakpoint-tablet){
+    @media screen and (min-width: $breakpoint-phone)  and (max-width: $breakpoint-tablet) and (max-height: $breakpoint-tablet){
 
 
         #description{
@@ -417,10 +417,35 @@
         .space_between_slider {
             margin-bottom: 3px;
         }
+
+    }
+    /* for a specifie small devices with width as tablet and height greater than desktop or equal*/
+    @media only screen and (min-device-height: 1024px)  and (orientation: portrait) {
+        body {
+            /*background-color: red;*/
+        }
+        .columns {
+            display: flex;
+            /*width: 100%;*/
+        }
+        /*button#collapsible{*/
+        /*    display: none;*/
+
+        /*}*/
+        /*#description{*/
+        /*    display: block;*/
+        /*    !*!*width: 50%;*!*!*/
+        /*    !*flex: none;*!*/
+        /*    !*overflow: hidden;*!*/
+        /*    !*line-height: 1.5;*!*/
+        /*    !*padding: 12px;*!*/
+        /*}*/
+
+
     }
 
-    /* orientation: landscape*/
-   @media screen and (max-width: $breakpoint-tablet) and (orientation: landscape) {
+            /* orientation: landscape*/
+   @media screen  and (orientation: landscape)  and (max-width: $breakpoint-tablet){
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
