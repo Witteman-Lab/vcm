@@ -4,7 +4,7 @@
         <div id="descriptionTitle" class="column is-half-desktop is-full-mobile is-centered">
             <h1 id="title" class="title has-text-primary is-size-5-mobile is-size-3-desktop">{{this.labels.title}}</h1>
             <button v-if="!selectedLanguage" id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
-            <button id="collapsible" class="button is-primary collapsible">{{this.labels.instruction[0]}}</button>
+            <button id="collapsible" class="button is-primary collapsible"  v-on:click="activeInstruction">{{this.instruction[instructionToggle]}}</button>
             <p id="description" class="notification has-text-left has-background-white">
                 {{this.labels.description1}}<br />
                 {{this.labels.description2}}<br />
@@ -59,6 +59,7 @@
                 currentLanguage: "",
                 progressValues: [],
                 numberOfSlider: 0,
+                instructionToggle: 0,
                 message: "yes",
                 message2: "yes",
                 instruction: [],
@@ -144,26 +145,22 @@
              * ---> ------------------ will be completed soon -------------------
              *
              */
-            activeInstruction(){
+            activeInstruction(el) {
+                if (el === undefined) {
+                    el = {};
+                    el.target = document.getElementById("collapsible");
+                }
                 let coll = document.getElementById("collapsible");
-                coll.style.animation = "collapsible 2s linear infinite";
+                let content = el.target.nextElementSibling;
 
-                //todo: the labels changes after the click is done, till to be done
-                coll.addEventListener("click", (el) => {
-                    el.target.classList.toggle("is-active");
-
-                    let content = el.target.nextElementSibling;
-
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                        el.target.innerHTML = this.labels.instruction[0];
-                    } else {
-                        content.style.display = "block";
-                        coll.style.animation = "";
-                        el.target.innerHTML = this.labels.instruction[1];
-
-                    }
-                });
+                if (content.style.display === "block") {
+                    this.instructionToggle = 0;
+                    content.style.display = "none";
+                } else {
+                    this.instructionToggle = 1;
+                    content.style.display = "block";
+                    coll.style.animation = "";
+                }
             },
 
             /**
@@ -304,7 +301,8 @@
 
             this.setOptions();
             this.setProgressParams();
-            this.activeInstruction();
+            let coll = document.getElementById("collapsible");
+            coll.style.animation = "collapsible 2s linear infinite";
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
                 // this.changeColorOption();
