@@ -27,7 +27,7 @@
             <div class="column slider is-centered has-text-centered">
                 <div style="display: flex;justify-content: space-evenly">
                     <div   v-for="(progress, index) in this.numberOfSlider" :ref="'graph-' + index" :id="'graph-' + index" class="space_between_progress" :key="progress + 'progress'">
-                        <VerticalProgressBar id="optionLabel"  :border-text="getBorderText(index)" :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
+                        <VerticalProgressBar id="optionLabel"  :text-bold="getTextBold(index)" :border-text="getBorderText(index)" :option-graph-label="optionGraphLabel[index]" v-bind:ref="progress" :value="getProgressValue(index)" :parameters="getParameters(index)" ></VerticalProgressBar>
                     </div>
                 </div>
                 <div class="results" id="result" style="border: 2px solid">
@@ -66,7 +66,8 @@
                 parametre:[],
                 topSliderLabel: "",
                 optionGraphLabel: [],
-                borderText: []
+                borderText: [],
+                textBold: []
             };
         },
         props:{
@@ -229,9 +230,12 @@
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if(value > 50 ){
+                        this.textBold[i]= "bolder";
+                        console.log("bolder", this.textBold)
                         this.borderText[i] = '2px solid ' + this.getParameters(i).progress.color;
                         // console.log("borderText", this.borderText);
                     }else {
+                        this.textBold[i]= "";
                         this.borderText[i] = "";
                     }
 
@@ -271,6 +275,14 @@
              */
             getBorderText(index) {
                 return this.borderText[index];
+            },
+            /**
+             * ---> ------------------ will be completed soon -------------------
+             * @param index
+             * @returns {*}
+             */
+            getTextBold(index) {
+                return this.textBold[index];
             },
 
             /**

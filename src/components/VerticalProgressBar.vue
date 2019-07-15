@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div  id="space_between_div" class="resize-option-label"><span v-bind:style="{color: textColor, border: borderText}">{{optionGraphLabel}}</span></div>
+        <div  id="space_between_div" class="resize-option-label"><span v-bind:style="{color: textColor, border: borderText,fontWeight: textBold}">{{optionGraphLabel}}</span></div>
     </div>
 </template>
 
@@ -13,14 +13,16 @@
         name: "VerticalProgressBar",
         data() {
             return {
-                textColor: String
+                textColor: String,
             }
         },
         props: {
             value: Number,
             parameters: Object,
             optionGraphLabel: String,
-            borderText: String
+            borderText: String,
+            textBold: String
+
 
         },
         methods: {
