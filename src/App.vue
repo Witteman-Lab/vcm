@@ -63,8 +63,8 @@
                 message: "yes",
                 message2: "yes",
                 instruction: [],
-                options : [],
-                parametre:[],
+                options: [],
+                parameter: [],
                 topSliderLabel: "",
                 optionGraphLabel: [],
                 borderText: [],
@@ -146,10 +146,6 @@
              *
              */
             activeInstruction(el) {
-                if (el === undefined) {
-                    el = {};
-                    el.target = document.getElementById("collapsible");
-                }
                 let coll = document.getElementById("collapsible");
                 let content = el.target.nextElementSibling;
 
@@ -188,7 +184,7 @@
                             type: 'line',
                         }
                     };
-                    this.parametre.push(option);
+                    this.parameter.push(option);
                     this.progressValues.push(option.defaultValue);
                 }
             },
@@ -200,7 +196,7 @@
             setResult() {
                 let divElement = document.getElementById("result");
                 // var x = window.matchMedia("(max-width: 812px)")
-                for (let i = 0; i < this.numberOfSlider; i++){
+                for (let i = 0; i < this.numberOfSlider; i++) {
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if (value > 50) {
                         if (divElement.style.visibility !== "hide")
@@ -226,12 +222,12 @@
             setBorderOption(){
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let value = this.$refs[i + 1][0].getSliderValue();
-                    if(value > 50 ){
-                        this.textBold[i]= "bolder";
+                    if (value > 50 ) {
+                        this.textBold[i] = "bolder";
                         // this.borderText[i] = '2px solid ' + this.getParameters(i).progress.color;
                         // console.log("borderText", this.borderText);
-                    }else {
-                        this.textBold[i]= "";
+                    } else {
+                        this.textBold[i] = "";
                         // this.borderText[i] = "";
                     }
 
@@ -287,7 +283,7 @@
              * @returns {*}
              */
             getParameters(index) {
-                return this.parametre[index];
+                return this.parameter[index];
             },
         },
         created() {
