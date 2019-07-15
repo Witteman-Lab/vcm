@@ -231,12 +231,11 @@
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if(value > 50 ){
                         this.textBold[i]= "bolder";
-                        console.log("bolder", this.textBold)
-                        this.borderText[i] = '2px solid ' + this.getParameters(i).progress.color;
+                        // this.borderText[i] = '2px solid ' + this.getParameters(i).progress.color;
                         // console.log("borderText", this.borderText);
                     }else {
                         this.textBold[i]= "";
-                        this.borderText[i] = "";
+                        // this.borderText[i] = "";
                     }
 
                 }
