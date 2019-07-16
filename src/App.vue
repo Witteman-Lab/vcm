@@ -386,7 +386,7 @@
     }
 
     /*ajuste css media queries for phone and tablets*/
-    @media screen and (min-width: $breakpoint-phone)  and (max-width: $breakpoint-tablet) and (max-height: $breakpoint-tablet){
+    @media screen  and (max-width: $breakpoint-tablet) and (max-height: $breakpoint-tablet){
 
 
         #description{
@@ -414,26 +414,17 @@
 
     }
     /* for a specifie small devices with width as tablet and height greater than desktop or equal*/
-    @media only screen and (min-device-height: 1024px)  and (orientation: portrait) {
-        body {
-            /*background-color: red;*/
-        }
+    @media only screen and (min-device-width: $breakpoint-tabletLargerWidth) and (max-device-height: $breakpoint-desktop) and (orientation: portrait){
         .columns {
             display: flex;
-            /*width: 100%;*/
         }
-        /*button#collapsible{*/
-        /*    display: none;*/
+        #description{
+            border: 2px solid #DDDDDD;
+            position: absolute;
+            z-index: 999;
+            padding: 12px;
 
-        /*}*/
-        /*#description{*/
-        /*    display: block;*/
-        /*    !*!*width: 50%;*!*!*/
-        /*    !*flex: none;*!*/
-        /*    !*overflow: hidden;*!*/
-        /*    !*line-height: 1.5;*!*/
-        /*    !*padding: 12px;*!*/
-        /*}*/
+        }
 
 
     }
