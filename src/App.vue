@@ -394,6 +394,7 @@
             position: absolute;
             z-index: 999;
             padding: 12px;
+            margin: 12px;
         }
         .column {
             width: 100%;
