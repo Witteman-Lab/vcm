@@ -417,8 +417,8 @@
     /* for a specifie small devices with width as tablet and height greater than desktop or equal*/
     @media only screen and (min-device-width: $breakpoint-tabletLargerWidth) and (max-device-height: $breakpoint-desktop) and (orientation: portrait){
         .columns {
-            display: flex;
-        }
+              display: flex;
+          }
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
@@ -426,7 +426,9 @@
             padding: 12px;
 
         }
-
+        body{
+            background-color: #a8a873;
+        }
 
     }
 
@@ -470,8 +472,8 @@
             margin-bottom: 3px;
         }
 
-        #app{
-            padding: 5px 0 0 7px;
-        }
+        /*#app{*/
+        /*    padding: 5px 0 0 7px;*/
+        /*}*/
     }
 </style>
