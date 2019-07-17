@@ -419,13 +419,13 @@
         .columns {
               display: flex;
           }
-        #description{
-            border: 2px solid #DDDDDD;
-            position: absolute;
-            z-index: 999;
-            padding: 12px;
+        /*#description{*/
+        /*    border: 2px solid #DDDDDD;*/
+        /*    position: absolute;*/
+        /*    z-index: 999;*/
+        /*    padding: 12px;*/
 
-        }
+        /*}*/
         body{
             background-color: #a8a873;
         }
