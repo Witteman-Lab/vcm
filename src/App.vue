@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="container">
         <!--Instructions -->
-        <div id="descriptionTitle" class="column is-half-desktop is-full-mobile is-centered">
+        <div id="descriptionTitle" class="column is-centered">
             <h1 id="title" class="title has-text-primary is-size-5-mobile is-size-3-desktop">{{this.labels.title}}</h1>
             <button v-if="!selectedLanguage" id="selectLanguage" class="button" v-on:click="this.changeLanguage">{{this.labels.language}}</button>
             <button id="collapsible" class="button is-primary collapsible"  v-on:click="activeInstruction">{{this.instruction[instructionToggle]}}</button>
@@ -373,9 +373,13 @@
         padding: 2px;
         border: 1px solid;
     }
+    #descriptionTitle{
+        width: 50%;
+    }
 
-    /*for larger and medium devices (desktop)*/
-    @media screen and (min-width: $breakpoint-desktop){
+    /*for tablet and laptop devices*/
+    @media only screen
+    and (min-width: $breakpoint-tablet){
         button#collapsible{
             display: none;
 
@@ -383,12 +387,15 @@
         #description{
             display: block;
         }
+        #descriptionTitle{
+            width: 50%;
+        }
     }
 
     /*ajuste css media queries for phone and tablets*/
-    @media screen  and (max-width: $breakpoint-tablet) and (max-height: $breakpoint-tablet){
-
-
+    @media  only screen
+    and (max-width: $breakpoint-tablet)
+    and (max-height: $breakpoint-tablet){
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
@@ -412,28 +419,32 @@
         .space_between_slider {
             margin-bottom: 3px;
         }
-
-    }
-    /* for a specifie small devices with width as tablet and height greater than desktop or equal*/
-    @media only screen and (min-device-width: $breakpoint-tabletLargerWidth) and (max-device-height: $breakpoint-desktop) and (orientation: portrait){
-        .columns {
-              display: flex;
-          }
-        /*#description{*/
-        /*    border: 2px solid #DDDDDD;*/
-        /*    position: absolute;*/
-        /*    z-index: 999;*/
-        /*    padding: 12px;*/
-
-        /*}*/
-        body{
-            background-color: #a8a873;
+        #descriptionTitle{
+            width: 100%;
         }
 
     }
+    /* for a specifie small devices with width as tablet and height greater than desktop or equal*/
+    @media only screen
+    and (min-device-width: $breakpoint-tabletIPadDevices)
+    and (max-device-width: $breakpoint-tabletIPadDevices)
+    and (orientation: portrait)
+    and (-webkit-min-device-pixel-ratio: 2) {
+        .column {
+              display: flex;
+        }
+        #description {
+            border: 2px solid #DDDDDD;
+            position: absolute;
+            z-index: 999;
+            padding: 12px;
+        }
 
-            /* orientation: landscape*/
-   @media screen  and (orientation: landscape)  and (max-width: $breakpoint-tablet){
+    }
+    /* orientation: landscape*/
+   @media only screen
+   and (orientation: landscape)
+   and (max-width: $breakpoint-tablet){
         #description{
             border: 2px solid #DDDDDD;
             position: absolute;
@@ -471,9 +482,19 @@
         .space_between_slider {
             margin-bottom: 3px;
         }
-
-        /*#app{*/
-        /*    padding: 5px 0 0 7px;*/
-        /*}*/
+   }
+    /* to resolved the bugs when the device width is 824 and orientation landscape*/
+    @media only screen
+    and (orientation: landscape)
+    and (min-device-width: $breakpoint-tablet)
+    and (max-device-width: $breakpoint-tablet){
+       #description{
+           line-height: 1.5;
+           padding: 0;
+           position: relative;
+           width: 50%;
+           border: none;
+           display: block;
+       }
     }
 </style>
