@@ -482,6 +482,10 @@
         .space_between_slider {
             margin-bottom: 3px;
         }
+       #app{
+           /*padding: 0 0 0 5px;*/
+           margin: 0 24px 0 0;
+       }
    }
     /* to resolved the bugs when the device width is 824 and orientation landscape*/
     @media only screen
