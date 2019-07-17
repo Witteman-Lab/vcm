@@ -52,7 +52,6 @@
         -moz-transform-origin: center;
         -ms-transform-origin: center;
         transform-origin: center;
-        /*padding-right: 0.5vw;*/
     }
 
     .progressBar:after {
@@ -66,7 +65,6 @@
     }
     .resize-vertical-bar-mobile {
         margin-top: 8vh;
-        /*z-index: 999;*/
     }
     #space_between_div {
         margin: auto;
