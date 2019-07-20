@@ -14,9 +14,10 @@
         <!--Sliders scales-->
         <div id="SliderGraphics" class="columns is-centered ">
             <div class="column sliders is-center descriptionAlign">
-                <span id="scaleLeft" class="has-text-left">{{this.labels.leftScaleLabel}}</span>
-                <span id="scaleRight" class="has-text-right">{{this.labels.rightScaleLabel}}</span>
-                <br>
+                <div style="display: flex;justify-content: space-between;">
+                    <span id="scaleLeft" class="has-text-left">{{this.labels.leftScaleLabel}}</span>
+                    <span id="scaleRight" class="has-text-right">{{this.labels.rightScaleLabel}}</span>
+                </div>
                 <!--Sliders-->
                 <div v-for="(slider, index) in this.numberOfSlider" ref="its"  :key="slider">
                     <SliderRange  :top-slider-label="topSliderLabel + (index + 1)" class="space_between_slider" v-bind:ref="slider" :option="options[index]"></SliderRange>
@@ -381,7 +382,7 @@
 
         }
         #description{
-            display: block;
+            display: block !important;
         }
     }
 
