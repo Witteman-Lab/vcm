@@ -41,7 +41,8 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "../scss/mediaQuery.scss";
     .progressBar {
         -webkit-transform: rotate(270deg);
         -moz-transform: rotate(270deg);
@@ -51,13 +52,10 @@
         -moz-transform-origin: center;
         -ms-transform-origin: center;
         transform-origin: center;
-        /*padding-right: 0.5vw;*/
     }
 
     .progressBar:after {
         content: "";
-        /* float: left; */
-        /* margin-top: 100%; */
     }
 
     .resize-option-label {
@@ -67,19 +65,15 @@
     }
     .resize-vertical-bar-mobile {
         margin-top: 8vh;
-        /*z-index: 999;*/
     }
     #space_between_div {
-        /*!*display: flex;*!*/
-        /*justify-content: center;*/
-        /*width: 100%;*/
-        /*display: inline-block;*/
         margin: auto;
         width: 80%;
     }
 
 
-    @media screen and (max-width: 420px) {
+    @media only screen
+    and (max-width: $breakpoint-phone) {
         .resize-vertical-bar-mobile {
             margin-top: 10vh;
         }
@@ -89,14 +83,25 @@
             padding-top: 14vh;
         }
     }
-    @media (orientation: landscape) and (max-width: 823px){
+    @media only screen
+    and (orientation: landscape)
+    and (max-width: $breakpoint-tablet){
         .resize-vertical-bar-mobile {
             margin-top: 10vh;
         }
 
         .resize-option-label {
-            /*text-align: center;*/
             padding-top: 24vh;
         }
     }
+    @media only screen
+    and (min-device-width: $breakpointWidthBugs)
+    and (max-device-width: $breakpoint-tablet)
+    and (min-device-height: $breakpointHeightBugs)
+    and (orientation: landscape) {
+        .resize-option-label {
+            padding-top: 12vh;
+        }
+    }
+
 </style>
