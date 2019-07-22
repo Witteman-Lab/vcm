@@ -75,20 +75,11 @@
             selectedLanguage: String
         },
         methods: {
-            /**
-             * ---> ------------------ will be completed soon -------------------
-             * @return none
-             */
-            btnTestOff(){
-                // document.getElementById("selectLanguageVcm").disabled = true;
-                // document.getElementById("selectLanguageVcm").style.visibility= "hidden";
-                // if (!this.selectedLanguage)
-                this.changeLanguage();
-                //     document.getElementById("selectLanguageVcm").style.display = "none";
-            },
 
              /**
-             * ---> ------------------ will be completed soon -------------------
+             * ---> This method change language
+              * @function {changeLanguage}
+              * @param none
              * @return none
              */
             changeLanguage() {
@@ -104,8 +95,10 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
-             *
+             * This method to set the background color of slider accordingly to their slider color
+             *@function {setBackgroundColor}
+             * @param none
+             * @return none
              */
             setBackgroundColor() {
                 for (let i = 0; i < this.$refs["its"].length; i++) {
@@ -117,8 +110,10 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
-             *
+             * ---> This method set-on slider' range depending on parameters on json file
+             * @function {setOptions}
+             * @param none
+             * @return none
              */
             setOptions() {
                 for (let i = 0; i < this.numberOfSlider; i++) {
@@ -142,8 +137,10 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
-             *
+             * ---> This method change the description to a button instruction on small screen
+             * @function {activeInstruction}
+             * @param el
+             *@return none
              */
             activeInstruction(el) {
                 let coll = document.getElementById("collapsible");
@@ -160,8 +157,10 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
-             *
+             * ---> This method set on progress (graphics)  depending on parameters on json file
+             * @function {setOptions}
+             * @param none
+             * @return none
              */
             setProgressParams() {
                 for (let i = 0; i < this.numberOfSlider; i++) {
@@ -190,8 +189,11 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
-             *
+             * ---> This method is for setting results according to the slider actual value
+             * ---> Also, set some css style of the output result option
+             * @function {setResult}
+             * @param none
+             * @return none
              */
             setResult() {
                 let divElement = document.getElementById("result");
@@ -215,9 +217,12 @@
 
 
             },
+
             /**
-             * ---> ------------------ will be completed soon -------------------
-             *
+             * ---> This method  set the text to bold when the slider default value change
+             * @function {setBorderOption}
+             * @param none
+             * @return none
              */
             setBorderOption(){
                 for (let i = 0; i < this.numberOfSlider; i++) {
@@ -235,10 +240,12 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
+             * ---> This method set the current progress value of slider accordingly to it's actual value
              * @param value
              * @param position
              * @param inverseValue
+             * @function {setCurrentProgressValue}
+             * @return none
              */
             setCurrentProgressValue(value, position, inverseValue) {
                 for (let i = 0; i < this.numberOfSlider; i++) {
@@ -253,32 +260,32 @@
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
+             * ---> This methods get the progress current value
              * @param index
-             * @returns {*}
+             * @returns {number}
              */
             getProgressValue(index) {
                 return this.progressValues[index];
             },
             /**
-             * ---> ------------------ will be completed soon -------------------
+             * ---> This methods get the border text data
              * @param index
-             * @returns {*}
+             * @returns {number}
              */
             getBorderText(index) {
                 return this.borderText[index];
             },
             /**
-             * ---> ------------------ will be completed soon -------------------
+             * This methods get the text index
              * @param index
-             * @returns {*}
+             * @returns {number}
              */
             getTextBold(index) {
                 return this.textBold[index];
             },
 
             /**
-             * ---> ------------------ will be completed soon -------------------
+             * ---> This methods get parameter of progress
              * @param index
              * @returns {*}
              */

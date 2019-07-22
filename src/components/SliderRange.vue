@@ -36,15 +36,21 @@
         },
         methods: {
             /**
-             *
+             *  ---> This method is to set the slider's value
+             * @function { setSlider}
              * @param value
+             * @return none
              */
             setSlider(value){
                 this.$refs.slider.setValue(value);
             },
+
             /**
-             *
-             * @returns {*}
+             *  ---> This method is to click and drags the slider's to the corresponding value
+             *  ---> Changing the other slider' value when clicking or draging the actual slider
+             * @function {drag}
+             * @param none
+             * @return none
              */
             drag() {
                 let curIndex = this.$refs.slider.getIndex();
@@ -54,6 +60,13 @@
                 this.$parent.setResult();
                 this.$parent.setBorderOption();
             },
+
+            /**
+             *  ---> This method gets the corresponding value of slider
+             * @function {getSliderValue}
+             * @param none
+             * @return values
+             */
             getSliderValue(){
               return this.$refs.slider.getValue();
             }
