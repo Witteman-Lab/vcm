@@ -25,14 +25,11 @@
 
 
         },
-        methods: {
+        methods: {},
 
-
-
-        },
         created() {},
+
         mounted() {
-            // console.log(this.parameters.progress.color);
             this.textColor = this.parameters.progress.color;
             document.addEventListener('DOMContentLoaded', () => {
 

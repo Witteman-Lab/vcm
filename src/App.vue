@@ -198,7 +198,6 @@
              */
             setResult() {
                 let divElement = document.getElementById("result");
-                // var x = window.matchMedia("(max-width: 812px)")
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let value = this.$refs[i + 1][0].getSliderValue();
                     if (value > 50) {
@@ -207,7 +206,7 @@
                         divElement.style.color = config.processSliderColor[i];
                         divElement.style.border = "2px solid" + config.processSliderColor[i];
                         divElement.style.marginTop = "1vh";
-                        // this.setResultsWidth(x,divElement);
+
                         this.message = this.labels.optionGraphLabel[i];
 
                     } else if (value === 50) {
@@ -262,24 +261,27 @@
 
             /**
              * ---> This methods get the progress current value
+             * @function {getProgressValue}
              * @param index
-             * @returns {number}
+             * @returns {*}
              */
             getProgressValue(index) {
                 return this.progressValues[index];
             },
             /**
              * ---> This methods get the border text data
+             * @function {getBorderText}
              * @param index
-             * @returns {number}
+             * @returns {*}
              */
             getBorderText(index) {
                 return this.borderText[index];
             },
             /**
              * This methods get the text index
+             * @function {getTextBold}
              * @param index
-             * @returns {number}
+             * @returns {*}
              */
             getTextBold(index) {
                 return this.textBold[index];
@@ -287,6 +289,7 @@
 
             /**
              * ---> This methods get parameter of progress
+             * @function {getParameters}
              * @param index
              * @returns {*}
              */
@@ -309,7 +312,6 @@
             coll.style.animation = "collapsible 2s linear infinite";
             document.addEventListener('DOMContentLoaded', () => {
                 this.setBackgroundColor();
-                // this.changeColorOption();
             });
         }
     }
