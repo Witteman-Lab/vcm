@@ -1,15 +1,13 @@
 {
   "currentLanguage" : "en",
   "title" : "What matters to you",
-  "description1" : "Before you make a choice between the two options, please take a moment to consider what matters most to you.",
-  "description2" : "Use the sliders below while you consider your feelings.",
-  "description3" : "Remember that there are no wrong answers.",
-  "language": "FR",
-  "leftScaleLabel": "Doesn’t matter at all",
-  "rightScaleLabel": "Matters a lot",
-  "topSliderLabel":"Reason(s) to choose option ",
-  "result":" fits best with what matters to you",
-  "optionGraphLabel":[ " Option 1", " Option 2"],
-  "instruction":["Show Instructions", "Hide Instructions"]
-
+  "description" : "Before you make a choice between the two options, please take a moment to consider what matters most to you. Use the sliders below while you consider your feelings. Remember that there are no wrong answers.",
+  "language" : "FR",
+  "leftScaleLabel" : "Doesn’t matter at all",
+  "rightScaleLabel" : "Matters a lot",
+  "topSliderLabel" : "Reason(s) to choose option ",
+  "result" : " fits best with what matters to you",
+  "optionGraphLabel" : [ " Option 1", " Option 2"],
+  "instruction" : ["Show Instructions", "Hide Instructions"],
+  "dashedSpanTxt" : ["", "Dashed text", " can be modified by double-clicking on it."]
 }

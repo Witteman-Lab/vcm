@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div  id="space_between_div" class="resize-option-label"><span v-bind:style="{color: textColor, border: borderText,fontWeight: textBold}">{{optionGraphLabel}}</span></div>
+        <div class="space_between_div resize-option-label"><span class="editableText" v-bind:style="{color: textColor, border: borderText,fontWeight: textBold}">{{optionGraphLabel}}</span></div>
     </div>
 </template>
 
@@ -13,7 +13,7 @@
         name: "VerticalProgressBar",
         data() {
             return {
-                textColor: String,
+                textColor: String
             }
         },
         props: {
@@ -21,9 +21,8 @@
             parameters: Object,
             optionGraphLabel: String,
             borderText: String,
-            textBold: String
-
-
+            textBold: String,
+            index: Number
         },
         methods: {},
 
@@ -31,9 +30,6 @@
 
         mounted() {
             this.textColor = this.parameters.progress.color;
-            document.addEventListener('DOMContentLoaded', () => {
-
-            });
         }
     }
 </script>
@@ -63,7 +59,7 @@
     .resize-vertical-bar-mobile {
         margin-top: 8vh;
     }
-    #space_between_div {
+    .space_between_div {
         margin: auto;
         width: 80%;
     }
