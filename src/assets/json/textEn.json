@@ -9,7 +9,6 @@
   "rightScaleLabel": "Matters a lot",
   "topSliderLabel":"Reason(s) to choose option ",
   "result":" fits best with what matters to you",
-  "optionGraphLabel":[ " Option 1", " Option 2"],
   "instruction":["Show Instructions", "Hide Instructions"]
 
 }

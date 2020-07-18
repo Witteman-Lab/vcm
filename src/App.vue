@@ -89,7 +89,6 @@
                 else
                     this.labels = textEn;
                 this.topSliderLabel = this.labels.topSliderLabel;
-                this.optionGraphLabel = this.labels.optionGraphLabel;
                 this.instruction = this.labels.instruction;
                 this.isLanguageChanged = !this.isLanguageChanged;
                 this.$forceUpdate();
@@ -104,6 +103,7 @@
             setBackgroundColor() {
                 for (let i = 0; i < this.$refs["its"].length; i++) {
                     for (let j = 0; j < this.numberOfSlider; j++) {
+                        console.log(this.$refs["its"][i].style.backgroundColor);
                         this.$refs["its"][i].style.backgroundColor = config.backgroundDivColor[j];
                         i++;
                     }
@@ -117,6 +117,7 @@
              * @return none
              */
             setOptions() {
+                this.optionGraphLabel = [];
                 for (let i = 0; i < this.numberOfSlider; i++) {
                     let option = {
                         inDragging: false,
@@ -133,6 +134,7 @@
                         position: i,
                     };
                     this.options.push(option);
+                    this.optionGraphLabel.push(`Option ${i + 1}`);
                     this.progressValues.push(option.defaultValue);
                 }
             },
@@ -203,14 +205,14 @@
                     if (value > 50) {
                         if (divElement.style.visibility !== "hide")
                             divElement.style.visibility = "visible";
+                        console.log(this.numberOfSlider);
+                        console.log(config.processSliderColor[i]);
                         divElement.style.color = config.processSliderColor[i];
-                        divElement.style.border = "2px solid" + config.processSliderColor[i];
+                        divElement.style.border = "2px solid " + config.processSliderColor[i];
                         divElement.style.marginTop = "1vh";
 
-                        this.message = this.labels.optionGraphLabel[i];
+                        this.message = `Option ${i + 1}`;
 
-                    } else if (value === 50) {
-                        divElement.style.visibility = 'hidden';
                     }
                 }
 
@@ -303,7 +305,6 @@
         mounted() {
             this.numberOfSlider = config.numberOfSlider;
             this.topSliderLabel = this.labels.topSliderLabel;
-            this.optionGraphLabel = this.labels.optionGraphLabel;
             this.instruction =this.labels.instruction;
 
             this.setOptions();
