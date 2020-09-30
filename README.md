@@ -48,6 +48,21 @@ npm run lint
 ```
 
 
+### Check all the packages are up to date
+```
+npm outdated
+```
+
+
+### Update all the packages versions ( In case vulnerability)
+```
+1-  npm install -g npm-check-updates
+2-  ncu -u
+3-  npm update
+4-  npm install
+```
+
+
 
 
 ### Customize configuration
