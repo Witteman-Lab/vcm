@@ -213,7 +213,7 @@ export default {
                     let num = i + 4;
                     let option = document.querySelector("#editableTextField" + num);
 
-                    this.message = option.innerHTML;
+                    this.message = option.innerText;
                     // this.message = this.labels.optionGraphLabel[i];
 
                 } else if (value === 50) {
