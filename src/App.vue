@@ -302,7 +302,6 @@ export default {
         let pathname = window.location.pathname;
         let pathnameParts = pathname.split("/");
         let langPosition = pathnameParts.length - 2;
-
         let lang = pathnameParts[langPosition];
         if (lang === "fr") {
             this.labels = textFr;
