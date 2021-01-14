@@ -3,7 +3,7 @@
         <div>
             <progress-bar class="progressBar resize-vertical-bar-mobile" :options="parameters" :value="value"/>
         </div>
-        <div class="space_between_div resize-option-label"><span class="editableText" v-bind:style="{color: textColor, border: borderText,fontWeight: textBold}">{{optionGraphLabel}}</span></div>
+        <div id="myInput" class="space_between_div resize-option-label"><span class="editableText" v-bind:style="{color: textColor, border: borderText,fontWeight: textBold}">{{optionGraphLabel}}</span></div>
     </div>
 </template>
 
@@ -30,6 +30,9 @@
 
         mounted() {
             this.textColor = this.parameters.progress.color;
+
+          const myInput = document.getElementById('myInput');
+          myInput.onpaste = e => e.preventDefault();
         }
     }
 </script>
