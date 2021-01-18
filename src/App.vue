@@ -8,7 +8,7 @@
             <p id="description" class="notification has-text-left has-background-white">
                 {{this.labels.description}}
                 <br /><br />
-                {{this.labels.dashedSpanTxt[0]}}<span class="editableTextStyle">{{this.labels.dashedSpanTxt[1]}}</span>{{this.labels.dashedSpanTxt[2]}}
+                {{this.labels.dashedSpanTxt[0]}}<span id="editable" class="editableTextStyle ">{{this.labels.dashedSpanTxt[1]}}</span>{{this.labels.dashedSpanTxt[2]}}
             </p>
         </div>
         <!--Sliders scales-->
@@ -296,7 +296,8 @@ export default {
         */
         getParameters(index) {
             return this.parameter[index];
-        }
+        },
+
     },
     created() {
         let pathname = window.location.pathname;
@@ -321,9 +322,12 @@ export default {
         let coll = document.getElementById("collapsible");
         coll.style.animation = "collapsible 2s linear infinite";
 
-        document.addEventListener('DOMContentLoaded', () => {
-            this.setBackgroundColor();
-        });
+      this.$refs.slider.stopPaste();
+      document.addEventListener('DOMContentLoaded', () => {
+
+
+      });
+
     }
 }
 </script>

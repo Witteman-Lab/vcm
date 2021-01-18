@@ -67,16 +67,30 @@ export default {
         */
         getSliderValue(){
             return this.$refs.slider.getValue();
+        },
+
+        stopPaste(){
+          let editableTextFields = document.querySelectorAll(".editableText");
+
+          editableTextFields.forEach((element) => {
+            element.addEventListener("paste", (e) => {
+              e.preventDefault()
+              let text = e.clipboardData.getData('text/plain')
+              document.execCommand('insertText', false, text)
+            })
+
+          });
+
         }
 
     },
-    mounted () {
+  mounted () {
         this.value = this.option.defaultValue;
 
         // Getting them here instead of in App.vue (all the editable fields are not rendered in App.vue))
         let editableTextFields = document.querySelectorAll(".editableText");
 
-        // Do this to ensure every field has an id so the code can work
+      // Do this to ensure every field has an id so the code can work
         // Could be optimized, but works for now
         for (let i = 0; i < editableTextFields.length; i++) {
             // If no id, give an id
@@ -96,9 +110,17 @@ export default {
                 sessionStorage.setItem(e.id, e.innerHTML);
                 this.$parent.setResult();
             });
+
+       // we can stop html style but paste twice the element, have to debug it again to see the problem
+            e.addEventListener('paste', (ce) => {
+                ce.preventDefault()
+                let text = ce.clipboardData.getData('text/plain')
+                document.execCommand('insertText', false, text)
+          })
         });
 
-        // If Storage exists in the browser
+
+      // If Storage exists in the browser
         if (typeof(Storage) !== "undefined") {
             editableTextFields.forEach((e) => {
                 let id = e.id;
@@ -112,6 +134,8 @@ export default {
                 }
             });
         }
+
+
     }
 }
 </script>
