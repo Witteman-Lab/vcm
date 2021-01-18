@@ -322,10 +322,18 @@ export default {
         let coll = document.getElementById("collapsible");
         coll.style.animation = "collapsible 2s linear infinite";
 
-      this.$refs.slider.stopPaste();
+
       document.addEventListener('DOMContentLoaded', () => {
 
+       let editableTextFields = document.querySelectorAll(".editableText")
+        editableTextFields.forEach((element) => {
+          element.addEventListener("paste", (e) => {
+            e.preventDefault()
+            let text = e.clipboardData.getData('text/plain')
+            document.execCommand('insertText', false, text)
+          })
 
+        });
       });
 
     }

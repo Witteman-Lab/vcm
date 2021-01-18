@@ -69,19 +69,19 @@ export default {
             return this.$refs.slider.getValue();
         },
 
-        stopPaste(){
-          let editableTextFields = document.querySelectorAll(".editableText");
-
-          editableTextFields.forEach((element) => {
-            element.addEventListener("paste", (e) => {
-              e.preventDefault()
-              let text = e.clipboardData.getData('text/plain')
-              document.execCommand('insertText', false, text)
-            })
-
-          });
-
-        }
+        // stopPaste(editableTextFields){
+        //   // let editableTextFields = document.querySelectorAll(".editableText");
+        //
+        //   editableTextFields.forEach((element) => {
+        //     element.addEventListener("paste", (e) => {
+        //       e.preventDefault()
+        //       let text = e.clipboardData.getData('text/plain')
+        //       document.execCommand('insertText', false, text)
+        //     })
+        //
+        //   });
+        //
+        // }
 
     },
   mounted () {
@@ -110,13 +110,6 @@ export default {
                 sessionStorage.setItem(e.id, e.innerHTML);
                 this.$parent.setResult();
             });
-
-       // we can stop html style but paste twice the element, have to debug it again to see the problem
-            e.addEventListener('paste', (ce) => {
-                ce.preventDefault()
-                let text = ce.clipboardData.getData('text/plain')
-                document.execCommand('insertText', false, text)
-          })
         });
 
 
