@@ -3,12 +3,12 @@
   "min": 0,
   "max": 100,
   "processSliderColor" : [
-       "#410e73", "#a8a873"
+    "#410e73", "#a8a873", "red"
   ],
   "backgroundDivColor" : [
-    "#e6e5ff", "#f1f4b6"
+    "#e6e5ff", "#f1f4b6", "blue"
   ],
-  "numberOfSlider": 2,
+  "numberOfSlider": 3,
   "value": 50,
   "interval": 1,
   "dotSize": 40,
@@ -17,4 +17,7 @@
   "progressHeight":"",
   "progressWidth":"",
   "progressStokeWIdth": ""
+
 }
+
+

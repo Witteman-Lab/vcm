@@ -1,13 +1,13 @@
 {
   "currentLanguage" : "fr",
   "title" : "Ce qui compte pour vous",
-  "description" : "Avant de choisir entre les deux options, veuillez prendre un instant pour considérer ce qui compte le plus pour vous. Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments. Sachez qu’il n’y a pas de mauvaise réponse.",
-  "language" : "EN",
-  "leftScaleLabel" : "Pas important du tout",
-  "rightScaleLabel" : "Très important",
-  "topSliderLabel" : "Raison(s) pour choisir l'option ",
-  "result" : " correspond le mieux à ce qui vous importe",
-  "optionGraphLabel" : [ " Option 1", " Option 2"],
-  "instruction" : ["Afficher les instructions", "Cacher les instructions"],
-  "dashedSpanTxt" : ["Les textes ", "encadrés en pointillés", " peuvent être modifiés en les double-cliquant."]
+  "description1" : "Avant de choisir entre les deux options, veuillez prendre un instant pour considérer ce qui compte le plus pour vous.",
+  "description2" : "Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments.",
+  "description3" : "Sachez qu’il n’y a pas de mauvaise réponse.",
+  "language": "EN",
+  "leftScaleLabel": "Pas important du tout",
+  "rightScaleLabel": "Très important",
+  "topSliderLabel":"Raison(s) pour choisir l'option ",
+  "result":" correspond le mieux à ce qui vous importe",
+  "instruction":["Afficher les instructions", "Cacher les instructions"]
 }
