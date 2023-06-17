@@ -23,16 +23,29 @@
       </div>
     </v-container>
     <div style="width: 288px" class="d-flex justify-space-between mb-6 px-6">
-      <div class="font-weight-regular text-center">
-        <span style="color: #410e73">Option 1</span>
+      <div class="font-weight-regular w-25 my-n6">
+        <v-text-field
+          class="input1"
+          v-model="option1"
+          variant="plain"
+          ref="input1"
+          @click="selectAll1"
+        ></v-text-field>
       </div>
-      <div class="font-weight-regular text-center">
-        <span style="color: #a8a873">Option 2</span>
+      <div class="font-weight-regular w-25 my-n6">
+        <v-text-field
+          class="input2"
+          v-model="option2"
+          variant="plain"
+          ref="input2"
+          @click="selectAll2"
+        ></v-text-field>
       </div>
     </div>
     <div class="d-flex justify-center" v-if="value1 !== 50">
       <v-chip variant="outlined" :color="value1 > 50 ? '#410e73' : '#a8a873'">
-        <b>Option 2&nbsp;</b>fits best with what matters to you
+        <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>fits best with what
+        matters to you
       </v-chip>
     </div>
   </v-container>
@@ -55,6 +68,8 @@ export default {
   setup(props) {
     const value1 = ref(props.value1);
     const value2 = ref(props.value2);
+    const option1 = ref("Option 1");
+    const option2 = ref("Option 2");
     // Watch the prop values for changes and update the refs accordingly
     watch(
       () => props.value1,
@@ -69,7 +84,15 @@ export default {
         value2.value = newValue;
       }
     );
-    return { value1, value2 };
+    return { value1, value2, option1, option2 };
+  },
+  methods: {
+    selectAll1() {
+      this.$refs.input1.select();
+    },
+    selectAll2() {
+      this.$refs.input2.select();
+    },
   },
 };
 </script>
@@ -77,6 +100,12 @@ export default {
 <style scoped lang="scss">
 .vertical-progress-container {
   transform: rotate(-90deg);
+}
+.input1:deep(input) {
+  color: #410e73;
+}
+.input2:deep(input) {
+  color: #a8a873;
 }
 </style>
 
