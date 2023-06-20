@@ -53,7 +53,7 @@
 </template>
   
 <script>
-import { ref, watch, onMounted, getCurrentInstance } from "vue";
+import { ref, watch, getCurrentInstance } from "vue";
 
 export default {
   props: {

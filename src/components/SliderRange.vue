@@ -100,6 +100,7 @@
                 track-color="white"
                 rounded="xl"
                 @end="updateData()"
+                style="z-index: 100;"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -195,14 +196,14 @@ export default {
     const handleInput1 = (value) => {
       if (value !== text5.value) {
         text5.value = value;
-        data.value.text5.push(text5.value);
+        data.value.option1.push(text5.value);
       }
     };
 
     const handleInput2 = (value) => {
       if (value !== text6.value) {
         text6.value = value;
-        data.value.text6.push(text6.value);
+        data.value.option2.push(text6.value);
       }
     };
 
@@ -227,21 +228,21 @@ export default {
     });
 
     const updateData = () => {
-      data.value.slider1.push(slider1.value);
-      data.value.slider2.push(slider2.value);
+      data.value.topSlider.push(slider1.value);
+      data.value.bottomSlider.push(slider2.value);
     };
 
     const updateText1 = () => {
-      data.value.text1.push(text1.value);
+      data.value.leftScaleLabel.push(text1.value);
     };
     const updateText2 = () => {
-      data.value.text2.push(text2.value);
+      data.value.rightScaleLabel.push(text2.value);
     };
     const updateText3 = () => {
-      data.value.text3.push(text3.value);
+      data.value.topSliderLabel.push(text3.value);
     };
     const updateText4 = () => {
-      data.value.text4.push(text4.value);
+      data.value.bottomSliderLabel.push(text4.value);
     };
 
     // Save the data to a file when the page is unloaded (refreshed or closed)

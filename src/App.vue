@@ -7,14 +7,13 @@
         color="white"
         elevation="12"
         fixed
-        style="z-index: 99"
       >
         <div class="w-25 ml-5">
           <v-img
             height="100"
             src="./assets/logo.svg"
             class="logo-image"
-            @click="refreshPage"
+            @click="handleLogoClick"
           ></v-img>
         </div>
         <v-spacer></v-spacer>
@@ -22,7 +21,7 @@
           <v-select
             variant="outlined"
             flat
-            :items="items"
+            :items="languageItems"
             v-model="language"
             menu-icon=""
             base-color="#398064"
@@ -40,40 +39,39 @@
 
 <script>
 import SliderRange from "./components/SliderRange.vue";
+
+const languageItems = ["EN", "FR"]; // Define language items as a constant
+
 export default {
   components: {
     SliderRange,
   },
   data() {
     return {
-      language: "", 
-      items: ["EN", "FR"],
+      language: "",
+      languageItems, // Use the constant for language items
     };
   },
   methods: {
-    refreshPage() {
+    handleLogoClick() {
       window.location.reload();
     },
-    setLanguage() {
-      // Save language to local storage
-      localStorage.setItem("language", this.language);
+  },
+  watch: {
+    language(newLanguage) {
+      // Call the setLanguage method whenever the language changes
+      localStorage.setItem("language", newLanguage);
     },
   },
   created() {
     // Retrieve language from local storage on component creation
     this.language = localStorage.getItem("language") || "EN";
   },
-  watch: {
-    language() {
-      // Call the setLanguage method whenever the language changes
-      this.setLanguage();
-    },
-  },
 };
 </script>
 
 <style scoped lang="scss">
 .logo-image {
-    cursor: pointer; /* Apply the pointer cursor style */
-  }
+  cursor: pointer; /* Apply the pointer cursor style */
+}
 </style>
