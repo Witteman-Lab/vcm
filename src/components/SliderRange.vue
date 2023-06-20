@@ -4,37 +4,30 @@
       <v-col order-sm="first">
         <div class="d-flex flex-column">
           <div class="d-flex text-h5 font-weight-bold title">
-            What matters to you
+            {{ title }}
           </div>
           <div
-            v-if="width > 426"
+            v-if="width > 675"
             class="d-flex text-body text-justify font-weight-light"
           >
-            Before you make a choice between the two options, please take a
-            moment to consider what matters most to you. Use the sliders below
-            while you consider your feelings. Remember that there are no wrong
-            answers. <br />Text can be modified by clicking on it.
+            {{ description1 }} {{ description2 }} <br />{{ description3 }}
           </div>
           <div
-            v-if="width < 426"
+            v-if="width < 675"
             class="d-flex text-body text-justify font-weight-light"
           >
-            <v-btn color="#00d1b2" class="white-text" @click="dialog = true"
-              >Show Instructions</v-btn
-            >
+            <v-btn color="#00d1b2" class="white-text" @click="dialog = true">{{
+              instruction[0]
+            }}</v-btn>
             <v-dialog v-model="dialog" width="auto">
               <v-card>
                 <v-card-text>
-                  Before you make a choice between the two options, please take
-                  a moment to consider what matters most to you. Use the sliders
-                  below while you consider your feelings. Remember that there
-                  are no wrong answers. <br />Text can be modified by clicking
-                  on it.
+                  {{ description1 }} {{ description2 }} <br />{{ description3 }}
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn color="#00d1b2" block @click="dialog = false"
-                    >Close Dialog</v-btn
-                  >
+                  <v-btn color="#00d1b2" block @click="dialog = false">{{
+                    instruction[1]
+                  }}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -48,7 +41,8 @@
                 no-resize
                 auto-grow
                 ref="input1"
-                @click="selectAll1"
+                @click="selectAllText('input1')"
+                @change="updateText1"
               ></v-textarea>
             </div>
             <div class="font-weight-regular mb-2 w-50">
@@ -60,7 +54,8 @@
                 no-resize
                 auto-grow
                 ref="input2"
-                @click="selectAll2"
+                @click="selectAllText('input2')"
+                @change="updateText2"
               ></v-textarea>
             </div>
           </div>
@@ -75,6 +70,7 @@
                 track-size="30"
                 track-color="white"
                 rounded="xl"
+                @end="updateData()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -85,7 +81,8 @@
                   no-resize
                   auto-grow
                   ref="input3"
-                  @click="selectAll3"
+                  @click="selectAllText('input3')"
+                  @change="updateText3"
                 ></v-textarea>
               </div>
             </div>
@@ -102,6 +99,7 @@
                 track-size="30"
                 track-color="white"
                 rounded="xl"
+                @end="updateData()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -112,7 +110,8 @@
                   no-resize
                   auto-grow
                   ref="input4"
-                  @click="selectAll4"
+                  @click="selectAllText('input4')"
+                  @change="updateText4"
                 ></v-textarea>
               </div>
             </div>
@@ -124,6 +123,9 @@
           <vertical-progress-bar
             :value1="slider1"
             :value2="slider2"
+            :result="result"
+            @input1="handleInput1"
+            @input2="handleInput2"
           ></vertical-progress-bar>
         </div>
       </v-col>
@@ -133,24 +135,88 @@
 
 <script>
 import VerticalProgressBar from "./VerticalProgressBar.vue";
-import { ref, watch } from "vue";
+import textEn from "../assets/json/textEN.json";
+import textFr from "../assets/json/textFr.json";
+import { ref, watch, onBeforeUnmount, computed, reactive } from "vue";
 import { useWindowSize } from "@vueuse/core";
+import { saveAs } from "file-saver";
 
 export default {
   components: {
     VerticalProgressBar,
   },
-  setup() {
+  props: {
+    language: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+    const textData = computed(() => {
+      return props.language === "EN" ? textEn : textFr;
+    });
+
+    watch(() => props.language, () => {
+      title.value = textData.value.title;
+      description1.value = textData.value.description1;
+      description2.value = textData.value.description2;
+      description3.value = textData.value.description3;
+      leftScaleLabel.value = textData.value.leftScaleLabel;
+      rightScaleLabel.value = textData.value.rightScaleLabel;
+      topSliderLabel.value = textData.value.topSliderLabel;
+      result.value = textData.value.result;
+      instruction.value = textData.value.instruction;
+    });
+
+    const title = ref(textData.value.title);
+    const description1 = ref(textData.value.description1);
+    const description2 = ref(textData.value.description2);
+    const description3 = ref(textData.value.description3);
+    const leftScaleLabel = ref(textData.value.leftScaleLabel);
+    const rightScaleLabel = ref(textData.value.rightScaleLabel);
+    const topSliderLabel = ref(textData.value.topSliderLabel);
+    const bottomSliderLabel = ref(textData.value.topSliderLabel);
+    const result = ref(textData.value.result);
+    const instruction = ref(textData.value.instruction);
+
     const slider1 = ref(50);
     const slider2 = ref(50);
-    const text1 = ref("Doesn’t matter at all");
-    const text2 = ref("Matters a lot");
-    const text3 = ref("Reason(s) to choose option 1");
-    const text4 = ref("Reason(s) to choose option 2");
+    const text1 = ref(leftScaleLabel);
+    const text2 = ref(rightScaleLabel);
+    const text3 = ref(topSliderLabel);
+    const text4 = ref(bottomSliderLabel);
     const choice1 = ref(slider1.value);
     const choice2 = ref(slider2.value);
     const { width, height } = useWindowSize();
     const dialog = ref(false);
+    const text5 = ref("Option 1");
+    const text6 = ref("Option 2");
+
+    const handleInput1 = (value) => {
+      if (value !== text5.value) {
+        text5.value = value;
+        data.value.text5.push(text5.value);
+      }
+    };
+
+    const handleInput2 = (value) => {
+      if (value !== text6.value) {
+        text6.value = value;
+        data.value.text6.push(text6.value);
+      }
+    };
+
+    // Create dictionaries to store the arrays
+    const data = ref({
+      topSlider: [],
+      bottomSlider: [],
+      leftScaleLabel: [],
+      rightScaleLabel: [],
+      topSliderLabel: [],
+      bottomSliderLabel: [],
+      option1: [],
+      option2: [],
+    });
 
     watch(slider1, (newValue) => {
       slider2.value = 100 - newValue;
@@ -160,7 +226,50 @@ export default {
       slider1.value = 100 - newValue;
     });
 
+    const updateData = () => {
+      data.value.slider1.push(slider1.value);
+      data.value.slider2.push(slider2.value);
+    };
+
+    const updateText1 = () => {
+      data.value.text1.push(text1.value);
+    };
+    const updateText2 = () => {
+      data.value.text2.push(text2.value);
+    };
+    const updateText3 = () => {
+      data.value.text3.push(text3.value);
+    };
+    const updateText4 = () => {
+      data.value.text4.push(text4.value);
+    };
+
+    // Save the data to a file when the page is unloaded (refreshed or closed)
+    const saveDataToFile = () => {
+      const jsonData = JSON.stringify(data.value, null, 2);
+      const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
+      saveAs(blob, "data.txt");
+    };
+
+    onBeforeUnmount(() => {
+      saveDataToFile();
+    });
+
+    // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
+    window.onbeforeunload = () => {
+      saveDataToFile();
+    };
+
     return {
+      title,
+      description1,
+      description2,
+      description3,
+      leftScaleLabel,
+      rightScaleLabel,
+      topSliderLabel,
+      result,
+      instruction,
       slider1,
       slider2,
       choice1,
@@ -172,20 +281,20 @@ export default {
       width,
       height,
       dialog,
+      updateData,
+      updateText1,
+      updateText2,
+      updateText3,
+      updateText4,
+      handleInput1,
+      handleInput2,
     };
   },
   methods: {
-    selectAll1() {
-      this.$refs.input1.select();
-    },
-    selectAll2() {
-      this.$refs.input2.select();
-    },
-    selectAll3() {
-      this.$refs.input3.select();
-    },
-    selectAll4() {
-      this.$refs.input4.select();
+    selectAllText(refName) {
+      if (this.$refs[refName]) {
+        this.$refs[refName].select();
+      }
     },
   },
 };

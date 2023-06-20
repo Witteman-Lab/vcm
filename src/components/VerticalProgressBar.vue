@@ -29,7 +29,8 @@
           v-model="option1"
           variant="plain"
           ref="input1"
-          @click="selectAll1"
+          @click="selectAllText('input1')"
+          @change="emitInput1"
         ></v-text-field>
       </div>
       <div class="font-weight-regular w-25 my-n6">
@@ -38,21 +39,21 @@
           v-model="option2"
           variant="plain"
           ref="input2"
-          @click="selectAll2"
+          @click="selectAllText('input2')"
+          @change="emitInput2"
         ></v-text-field>
       </div>
     </div>
     <div class="d-flex justify-center" v-if="value1 !== 50">
       <v-chip variant="outlined" :color="value1 > 50 ? '#410e73' : '#a8a873'">
-        <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>fits best with what
-        matters to you
+        <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>{{result}}
       </v-chip>
     </div>
   </v-container>
 </template>
   
 <script>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, getCurrentInstance } from "vue";
 
 export default {
   props: {
@@ -64,6 +65,10 @@ export default {
       type: Number,
       required: true,
     },
+    result: {
+    type: String,
+    required: true
+  }
   },
   setup(props) {
     const value1 = ref(props.value1);
@@ -84,14 +89,27 @@ export default {
         value2.value = newValue;
       }
     );
-    return { value1, value2, option1, option2 };
+
+    // Get the current Vue component instance
+    const instance = getCurrentInstance();
+
+    // Emit input1 value to the parent component
+    const emitInput1 = () => {
+      instance.emit("input1", option1.value);
+    };
+
+    // Emit input2 value to the parent component
+    const emitInput2 = () => {
+      instance.emit("input2", option2.value);
+    };
+
+    return { value1, value2, option1, option2, emitInput1, emitInput2 };
   },
   methods: {
-    selectAll1() {
-      this.$refs.input1.select();
-    },
-    selectAll2() {
-      this.$refs.input2.select();
+    selectAllText(refName) {
+      if (this.$refs[refName]) {
+        this.$refs[refName].select();
+      }
     },
   },
 };
