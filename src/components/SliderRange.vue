@@ -1,5 +1,10 @@
 <template>
-  <v-container fluid :class="width > 426 ? 'mx-8 pt-16' : 'mt-n16'">
+  <v-container
+    fluid
+    :class="width > 426 ? 'mx-8 pt-16' : 'mt-n16'"
+    style="width: fit-content"
+    class="mx-auto"
+  >
     <v-row no-gutters>
       <v-col order-sm="first">
         <div class="d-flex flex-column">
@@ -70,7 +75,9 @@
                 track-size="30"
                 track-color="white"
                 rounded="xl"
-                @end="updateData()"
+                step="1"
+                @end="updateData1()"
+                @start="startValue1()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -99,8 +106,10 @@
                 track-size="30"
                 track-color="white"
                 rounded="xl"
-                @end="updateData()"
-                style="z-index: 100;"
+                step="1"
+                @end="updateData2()"
+                @start="startValue2()"
+                style="z-index: 100"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -119,7 +128,7 @@
           </div>
         </div>
       </v-col>
-      <v-col order="first">
+      <v-col order="first" cols="4">
         <div>
           <vertical-progress-bar
             :value1="slider1"
@@ -157,17 +166,20 @@ export default {
       return props.language === "EN" ? textEn : textFr;
     });
 
-    watch(() => props.language, () => {
-      title.value = textData.value.title;
-      description1.value = textData.value.description1;
-      description2.value = textData.value.description2;
-      description3.value = textData.value.description3;
-      leftScaleLabel.value = textData.value.leftScaleLabel;
-      rightScaleLabel.value = textData.value.rightScaleLabel;
-      topSliderLabel.value = textData.value.topSliderLabel;
-      result.value = textData.value.result;
-      instruction.value = textData.value.instruction;
-    });
+    watch(
+      () => props.language,
+      () => {
+        title.value = textData.value.title;
+        description1.value = textData.value.description1;
+        description2.value = textData.value.description2;
+        description3.value = textData.value.description3;
+        leftScaleLabel.value = textData.value.leftScaleLabel;
+        rightScaleLabel.value = textData.value.rightScaleLabel;
+        topSliderLabel.value = textData.value.topSliderLabel;
+        result.value = textData.value.result;
+        instruction.value = textData.value.instruction;
+      }
+    );
 
     const title = ref(textData.value.title);
     const description1 = ref(textData.value.description1);
@@ -193,6 +205,9 @@ export default {
     const text5 = ref("Option 1");
     const text6 = ref("Option 2");
 
+    let startSlider1 = 50;
+    let startSlider2 = 50;
+
     const handleInput1 = (value) => {
       if (value !== text5.value) {
         text5.value = value;
@@ -207,6 +222,14 @@ export default {
       }
     };
 
+    const startValue1 = (value) => {
+      startSlider1 = slider1.value;
+    };
+
+    const startValue2 = (value) => {
+      startSlider2 = slider2.value;
+    };
+
     // Create dictionaries to store the arrays
     const data = ref({
       topSlider: [],
@@ -219,6 +242,29 @@ export default {
       option2: [],
     });
 
+    function range(start, stop, step) {
+      if (typeof stop == "undefined") {
+        // one param defined
+        stop = start;
+        start = 0;
+      }
+
+      if (typeof step == "undefined") {
+        step = 1;
+      }
+
+      if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+        return [];
+      }
+
+      var result = [];
+      for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+        result.push(i);
+      }
+
+      return result;
+    }
+
     watch(slider1, (newValue) => {
       slider2.value = 100 - newValue;
     });
@@ -227,9 +273,24 @@ export default {
       slider1.value = 100 - newValue;
     });
 
-    const updateData = () => {
-      data.value.topSlider.push(slider1.value);
-      data.value.bottomSlider.push(slider2.value);
+    const updateData1 = () => {
+      if (startSlider1 < slider1.value) {
+        data.value.topSlider.push(range(startSlider1,slider1.value+1));
+      }
+      if (startSlider1 > slider1.value) {
+        data.value.topSlider.push(range(slider1.value,startSlider1+1).reverse());
+      }
+      // data.value.topSlider.push(slider1.value);
+      // data.value.bottomSlider.push(slider2.value);
+    };
+
+    const updateData2 = () => {
+      if (startSlider2 < slider2.value) {
+        data.value.bottomSlider.push(range(startSlider2,slider2.value+1));
+      }
+      if (startSlider2 > slider2.value) {
+        data.value.bottomSlider.push(range(slider2.value,startSlider2+1).reverse());
+      }
     };
 
     const updateText1 = () => {
@@ -282,13 +343,16 @@ export default {
       width,
       height,
       dialog,
-      updateData,
+      updateData1,
+      updateData2,
       updateText1,
       updateText2,
       updateText3,
       updateText4,
       handleInput1,
       handleInput2,
+      startValue1,
+      startValue2,
     };
   },
   methods: {

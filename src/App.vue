@@ -59,13 +59,16 @@ export default {
   },
   watch: {
     language(newLanguage) {
-      // Call the setLanguage method whenever the language changes
-      localStorage.setItem("language", newLanguage);
-    },
+    localStorage.setItem("language", newLanguage);
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("lang", newLanguage);
+    window.history.replaceState({}, "", `${window.location.pathname}?${urlParams}`);
+  },
   },
   created() {
     // Retrieve language from local storage on component creation
-    this.language = localStorage.getItem("language") || "EN";
+    const urlParams = new URLSearchParams(window.location.search);
+  this.language = urlParams.get("lang").toUpperCase() || localStorage.getItem("language").toUpperCase() || "EN".toUpperCase();
   },
 };
 </script>
