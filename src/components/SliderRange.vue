@@ -78,6 +78,7 @@
                 step="1"
                 @end="updateData1()"
                 @start="startValue1()"
+                @click="addData1()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -110,6 +111,7 @@
                 @end="updateData2()"
                 @start="startValue2()"
                 style="z-index: 100"
+                @click="addData2()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -160,10 +162,17 @@ export default {
       type: String,
       required: true,
     },
+    uid: {
+      type: Number,
+    },
+    returnUrl: {
+      type: URL,
+    },
   },
   setup(props) {
+
     const textData = computed(() => {
-      return props.language === "EN" ? textEn : textFr;
+      return props.language === "en" ? textEn : textFr;
     });
 
     watch(
@@ -178,6 +187,7 @@ export default {
         topSliderLabel.value = textData.value.topSliderLabel;
         result.value = textData.value.result;
         instruction.value = textData.value.instruction;
+        data.value.language = props.language;
       }
     );
 
@@ -192,6 +202,9 @@ export default {
     const result = ref(textData.value.result);
     const instruction = ref(textData.value.instruction);
 
+    const startTimeApp  = ref(new Date());
+    const startTime = ref(new Date());
+    const sliders = ref([]);
     const slider1 = ref(50);
     const slider2 = ref(50);
     const text1 = ref(leftScaleLabel);
@@ -224,22 +237,28 @@ export default {
 
     const startValue1 = (value) => {
       startSlider1 = slider1.value;
+      startTime.value = new Date();
     };
 
     const startValue2 = (value) => {
       startSlider2 = slider2.value;
+      startTime.value = new Date();
     };
 
     // Create dictionaries to store the arrays
     const data = ref({
-      topSlider: [],
-      bottomSlider: [],
+      userID: props.uid,
+      returnUrl:props.returnUrl,
+      duration_m_s: 0,
+      EndTimeVCM: new Date(),
+      sliders,
       leftScaleLabel: [],
       rightScaleLabel: [],
       topSliderLabel: [],
       bottomSliderLabel: [],
       option1: [],
       option2: [],
+      language: props.language,
     });
 
     function range(start, stop, step) {
@@ -273,12 +292,41 @@ export default {
       slider1.value = 100 - newValue;
     });
 
+    const calculateDuration = (startTime, endTime) => {
+      const durationInMillis = endTime - startTime;
+      const minutes = Math.floor(durationInMillis / (1000 * 60));
+      const seconds = Math.floor((durationInMillis / 1000) % 60);
+      if (durationInMillis >= 1000) {
+        return `${minutes}m ${seconds}s`;
+      } else {
+        return `${durationInMillis} ms`;
+      }
+    };
+
     const updateData1 = () => {
       if (startSlider1 < slider1.value) {
-        data.value.topSlider.push(range(startSlider1,slider1.value+1));
+        const values = range(startSlider1, slider1.value + 1);
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_1",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
       }
       if (startSlider1 > slider1.value) {
-        data.value.topSlider.push(range(slider1.value,startSlider1+1).reverse());
+        const values = range(slider1.value, startSlider1 + 1).reverse();
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_1",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
       }
       // data.value.topSlider.push(slider1.value);
       // data.value.bottomSlider.push(slider2.value);
@@ -286,10 +334,28 @@ export default {
 
     const updateData2 = () => {
       if (startSlider2 < slider2.value) {
-        data.value.bottomSlider.push(range(startSlider2,slider2.value+1));
+        const values = range(startSlider2, slider2.value + 1);
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_2",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
       }
       if (startSlider2 > slider2.value) {
-        data.value.bottomSlider.push(range(slider2.value,startSlider2+1).reverse());
+        const values = range(slider2.value, startSlider2 + 1).reverse();
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_2",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
       }
     };
 
@@ -308,6 +374,10 @@ export default {
 
     // Save the data to a file when the page is unloaded (refreshed or closed)
     const saveDataToFile = () => {
+      const endTimeVCM = new Date()
+      data.value.EndTimeVCM = endTimeVCM
+      const duration = calculateDuration(startTimeApp.value, endTimeVCM);
+      data.value.duration_m_s = duration;
       const jsonData = JSON.stringify(data.value, null, 2);
       const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
       saveAs(blob, "data.txt");
@@ -320,6 +390,29 @@ export default {
     // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
     window.onbeforeunload = () => {
       saveDataToFile();
+    };
+
+    const addData2 = () => {
+      const endTime = new Date();
+      const duration = calculateDuration(startTime.value, endTime);
+      sliders.value.push({
+        name: "Slider_2",
+        values: slider2.value,
+        startTime,
+        endTime: endTime,
+        duration: duration,
+      });
+    };
+    const addData1 = () => {
+      const endTime = new Date();
+      const duration = calculateDuration(startTime.value, endTime);
+      sliders.value.push({
+        name: "Slider_1",
+        values: slider1.value,
+        startTime,
+        endTime: endTime,
+        duration: duration,
+      });
     };
 
     return {
@@ -353,6 +446,8 @@ export default {
       handleInput2,
       startValue1,
       startValue2,
+      addData2,
+      addData1,
     };
   },
   methods: {
