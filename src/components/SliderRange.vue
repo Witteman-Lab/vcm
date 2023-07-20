@@ -1,5 +1,10 @@
 <template>
-  <v-container fluid :class="width > 426 ? 'mx-8 pt-16' : 'mt-n16'">
+  <v-container
+    fluid
+    :class="width > 426 ? 'mx-8 pt-16' : 'mt-n16'"
+    style="width: fit-content"
+    class="mx-auto"
+  >
     <v-row no-gutters>
       <v-col order-sm="first">
         <div class="d-flex flex-column">
@@ -70,7 +75,10 @@
                 track-size="30"
                 track-color="white"
                 rounded="xl"
-                @end="updateData()"
+                step="1"
+                @end="updateData1()"
+                @start="startValue1()"
+                @click="addData1()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -99,8 +107,11 @@
                 track-size="30"
                 track-color="white"
                 rounded="xl"
-                @end="updateData()"
-                style="z-index: 100;"
+                step="1"
+                @end="updateData2()"
+                @start="startValue2()"
+                style="z-index: 100"
+                @click="addData2()"
               ></v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -119,7 +130,7 @@
           </div>
         </div>
       </v-col>
-      <v-col order="first">
+      <v-col order="first" cols="4">
         <div>
           <vertical-progress-bar
             :value1="slider1"
@@ -151,23 +162,34 @@ export default {
       type: String,
       required: true,
     },
+    uid: {
+      type: Number,
+    },
+    returnUrl: {
+      type: URL,
+    },
   },
   setup(props) {
+
     const textData = computed(() => {
-      return props.language === "EN" ? textEn : textFr;
+      return props.language === "en" ? textEn : textFr;
     });
 
-    watch(() => props.language, () => {
-      title.value = textData.value.title;
-      description1.value = textData.value.description1;
-      description2.value = textData.value.description2;
-      description3.value = textData.value.description3;
-      leftScaleLabel.value = textData.value.leftScaleLabel;
-      rightScaleLabel.value = textData.value.rightScaleLabel;
-      topSliderLabel.value = textData.value.topSliderLabel;
-      result.value = textData.value.result;
-      instruction.value = textData.value.instruction;
-    });
+    watch(
+      () => props.language,
+      () => {
+        title.value = textData.value.title;
+        description1.value = textData.value.description1;
+        description2.value = textData.value.description2;
+        description3.value = textData.value.description3;
+        leftScaleLabel.value = textData.value.leftScaleLabel;
+        rightScaleLabel.value = textData.value.rightScaleLabel;
+        topSliderLabel.value = textData.value.topSliderLabel;
+        result.value = textData.value.result;
+        instruction.value = textData.value.instruction;
+        data.value.language = props.language;
+      }
+    );
 
     const title = ref(textData.value.title);
     const description1 = ref(textData.value.description1);
@@ -180,6 +202,9 @@ export default {
     const result = ref(textData.value.result);
     const instruction = ref(textData.value.instruction);
 
+    const startTimeApp  = ref(new Date());
+    const startTime = ref(new Date());
+    const sliders = ref([]);
     const slider1 = ref(50);
     const slider2 = ref(50);
     const text1 = ref(leftScaleLabel);
@@ -192,6 +217,9 @@ export default {
     const dialog = ref(false);
     const text5 = ref("Option 1");
     const text6 = ref("Option 2");
+
+    let startSlider1 = 50;
+    let startSlider2 = 50;
 
     const handleInput1 = (value) => {
       if (value !== text5.value) {
@@ -207,17 +235,54 @@ export default {
       }
     };
 
+    const startValue1 = (value) => {
+      startSlider1 = slider1.value;
+      startTime.value = new Date();
+    };
+
+    const startValue2 = (value) => {
+      startSlider2 = slider2.value;
+      startTime.value = new Date();
+    };
+
     // Create dictionaries to store the arrays
     const data = ref({
-      topSlider: [],
-      bottomSlider: [],
+      userID: props.uid,
+      returnUrl:props.returnUrl,
+      duration_m_s: 0,
+      EndTimeVCM: new Date(),
+      sliders,
       leftScaleLabel: [],
       rightScaleLabel: [],
       topSliderLabel: [],
       bottomSliderLabel: [],
       option1: [],
       option2: [],
+      language: props.language,
     });
+
+    function range(start, stop, step) {
+      if (typeof stop == "undefined") {
+        // one param defined
+        stop = start;
+        start = 0;
+      }
+
+      if (typeof step == "undefined") {
+        step = 1;
+      }
+
+      if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+        return [];
+      }
+
+      var result = [];
+      for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+        result.push(i);
+      }
+
+      return result;
+    }
 
     watch(slider1, (newValue) => {
       slider2.value = 100 - newValue;
@@ -227,9 +292,71 @@ export default {
       slider1.value = 100 - newValue;
     });
 
-    const updateData = () => {
-      data.value.topSlider.push(slider1.value);
-      data.value.bottomSlider.push(slider2.value);
+    const calculateDuration = (startTime, endTime) => {
+      const durationInMillis = endTime - startTime;
+      const minutes = Math.floor(durationInMillis / (1000 * 60));
+      const seconds = Math.floor((durationInMillis / 1000) % 60);
+      if (durationInMillis >= 1000) {
+        return `${minutes}m ${seconds}s`;
+      } else {
+        return `${durationInMillis} ms`;
+      }
+    };
+
+    const updateData1 = () => {
+      if (startSlider1 < slider1.value) {
+        const values = range(startSlider1, slider1.value + 1);
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_1",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
+      }
+      if (startSlider1 > slider1.value) {
+        const values = range(slider1.value, startSlider1 + 1).reverse();
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_1",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
+      }
+      // data.value.topSlider.push(slider1.value);
+      // data.value.bottomSlider.push(slider2.value);
+    };
+
+    const updateData2 = () => {
+      if (startSlider2 < slider2.value) {
+        const values = range(startSlider2, slider2.value + 1);
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_2",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
+      }
+      if (startSlider2 > slider2.value) {
+        const values = range(slider2.value, startSlider2 + 1).reverse();
+        const endTime = new Date();
+        const duration = calculateDuration(startTime.value, endTime);
+        sliders.value.push({
+          name: "Slider_2",
+          values,
+          startTime,
+          endTime: endTime,
+          duration: duration,
+        });
+      }
     };
 
     const updateText1 = () => {
@@ -247,6 +374,10 @@ export default {
 
     // Save the data to a file when the page is unloaded (refreshed or closed)
     const saveDataToFile = () => {
+      const endTimeVCM = new Date()
+      data.value.EndTimeVCM = endTimeVCM
+      const duration = calculateDuration(startTimeApp.value, endTimeVCM);
+      data.value.duration_m_s = duration;
       const jsonData = JSON.stringify(data.value, null, 2);
       const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
       saveAs(blob, "data.txt");
@@ -259,6 +390,29 @@ export default {
     // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
     window.onbeforeunload = () => {
       saveDataToFile();
+    };
+
+    const addData2 = () => {
+      const endTime = new Date();
+      const duration = calculateDuration(startTime.value, endTime);
+      sliders.value.push({
+        name: "Slider_2",
+        values: slider2.value,
+        startTime,
+        endTime: endTime,
+        duration: duration,
+      });
+    };
+    const addData1 = () => {
+      const endTime = new Date();
+      const duration = calculateDuration(startTime.value, endTime);
+      sliders.value.push({
+        name: "Slider_1",
+        values: slider1.value,
+        startTime,
+        endTime: endTime,
+        duration: duration,
+      });
     };
 
     return {
@@ -282,13 +436,18 @@ export default {
       width,
       height,
       dialog,
-      updateData,
+      updateData1,
+      updateData2,
       updateText1,
       updateText2,
       updateText3,
       updateText4,
       handleInput1,
       handleInput2,
+      startValue1,
+      startValue2,
+      addData2,
+      addData1,
     };
   },
   methods: {

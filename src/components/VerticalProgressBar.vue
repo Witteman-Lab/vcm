@@ -1,6 +1,6 @@
 <template>
-  <v-container class="d-flex flex-column align-center">
-    <v-container style="width: 250px" fluid class="vertical-progress-container">
+  <v-container class="d-flex flex-column align-center"  style="width: fit-content;">
+    <v-container style="width: 250px;" fluid class="vertical-progress-container">
       <div class="d-flex flex-column">
         <div class="mb-12">
           <v-progress-linear
@@ -45,6 +45,11 @@
       </div>
     </div>
     <div class="d-flex justify-center" v-if="value1 !== 50">
+      <v-chip variant="outlined" :color="value1 > 50 ? '#410e73' : '#a8a873'">
+        <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>{{result}}
+      </v-chip>
+    </div>
+    <div class="d-flex justify-center hidden" >
       <v-chip variant="outlined" :color="value1 > 50 ? '#410e73' : '#a8a873'">
         <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>{{result}}
       </v-chip>
@@ -116,6 +121,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.hidden{
+  visibility: hidden;
+}
 .vertical-progress-container {
   transform: rotate(-90deg);
 }

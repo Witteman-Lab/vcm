@@ -1,13 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout>
-      <v-app-bar
-        height="120"
-        app
-        color="white"
-        elevation="12"
-        fixed
-      >
+      <v-app-bar height="120" app color="white" elevation="12" fixed>
         <div class="w-25 ml-5">
           <v-img
             height="100"
@@ -31,7 +25,7 @@
       </v-app-bar>
 
       <v-main>
-        <slider-range :language="language"></slider-range>
+        <slider-range :language="language" :uid="uid" :returnUrl="returnUrl"></slider-range>
       </v-main>
     </v-layout>
   </v-container>
@@ -40,7 +34,7 @@
 <script>
 import SliderRange from "./components/SliderRange.vue";
 
-const languageItems = ["EN", "FR"]; // Define language items as a constant
+const languageItems = ["en", "fr"]; // Define language items as a constant
 
 export default {
   components: {
@@ -49,6 +43,8 @@ export default {
   data() {
     return {
       language: "",
+      returnUrl: "",
+      uid: "",
       languageItems, // Use the constant for language items
     };
   },
@@ -59,13 +55,45 @@ export default {
   },
   watch: {
     language(newLanguage) {
-      // Call the setLanguage method whenever the language changes
       localStorage.setItem("language", newLanguage);
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("lang", newLanguage);
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?${urlParams}`
+      );
+    },
+    returnUrl(newReturnUrl) {
+      localStorage.setItem("returnUrl", newReturnUrl);
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("returnUrl", newReturnUrl);
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?${urlParams}`
+      );
+    },
+    uid(newUid) {
+      localStorage.setItem("uid", newUid);
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("uid", newUid);
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?${urlParams}`
+      );
     },
   },
   created() {
     // Retrieve language from local storage on component creation
-    this.language = localStorage.getItem("language") || "EN";
+    const urlParams = new URLSearchParams(window.location.search);
+    this.language =
+      urlParams.get("lang") || localStorage.getItem("language") || "en";
+
+    this.returnUrl =
+      urlParams.get("returnUrl") || localStorage.getItem("returnUrl") || "";
+    this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
   },
 };
 </script>
