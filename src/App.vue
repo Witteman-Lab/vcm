@@ -25,9 +25,29 @@
       </v-app-bar>
 
       <v-main>
-        <slider-range :language="language" :uid="uid" :returnUrl="returnUrl"></slider-range>
+        <slider-range
+          :language="language"
+          :uid="uid"
+          :returnUrl="returnUrl"
+        ></slider-range>
       </v-main>
     </v-layout>
+    <div class="d-flex justify-center mt-15">
+      <v-btn
+        class="montserratSemiBoldBtn"
+        color="#05cdc1"
+        variant="outlined"
+        rounded
+        x-large
+        v-if="this.returnUrl !== null"
+      >
+        <span :style="{ display: isMobile ? 'none' : 'inline-block' }"
+          ><a style="color: #05cdc1" :href="this.returnUrl"
+            >Retour au sondage</a
+          ></span
+        >
+      </v-btn>
+    </div>
   </v-container>
 </template>
 
@@ -101,5 +121,11 @@ export default {
 <style scoped lang="scss">
 .logo-image {
   cursor: pointer; /* Apply the pointer cursor style */
+}
+a,
+a::before,
+a::after {
+  text-decoration: none;
+  color: #05cdc1;
 }
 </style>
