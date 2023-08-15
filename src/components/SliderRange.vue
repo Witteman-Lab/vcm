@@ -7,7 +7,7 @@
   >
     <v-row no-gutters>
       <v-col order-sm="first">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column" :style="width < 500 ? 'width: max-content':''">
           <div class="d-flex text-h5 font-weight-bold title">
             {{ title }}
           </div>
@@ -130,7 +130,7 @@
           </div>
         </div>
       </v-col>
-      <v-col order="first" cols="4">
+      <v-col order="first">
         <div>
           <vertical-progress-bar
             :value1="slider1"
