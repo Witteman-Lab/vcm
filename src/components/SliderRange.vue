@@ -150,7 +150,7 @@
 
 <script>
 import VerticalProgressBar from "./VerticalProgressBar.vue";
-import textEn from "../assets/json/textEN.json";
+import textEn from "../assets/json/textEn.json";
 import textFr from "../assets/json/textFr.json";
 import { ref, watch, onBeforeUnmount, computed, reactive } from "vue";
 import { useWindowSize } from "@vueuse/core";
