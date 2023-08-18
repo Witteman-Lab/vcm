@@ -7,7 +7,10 @@
   >
     <v-row no-gutters>
       <v-col order-sm="first">
-        <div class="d-flex flex-column" :style="width < 500 ? 'width: max-content':''">
+        <div
+          class="d-flex flex-column"
+          :style="width < 500 ? 'width: max-content' : ''"
+        >
           <div class="d-flex text-h5 font-weight-bold title">
             {{ title }}
           </div>
@@ -170,7 +173,6 @@ export default {
     },
   },
   setup(props) {
-
     const textData = computed(() => {
       return props.language === "en" ? textEn : textFr;
     });
@@ -191,6 +193,9 @@ export default {
       }
     );
 
+    let activeSlider = null;
+    const graph = ref({}); // Initialize the graph dictionary
+
     const title = ref(textData.value.title);
     const description1 = ref(textData.value.description1);
     const description2 = ref(textData.value.description2);
@@ -202,7 +207,7 @@ export default {
     const result = ref(textData.value.result);
     const instruction = ref(textData.value.instruction);
 
-    const startTimeApp  = ref(new Date());
+    const startTimeApp = ref(new Date());
     const startTime = ref(new Date());
     const sliders = ref([]);
     const slider1 = ref(50);
@@ -236,11 +241,13 @@ export default {
     };
 
     const startValue1 = (value) => {
+      activeSlider = "Slider_1";
       startSlider1 = slider1.value;
       startTime.value = new Date();
     };
 
     const startValue2 = (value) => {
+      activeSlider = "Slider_2";
       startSlider2 = slider2.value;
       startTime.value = new Date();
     };
@@ -248,7 +255,7 @@ export default {
     // Create dictionaries to store the arrays
     const data = ref({
       userID: props.uid,
-      returnUrl:props.returnUrl,
+      returnUrl: props.returnUrl,
       duration_m_s: 0,
       EndTimeVCM: new Date(),
       sliders,
@@ -259,6 +266,7 @@ export default {
       option1: [],
       option2: [],
       language: props.language,
+      graph:graph.value
     });
 
     function range(start, stop, step) {
@@ -304,6 +312,7 @@ export default {
     };
 
     const updateData1 = () => {
+      activeSlider = null;
       if (startSlider1 < slider1.value) {
         const values = range(startSlider1, slider1.value + 1);
         const endTime = new Date();
@@ -333,6 +342,7 @@ export default {
     };
 
     const updateData2 = () => {
+      activeSlider = null;
       if (startSlider2 < slider2.value) {
         const values = range(startSlider2, slider2.value + 1);
         const endTime = new Date();
@@ -374,8 +384,8 @@ export default {
 
     // Save the data to a file when the page is unloaded (refreshed or closed)
     const saveDataToFile = () => {
-      const endTimeVCM = new Date()
-      data.value.EndTimeVCM = endTimeVCM
+      const endTimeVCM = new Date();
+      data.value.EndTimeVCM = endTimeVCM;
       const duration = calculateDuration(startTimeApp.value, endTimeVCM);
       data.value.duration_m_s = duration;
       const jsonData = JSON.stringify(data.value, null, 2);
@@ -385,6 +395,7 @@ export default {
 
     onBeforeUnmount(() => {
       saveDataToFile();
+      clearInterval(timerInterval);
     });
 
     // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
@@ -393,6 +404,7 @@ export default {
     };
 
     const addData2 = () => {
+      activeSlider = "Slider_2";
       const endTime = new Date();
       const duration = calculateDuration(startTime.value, endTime);
       sliders.value.push({
@@ -404,6 +416,7 @@ export default {
       });
     };
     const addData1 = () => {
+      activeSlider = "Slider_1";
       const endTime = new Date();
       const duration = calculateDuration(startTime.value, endTime);
       sliders.value.push({
@@ -414,6 +427,24 @@ export default {
         duration: duration,
       });
     };
+
+    let currentSecond = 0;
+    // Set up a timer to check and reset activeSlider every second
+    const timerInterval = setInterval(() => {
+      currentSecond++;
+      if (activeSlider) {
+        graph.value[currentSecond*500] = {
+          slider: activeSlider,
+          value: activeSlider === "Slider_1" ? slider1.value : slider2.value,
+        };
+      }else{
+        graph.value[currentSecond*500] = null
+      }
+    }, 500);
+
+    // const timerInterval = setInterval(() => {
+    //   console.log(activeSlider) // Reset activeSlider to null every second
+    // }, 1000);
 
     return {
       title,
