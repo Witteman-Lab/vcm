@@ -1,0 +1,17 @@
+{
+  "currentLanguage" : "en",
+  "title" : "What matters to you",
+  "description1" : "Before you make a choice between the two options, please take a moment to consider what matters most to you.",
+  "description2" : "Use the sliders below while you consider your feelings. Remember that there are no wrong answers.",
+  "language": "FR",
+  "leftScaleLabel": "Doesn’t matter at all",
+  "rightScaleLabel": "Matters a lot",
+  "topSliderLabel":"Avoiding a false positive diagnosis of breast cancer or getting overdiagnosed",
+  "bottomSliderLabel":"Avoiding dying of breast cancer",
+  "leftBarText" : "Not getting a breast cancer screening test",
+  "rightBarText" : "Getting a breast cancer screening test",
+  "result":"fits best with what matters to you",
+  "instruction":["Show Instructions", "Hide Instructions"],
+  "returnLabel": "Back to survey"
+
+}

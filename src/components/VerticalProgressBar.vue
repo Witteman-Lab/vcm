@@ -4,7 +4,7 @@
     style="width: fit-content"
   >
     <v-container
-      style="width: 250px; height: 300px"
+      style="width: 250px; height: auto;"
       fluid
       class="vertical-progress-container"
     >
@@ -29,26 +29,32 @@
         </div>
       </div>
     </v-container>
-    <div style="width: 100%;" class="d-flex justify-space-between mb-6 px-6">
-      <div class="font-weight-regular w-25 my-n6">
-        <v-text-field
-          class="input1"
+    <div style="width: 100%; height: auto" class="d-flex justify-space-between mb-2" >
+      <div class="font-weight-regular w-50 my-n6 d-flex align-center justify-center">
+        <v-textarea
+          dense
+          hide-details
+          class="input1 text-center"
           v-model="option1"
           variant="plain"
           ref="input1"
           @click="selectAllText('input1')"
           @change="emitInput1"
-        ></v-text-field>
+          style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
+        ></v-textarea>
       </div>
-      <div class="font-weight-regular w-25 my-n6">
-        <v-text-field
-          class="input2"
+      <div class="font-weight-regular w-50 my-n6 d-flex align-center justify-center">
+        <v-textarea
+          dense
+          hide-details
+          class="input2 text-center"
           v-model="option2"
           variant="plain"
           ref="input2"
           @click="selectAllText('input2')"
           @change="emitInput2"
-        ></v-text-field>
+          style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
+        ></v-textarea>
       </div>
     </div>
     <div class="d-flex justify-center" v-if="value1 !== 50">
@@ -87,12 +93,20 @@ export default {
       type: String,
       required: true,
     },
+    leftBarText: {
+      type: String,
+      required: true,
+    },
+    rightBarText: {
+      type: String,
+      required: true,
+    },
   },
   setup(props) {
     const value1 = ref(props.value1);
     const value2 = ref(props.value2);
-    const option1 = ref("Option 1");
-    const option2 = ref("Option 2");
+    const option1 = ref(props.leftBarText);
+    const option2 = ref(props.rightBarText);
     // Watch the prop values for changes and update the refs accordingly
     watch(
       () => props.value1,
@@ -106,6 +120,22 @@ export default {
         value2.value = newValue;
       }
     );
+
+    watch(
+      () => props.leftBarText,
+      (newVal) => {
+        option1.value = newVal;
+      }
+    );
+
+    watch(
+      () => props.rightBarText,
+      (newVal) => {
+        option2.value = newVal;
+      }
+    );
+
+
     // Get the current Vue component instance
     const instance = getCurrentInstance();
     // Emit input1 value to the parent component

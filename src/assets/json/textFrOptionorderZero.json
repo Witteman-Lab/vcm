@@ -1,0 +1,16 @@
+{
+  "currentLanguage" : "fr",
+  "title" : "Ce qui compte pour vous",
+  "description1" : "Avant de choisir entre les deux options, veuillez prendre un instant pour considérer ce qui compte le plus pour vous.",
+  "description2" : "Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments.",
+  "language": "EN",
+  "leftScaleLabel": "Pas important du tout",
+  "rightScaleLabel": "Très important",
+  "topSliderLabel":"Éviter de mourir du cancer du sein",
+  "bottomSliderLabel":"Éviter un faux diagnostic positif de cancer du sein ou un surdiagnostic",
+  "leftBarText" : "Faire un test de dépistage du cancer du sein",
+  "rightBarText" : "Ne pas faire un test de dépistage du cancer du sein",
+  "result":"correspond le mieux à ce qui vous importe",
+  "instruction":["Afficher les instructions", "Cacher les instructions"],
+  "returnLabel": "Retour au sondage"
+}

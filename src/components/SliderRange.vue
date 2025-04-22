@@ -145,6 +145,8 @@
             :value1="slider1"
             :value2="slider2"
             :result="result"
+            :leftBarText="leftBarText"
+            :rightBarText="rightBarText"
             @input1="handleInput1"
             @input2="handleInput2"
           ></vertical-progress-bar>
@@ -161,9 +163,7 @@
  * updating data, and managing the lifecycle of the component.
  */
 import VerticalProgressBar from "./VerticalProgressBar.vue";
-import textEn from "../assets/json/textEn.json";
-import textFr from "../assets/json/textFr.json";
-import { ref, watch, onBeforeUnmount, computed, reactive } from "vue";
+import {ref, watch, onBeforeUnmount, computed, reactive, } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import { saveAs } from "file-saver";
 
@@ -188,39 +188,52 @@ export default {
     returnUrl: {
       type: URL,
     },
+
+    optionOrder: {
+      type: Number,
+      default: 0,
+    },
+
+    textData: {
+      type: Object,
+      required: true,
+    }
   },
   setup(props) {
-    // Computed property to dynamically select text data based on the language
-    const textData = computed(() => {
-      return props.language === "en" ? textEn : textFr;
-    });
-    // Watcher to update text data when language changes
+
+    const title = ref(props.textData.title);
+    const description1 = ref(props.textData.description1);
+    const description2 = ref(props.textData.description2);
+    const leftScaleLabel = ref(props.textData.leftScaleLabel);
+    const rightScaleLabel = ref(props.textData.rightScaleLabel);
+    const topSliderLabel = ref(props.textData.topSliderLabel);
+    const bottomSliderLabel = ref(props.textData.bottomSliderLabel);
+    const result = ref(props.textData.result);
+    const instruction = ref(props.textData.instruction);
+    const leftBarText = ref(props.textData.leftBarText);
+    const rightBarText = ref(props.textData.rightBarText);
+
+
     watch(
-      () => props.language,
-      () => {
-        title.value = textData.value.title;
-        description1.value = textData.value.description1;
-        description2.value = textData.value.description2;
-        leftScaleLabel.value = textData.value.leftScaleLabel;
-        rightScaleLabel.value = textData.value.rightScaleLabel;
-        topSliderLabel.value = textData.value.topSliderLabel;
-        bottomSliderLabel.value = textData.value.topSliderLabel;
-        result.value = textData.value.result;
-        instruction.value = textData.value.instruction;
-        data.value.language = props.language;
-      }
+      () => props.textData,
+      (newVal) => {
+        title.value = newVal.title;
+        description1.value = newVal.description1;
+        description2.value = newVal.description2;
+        leftScaleLabel.value = newVal.leftScaleLabel;
+        rightScaleLabel.value = newVal.rightScaleLabel;
+        topSliderLabel.value = newVal.topSliderLabel;
+        bottomSliderLabel.value = newVal.bottomSliderLabel;
+        result.value = newVal.result;
+        instruction.value = newVal.instruction;
+        leftBarText.value = newVal.leftBarText;
+        rightBarText.value = newVal.rightBarText;
+      },
+      { immediate: true }
     );
+
     let activeSlider = null;
     const graph = ref({}); // Initialize the graph dictionary
-    const title = ref(textData.value.title);
-    const description1 = ref(textData.value.description1);
-    const description2 = ref(textData.value.description2);
-    const leftScaleLabel = ref(textData.value.leftScaleLabel);
-    const rightScaleLabel = ref(textData.value.rightScaleLabel);
-    const topSliderLabel = ref(textData.value.topSliderLabel);
-    const bottomSliderLabel = ref(textData.value.topSliderLabel);
-    const result = ref(textData.value.result);
-    const instruction = ref(textData.value.instruction);
     const startTimeApp = ref(new Date());
     const startTime = ref(new Date());
     const sliders = ref([]);
@@ -229,15 +242,20 @@ export default {
     const text1 = ref(leftScaleLabel);
     const text2 = ref(rightScaleLabel);
     const text3 = ref(topSliderLabel);
-    const text4 = ref(bottomSliderLabel); // Magniol
+    const text4 = ref(bottomSliderLabel);
     const choice1 = ref(slider1.value);
     const choice2 = ref(slider2.value);
     const { width, height } = useWindowSize();
     const dialog = ref(false);
-    const text5 = ref("Option 1");
+    const text5 = ref("Option 1 ");
     const text6 = ref("Option 2");
     let startSlider1 = 50;
     let startSlider2 = 50;
+
+
+
+
+
     /**
      * Handles input for text input field 1.
      * If the input value is different from the current value, updates the value and pushes it to option1 array in data.
@@ -246,7 +264,7 @@ export default {
     const handleInput1 = (value) => {
       if (value !== text5.value) {
         text5.value = value;
-        data.value.option1.push(text5.value);
+
       }
     };
     /**
@@ -296,6 +314,7 @@ export default {
       option1: [],
       option2: [],
       language: props.language,
+      optionOrder: props.optionOrder,
       graph:graph.value
     });
     /**
@@ -511,6 +530,7 @@ export default {
       leftScaleLabel,
       rightScaleLabel,
       topSliderLabel,
+      bottomSliderLabel,
       result,
       instruction,
       slider1,
@@ -536,6 +556,8 @@ export default {
       startValue2,
       addData2,
       addData1,
+      leftBarText,
+      rightBarText
     };
   },
   methods: {
@@ -548,6 +570,7 @@ export default {
         this.$refs[refName].select();
       }
     },
+
   },
 };
 </script>

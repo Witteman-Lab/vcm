@@ -3,7 +3,7 @@
     <v-layout>
       <v-app-bar height="60" app color="white" elevation="7" fixed>
         <div class="w-25 ml-5">
-          <v-img
+          <v-img v-if="false"
             height="50"
             src="./assets/logo.svg"
             class="logo-image"
@@ -28,21 +28,23 @@
           :language="language"
           :uid="uid"
           :returnUrl="returnUrl"
+          :optionOrder="optionOrder"
+          :textData="textData"
         ></slider-range>
       </v-main>
     </v-layout>
     <div class="d-flex justify-center mt-15">
-      <v-btn style="display: none"
+      <v-btn
         class="montserratSemiBoldBtn"
         color="#398064"
         variant="outlined"
         rounded
         x-large
-        v-if="this.returnUrl !== null"
+        v-if="hasQueryParams"
       >
         <span :style="{ display: isMobile ? 'none' : 'inline-block' }"
           ><a style="color: #398064" :href="this.returnUrl"
-            >Retour au sondage</a
+            >{{ textData.returnLabel }}</a
           ></span
         >
       </v-btn>
@@ -52,7 +54,10 @@
 
 <script>
 import SliderRange from "./components/SliderRange.vue";
-
+import textEnOptionorderZero from "../src/assets/json/textEnOptionorderZero.json";
+import textFrOptionorderZero from "../src//assets/json/textFrOptionorderZero.json";
+import textEnOptionorderOne from "../src//assets/json/textEnOptionorderOne.json";
+import textFrOptionorderOne from "../src//assets/json/textFrOptionorderOne.json";
 const languageItems = ["en", "fr"]; // Define language items as a constant
 
 export default {
@@ -70,7 +75,19 @@ export default {
       returnUrl: "",
       uid: "",
       languageItems, // Use the constant for language items
+      optionOrder: 0,
+      hasQueryParams: false,
+      returnLabel: "",
     };
+  },
+  computed: {
+    textData() {
+      if (this.language === "en") {
+        return Number(this.optionOrder) === 1 ? textEnOptionorderOne : textEnOptionorderZero;
+      } else {
+        return Number(this.optionOrder) === 1 ? textFrOptionorderOne : textFrOptionorderZero;
+      }
+    },
   },
   methods: {
     /**
@@ -80,6 +97,14 @@ export default {
     handleLogoClick() {
       window.location.reload();
     },
+
+    syncOptionOrderFromUrl() {
+      const val = new URLSearchParams(location.search).get('optionOrder') || 0;
+      if (this.optionOrder !== val) {     // ③ met à jour la data Vue
+        this.optionOrder = val;
+      }
+    },
+
   },
   watch: {
     /**
@@ -97,6 +122,21 @@ export default {
         `${window.location.pathname}?${urlParams}`
       );
     },
+
+    /**
+     * Method: optionOrder
+     * Description: Updates ---
+     * @param {number} newOptionOrder - The new language code.
+     */
+    optionOrder(newOptionOrder) {
+      console.log(newOptionOrder, "je fais mon test");
+      localStorage.setItem("optionOrder", newOptionOrder);
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("optionOrder", newOptionOrder);
+      window.history.replaceState({}, "", `${window.location.pathname}?${urlParams}`);
+      console.log(newOptionOrder, "autre test");
+    },
+
     /**
      * Method: returnUrl
      * Description: Updates the return URL setting and URL parameters with the new return URL.
@@ -140,6 +180,9 @@ export default {
     this.returnUrl =
       urlParams.get("returnUrl") || localStorage.getItem("returnUrl") || "";
     this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
+    this.optionOrder = urlParams.get("optionOrder") || localStorage.getItem("optionOrder") || 0;
+    this.hasQueryParams = Array.from(urlParams.keys()).length > 0;
+
   },
 };
 </script>
