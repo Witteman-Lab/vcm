@@ -41,13 +41,26 @@
         rounded
         x-large
         v-if="hasQueryParams"
+        @click="goBackToQualtrics"
       >
-        <span :style="{ display: isMobile ? 'none' : 'inline-block' }"
-          ><a style="color: #398064" :href="this.returnUrl"
-            >{{ textData.returnLabel }}</a
-          ></span
-        >
+  <span :style="{ display: isMobile ? 'none' : 'inline-block' }">
+    {{ textData.returnLabel }}
+  </span>
       </v-btn>
+<!--      <v-btn-->
+<!--        class="montserratSemiBoldBtn"-->
+<!--        color="#398064"-->
+<!--        variant="outlined"-->
+<!--        rounded-->
+<!--        x-large-->
+<!--        v-if="hasQueryParams"-->
+<!--      >-->
+<!--        <span :style="{ display: isMobile ? 'none' : 'inline-block' }"-->
+<!--          ><a style="color: #398064" :href="this.returnUrl"-->
+<!--            >{{ textData.returnLabel }}</a-->
+<!--          ></span-->
+<!--        >-->
+<!--      </v-btn>-->
     </div>
   </v-container>
 </template>
@@ -90,6 +103,14 @@ export default {
     },
   },
   methods: {
+    goBackToQualtrics() {
+      // const fullUrl = `${this.returnUrl}?ResponseID=${this.uid}`;
+      // window.location.href = fullUrl;
+      window.location.href = this.returnUrl;
+      // const fullUrl = `${this.returnUrl}${this.returnUrl.includes('?') ? '&' : '?'}Q_R=${this.uid}&Q_CHL=retake`;
+      // window.location.href = fullUrl;
+
+    },
     /**
      * Method: handleLogoClick
      * Description: Reloads the current page when the logo is clicked.
@@ -178,7 +199,13 @@ export default {
     this.language =
       urlParams.get("lang") || localStorage.getItem("language") || "en";
     this.returnUrl =
-      urlParams.get("returnUrl") || localStorage.getItem("returnUrl") || "";
+      urlParams.get("returnURL") ||
+      localStorage.getItem("returnUrl") ||
+      "";
+
+    // this.returnUrl =
+    //   urlParams.get("returnUrl") || localStorage.getItem("returnUrl") ||
+    //   "https://ulavalfmed.ca1.qualtrics.com/jfe/form/SV_acaVCp5rMgVtKLQ";
     this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
     this.optionOrder = urlParams.get("optionOrder") || localStorage.getItem("optionOrder") || 0;
     this.hasQueryParams = Array.from(urlParams.keys()).length > 0;
