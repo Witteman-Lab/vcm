@@ -5,154 +5,162 @@
     style="width: fit-content"
     class="mx-auto"
   >
-    <div class="header">
-      <div class="text-h4 font-weight-bold title">
-  <!--          Title-->
-        {{title}}
-      </div>
-      <div
-        v-if="width > 675"
-        class="text-body text-justify"
-      >
-  <!--      Subtitle for desktop-->
-        {{ description1 }} {{ description2 }}
-      </div>
+<!--    <div class="header">-->
+<!--      <div class="text-h4 font-weight-bold title">-->
+<!--  &lt;!&ndash;          Title&ndash;&gt;-->
+<!--        {{title}}-->
+<!--      </div>-->
+<!--      <div-->
+<!--        v-if="width > 675"-->
+<!--        class="text-body text-justify"-->
+<!--      >-->
+<!--  &lt;!&ndash;      Subtitle for desktop&ndash;&gt;-->
+<!--        {{ description1 }} {{ description2 }}-->
+<!--      </div>-->
 
-      <div
-        v-if="width < 675"
-        class="text-body text-justify tgl-btn"
-      >
-  <!--      Subtitle toggle for mobile-->
-        <v-btn
-          color="#398064"
-          class="white-text"
-          @click="dialog = true">
-          {{instruction[0] }}
-        </v-btn>
-        <v-dialog v-model="dialog" width="auto">
-          <v-card>
-            <v-card-text>
-              {{ description1 }} {{ description2 }}
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="#398064" block @click="dialog = false">{{
-                  instruction[1]
-                }}</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </div>
-    </div>
-    <v-row no-gutters>
-      <v-col id="sliders-wrp" order-sm="first">
-        <div
-          class="d-flex flex-column"
-          :style="width < 500 ? 'width: max-content' : ''"
-        >
-          <div class="d-flex justify-space-between mb-n9">
-            <div class="font-weight-bold mb-2 w-50">
-              <v-textarea
-                v-model="text1"
-                variant="plain"
-                rows="1"
-                no-resize
-                auto-grow
-                ref="input1"
-                @click="selectAllText('input1')"
-                @change="updateText1"
-              ></v-textarea>
-            </div>
-            <div class="font-weight-bold mb-2 w-50">
-              <v-textarea
-                v-model="text2"
-                variant="plain"
-                class="right-input"
-                rows="1"
-                no-resize
-                auto-grow
-                ref="input2"
-                @click="selectAllText('input2')"
-                @change="updateText2"
-              ></v-textarea>
-            </div>
-          </div>
-          <div class="mb-2" style="z-index: 10;">
-            <div class="d-flex flex-column pa-4">
-              <v-slider
-                v-model="slider1"
-                color="#398064"
-                thumb-color="white"
-                thumb-size="30"
-                track-size="15"
-                track-color="#D2D2D2FF"
-                rounded="xl"
-                step="1"
-                @end="updateData1()"
-                @start="startValue1()"
-                @click="addData1()"
-              ></v-slider>
-              <div class="font-weight-regular my-n6">
-                <v-textarea
-                  class="center-input"
-                  v-model="text3"
-                  variant="plain"
-                  rows="1"
-                  no-resize
-                  auto-grow
-                  ref="input3"
-                  @click="selectAllText('input3')"
-                  @change="updateText3"
-                ></v-textarea>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="d-flex flex-column pa-4">
-              <v-slider
-                v-model="slider2"
-                color="#cd9367"
-                thumb-color="white"
-                thumb-size="30"
-                track-size="15"
-                track-color="#D2D2D2FF"
-                rounded="xl"
-                step="1"
-                @end="updateData2()"
-                @start="startValue2()"
-                style="z-index: 100"
-                @click="addData2()"
-              ></v-slider>
-              <div class="font-weight-regular my-n6">
-                <v-textarea
-                  class="center-input"
-                  v-model="text4"
-                  variant="plain"
-                  rows="1"
-                  no-resize
-                  auto-grow
-                  ref="input4"
-                  @click="selectAllText('input4')"
-                  @change="updateText4"
-                ></v-textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </v-col>
-      <v-col order="first">
-        <div>
-          <vertical-progress-bar
-            :value1="slider1"
-            :value2="slider2"
-            :result="result"
-            :leftBarText="leftBarText"
-            :rightBarText="rightBarText"
-            @input1="handleInput1"
-            @input2="handleInput2"
-          ></vertical-progress-bar>
-        </div>
-      </v-col>
-    </v-row>
+<!--      <div-->
+<!--        v-if="width < 675"-->
+<!--        class="text-body text-justify tgl-btn"-->
+<!--      >-->
+<!--  &lt;!&ndash;      Subtitle toggle for mobile&ndash;&gt;-->
+<!--        <v-btn-->
+<!--          color="#398064"-->
+<!--          class="white-text"-->
+<!--          @click="dialog = true">-->
+<!--          {{instruction[0] }}-->
+<!--        </v-btn>-->
+<!--        <v-dialog v-model="dialog" width="auto">-->
+<!--          <v-card>-->
+<!--            <v-card-text>-->
+<!--              {{ description1 }} {{ description2 }}-->
+<!--            </v-card-text>-->
+<!--            <v-card-actions>-->
+<!--              <v-btn color="#398064" block @click="dialog = false">{{-->
+<!--                  instruction[1]-->
+<!--                }}</v-btn>-->
+<!--            </v-card-actions>-->
+<!--          </v-card>-->
+<!--        </v-dialog>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+
+<!--    <v-row no-gutters>-->
+<!--      <v-col id="sliders-wrp" order-sm="first">-->
+<!--        <div-->
+<!--          class="d-flex flex-column"-->
+<!--          :style="width < 500 ? 'width: max-content' : ''"-->
+<!--        >-->
+<!--          <div class="d-flex justify-space-between mb-n9">-->
+<!--            <div class="font-weight-bold mb-2 w-50">-->
+<!--              <v-textarea-->
+<!--                v-model="text1"-->
+<!--                variant="plain"-->
+<!--                rows="1"-->
+<!--                no-resize-->
+<!--                auto-grow-->
+<!--                ref="input1"-->
+<!--                @click="selectAllText('input1')"-->
+<!--                @change="updateText1"-->
+<!--              ></v-textarea>-->
+<!--            </div>-->
+<!--            <div class="font-weight-bold mb-2 w-50">-->
+<!--              <v-textarea-->
+<!--                v-model="text2"-->
+<!--                variant="plain"-->
+<!--                class="right-input"-->
+<!--                rows="1"-->
+<!--                no-resize-->
+<!--                auto-grow-->
+<!--                ref="input2"-->
+<!--                @click="selectAllText('input2')"-->
+<!--                @change="updateText2"-->
+<!--              ></v-textarea>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="mb-2" style="z-index: 10;">-->
+<!--            <div class="d-flex flex-column pa-4">-->
+<!--              <v-slider-->
+<!--                v-model="slider1"-->
+<!--                color="#398064"-->
+<!--                thumb-color="white"-->
+<!--                thumb-size="30"-->
+<!--                track-size="15"-->
+<!--                track-color="#D2D2D2FF"-->
+<!--                rounded="xl"-->
+<!--                step="1"-->
+<!--                @end="updateData1()"-->
+<!--                @start="startValue1()"-->
+<!--                @click="addData1()"-->
+<!--              ></v-slider>-->
+<!--              <div class="font-weight-regular my-n6">-->
+<!--                <v-textarea-->
+<!--                  class="center-input"-->
+<!--                  v-model="text3"-->
+<!--                  variant="plain"-->
+<!--                  rows="1"-->
+<!--                  no-resize-->
+<!--                  auto-grow-->
+<!--                  ref="input3"-->
+<!--                  @click="selectAllText('input3')"-->
+<!--                  @change="updateText3"-->
+<!--                ></v-textarea>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            <div class="d-flex flex-column pa-4">-->
+<!--              <v-slider-->
+<!--                v-model="slider2"-->
+<!--                color="#cd9367"-->
+<!--                thumb-color="white"-->
+<!--                thumb-size="30"-->
+<!--                track-size="15"-->
+<!--                track-color="#D2D2D2FF"-->
+<!--                rounded="xl"-->
+<!--                step="1"-->
+<!--                @end="updateData2()"-->
+<!--                @start="startValue2()"-->
+<!--                style="z-index: 100"-->
+<!--                @click="addData2()"-->
+<!--              ></v-slider>-->
+<!--              <div class="font-weight-regular my-n6">-->
+<!--                <v-textarea-->
+<!--                  class="center-input"-->
+<!--                  v-model="text4"-->
+<!--                  variant="plain"-->
+<!--                  rows="1"-->
+<!--                  no-resize-->
+<!--                  auto-grow-->
+<!--                  ref="input4"-->
+<!--                  @click="selectAllText('input4')"-->
+<!--                  @change="updateText4"-->
+<!--                ></v-textarea>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </v-col>-->
+<!--      <v-col order="first">-->
+<!--        <div>-->
+<!--          <vertical-progress-bar-->
+<!--            :value1="slider1"-->
+<!--            :value2="slider2"-->
+<!--            :result="result"-->
+<!--            :leftBarText="leftBarText"-->
+<!--            :rightBarText="rightBarText"-->
+<!--            @input1="handleInput1"-->
+<!--            @input2="handleInput2"-->
+<!--          ></vertical-progress-bar>-->
+<!--        </div>-->
+<!--      </v-col>-->
+<!--    </v-row>-->
+
+    <h1>sdfs</h1>
+    <VerticalProgress :model-value="50" color="#398064" :height="220" :thickness="90" />
+    <h1>sdfs</h1>
+    <VerticalProgress :model-value="75" color="var(--v-theme-primary)" :height="300" :thickness="8" :reverse="true" />
   </v-container>
 </template>
 
@@ -163,13 +171,14 @@
  * updating data, and managing the lifecycle of the component.
  */
 import VerticalProgressBar from "./VerticalProgressBar.vue";
+import VerticalProgress from "./VerticalProgress.vue";
 import {ref, watch, onBeforeUnmount, computed, reactive, } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import { saveAs } from "file-saver";
 
 export default {
   components: {
-    VerticalProgressBar,
+    VerticalProgressBar,VerticalProgress
   },
   props: {
     /**
