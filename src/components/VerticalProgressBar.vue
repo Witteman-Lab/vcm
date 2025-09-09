@@ -1,79 +1,69 @@
 <template>
   <v-container
     class="d-flex flex-column align-center"
-    style="width: fit-content"
+    style=""
   >
     <v-container
-      style="width: 250px; height: auto;"
+      style="width: auto; height: auto;"
       fluid
-      class="vertical-progress-container"
+      class="d-flex flex-row"
     >
-      <div class="d-flex flex-column">
-        <div class="mb-12">
-          <v-progress-linear
-            v-model="value1"
-            color="#398064"
-            height="80"
-            class="progressBar"
-          ></v-progress-linear>
+        <div class="">
+          <VerticalProgress :model-value="value1" color="#398064" :height="220" :thickness="90" :rounded="false"/>
+          <v-textarea
+            dense
+            hide-details
+            class="input1 text-center"
+            v-model="option1"
+            variant="plain"
+            ref="input1"
+            @click="selectAllText('input1')"
+            @change="emitInput1"
+            style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
+          ></v-textarea>
         </div>
-        <v-spacer class="mb-12"></v-spacer>
         <div>
-          <v-progress-linear
-            v-model="value2"
-            color="#cd9367"
-            height="80"
-            class="progressBar"
-          >
-          </v-progress-linear>
+          <VerticalProgress :model-value="value2" color="#cd9367" :height="220" :thickness="90" :rounded="false"/>
+          <v-textarea
+            dense
+            hide-details
+            class="input2 text-center"
+            v-model="option2"
+            variant="plain"
+            ref="input2"
+            @click="selectAllText('input2')"
+            @change="emitInput2"
+            style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
+          ></v-textarea>
         </div>
-      </div>
+
     </v-container>
-    <div style="width: 100%; height: auto" class="d-flex justify-space-between mb-2" >
-      <div class="font-weight-regular w-50 my-n6 d-flex align-center justify-center">
-        <v-textarea
-          dense
-          hide-details
-          class="input1 text-center"
-          v-model="option1"
-          variant="plain"
-          ref="input1"
-          @click="selectAllText('input1')"
-          @change="emitInput1"
-          style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
-        ></v-textarea>
-      </div>
-      <div class="font-weight-regular w-50 my-n6 d-flex align-center justify-center">
-        <v-textarea
-          dense
-          hide-details
-          class="input2 text-center"
-          v-model="option2"
-          variant="plain"
-          ref="input2"
-          @click="selectAllText('input2')"
-          @change="emitInput2"
-          style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
-        ></v-textarea>
-      </div>
+
+
+    <div class="d-flex justify-center" v-show="value1 !== 50" >
+<!--      <v-chip variant="outlined" :color="value1 > 50 ? '#398064' : '#cd9367'" style="text-wrap: auto;" size="45">-->
+<!--        <span style="font-weight: bold; padding-bottom: 20px; margin-top: 20px">{{ value1 > 50 ? option1 : option2 }} <span>{{ result }}</span> </span>-->
+<!--      </v-chip>-->
+
+      <span class="badge-vert" :style="{borderColor: value1 > 50 ? '#398064':'#cd9367'}">
+        <span class="font-weight-bold mr-1">{{ value1 > 50 ? option1 : option2 }}</span>
+      <span class="font-weight-regular">{{ result }}</span>
+      </span>
+
     </div>
-    <div class="d-flex justify-center" v-if="value1 !== 50">
-      <v-chip variant="outlined" :color="value1 > 50 ? '#398064' : '#cd9367'">
-        <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>{{ result }}
-      </v-chip>
-    </div>
-    <div class="d-flex justify-center hidden">
-      <v-chip variant="outlined" :color="value1 > 50 ? '#398064' : '#cd9367'">
-        <b>{{ value1 > 50 ? option1 : option2 }}&nbsp;</b>{{ result }}
-      </v-chip>
-    </div>
+
   </v-container>
+
 </template>
 
 <script>
 import { ref, watch, getCurrentInstance } from "vue";
+import VerticalProgress from "./VerticalProgress.vue";
 
 export default {
+  components: {
+    VerticalProgress
+  },
   /**
    * Props:
    * - value1: The first input value (Type: Number, Required: true)
@@ -168,13 +158,26 @@ export default {
   visibility: hidden;
 }
 .vertical-progress-container {
-  transform: rotate(-90deg);
+  //transform: rotate(-90deg);
 }
 .input1:deep(input) {
   color: #398064;
 }
 .input2:deep(input) {
   color: #cd9367;
+}
+
+.badge-vert {
+  border: 1px solid; /* contour vert */
+  border-radius: 9999px; /* arrondi "pilule" */
+  padding: .25rem .6rem; /* marge interne */
+  display: inline-block; /* garde la forme */
+  line-height: 1.2;
+  /* si le texte va à la ligne, garde un rendu propre */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+
+
 }
 </style>
 

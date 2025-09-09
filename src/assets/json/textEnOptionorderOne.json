@@ -8,7 +8,7 @@
   "rightScaleLabel": "Matters a lot",
   "topSliderLabel":"Avoiding a false positive diagnosis of prostate cancer or getting overdiagnosed",
   "bottomSliderLabel":"Avoiding dying of prostate cancer",
-  "leftBarText" : "Not getting a prostate cancer screening test",
+  "leftBarText" : "Not getting a prostate cancer screening",
   "rightBarText" : "Getting a prostate cancer screening test",
   "result":"fits best with what matters to you",
   "instruction":["Show Instructions", "Hide Instructions"],

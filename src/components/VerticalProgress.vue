@@ -53,7 +53,7 @@ const clamped = computed(() => Math.max(0, Math.min(100, props.modelValue ?? 0))
   width: 100%;
   height: 100%;
   background: color-mix(in srgb, var(--vpv-color) 15%, transparent);
-  border-radius: 999px;
+  border-radius: 5px 5px 5px 5px;
   overflow: hidden;
 }
 .vpv__bar {
