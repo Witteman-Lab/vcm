@@ -1,17 +1,22 @@
 {
   "currentLanguage" : "en",
   "title" : "What matters to you",
-  "description1" : "Before you make a choice between the two options, please take a moment to consider what matters most to you.",
-  "description2" : "Use the sliders below while you consider your feelings. Remember that there are no wrong answers.",
+  "description1" : "Before you make a choice between the two options, please take a moment to consider what matters most to you. Use the sliders below while you consider your feelings. Remember that there are no wrong answers.",
+  "description2" : "If they matter equally, or if you are not sure, put the sliders in the middle. Definitions are given at the bottom of the page.",
   "language": "FR",
   "leftScaleLabel": "Doesn’t matter at all",
+  "centerScaleLabel" : "Neither matter nor doesn't matter",
   "rightScaleLabel": "Matters a lot",
   "topSliderLabel":"Avoiding a false positive diagnosis of prostate cancer or getting overdiagnosed",
   "bottomSliderLabel":"Avoiding dying of prostate cancer",
-  "leftBarText" : "Not getting a prostate cancer screening",
+  "leftBarText" : "Not getting a prostate cancer screening test",
   "rightBarText" : "Getting a prostate cancer screening test",
   "result":"fits best with what matters to you",
   "instruction":["Show Instructions", "Hide Instructions"],
-  "returnLabel": "Back to survey"
+  "returnLabel": "Back to survey",
+  "topBarInstruction": "Fits perfectly",
+  "bottomBarInstruction": "Doesn’t fit",
+  "middleBarTextNormal": "Your answers suggest that ",
+  "middleBarTexBold": "you may be still unclear about whether or not to get a breast cancer screening test."
 
 }

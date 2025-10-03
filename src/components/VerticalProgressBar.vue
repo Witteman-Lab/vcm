@@ -9,7 +9,10 @@
       class="d-flex flex-row"
     >
         <div class="">
-          <VerticalProgress :model-value="value1" color="#398064" :height="220" :thickness="90" :rounded="false"/>
+          <div style="display: flex; align-items: center; justify-content: flex-start; flex-direction: row;">
+            <VerticalProgress :model-value="value1" color="#398064" :height="220" :thickness="90" :rounded="false"/>
+          </div>
+          <div style="height: 3px; width: 100%; background: black; "></div>
           <v-textarea
             dense
             hide-details
@@ -19,11 +22,42 @@
             ref="input1"
             @click="selectAllText('input1')"
             @change="emitInput1"
-            style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
+            style="width: auto; text-align: center; padding-right: 10px; padding-left: 0px;"
+            :style="{color:value1 > 50 ? '#398064' : '#000000', fontWeight:value1>50 ? 'bold' : 'normal'}"
+            no-resize
+            color="orange orange-darken-4"
           ></v-textarea>
         </div>
         <div>
-          <VerticalProgress :model-value="value2" color="#cd9367" :height="220" :thickness="90" :rounded="false"/>
+
+
+<!--          <div style="display: flex; align-items: center; justify-content: center; flex-direction: row;">-->
+<!--            <VerticalProgress :model-value="value2" color="#cd9367" :height="220" :thickness="90" :rounded="false"/>-->
+<!--            <span>Doesn't fit</span>-->
+<!--            <span>Fit perfectly</span>-->
+<!--          </div>-->
+
+
+<!--          <div class="bar-with-abs" style="&#45;&#45;bar-h:220px; &#45;&#45;label-gap:16px; &#45;&#45;top-nudge:-2px; &#45;&#45;bottom-nudge:6px;">-->
+<!--            <VerticalProgress :model-value="value2" color="#cd9367" :height="220" :thickness="90" :rounded="false"/>-->
+<!--            <span class="lbl lbl-top">Fits perfectly</span>-->
+<!--            <span class="lbl lbl-bottom">Doesn’t fit</span>-->
+<!--          </div>-->
+<!--          -->
+
+
+
+          <div style="display: flex; align-items: center; justify-content: flex-start; flex-direction: row; position: relative;">
+            <VerticalProgress :model-value="value2" color="#cd9367" :height="220" :thickness="90" :rounded="false"/>
+            <span style="position: absolute; top: -10px; right: -5px; transform: translate(100%, 0);margin-left: 50px; color: #ffffff; padding-left: 5px; padding-right: 5px; text-align: start;"
+            :style="{background:value1 > 50 ? '#398064' : '#ffffff', color:value1 > 50 ? '#ffffff' : '#000000'}">{{topBarInstruction}}</span>
+
+            <span style="padding-left: 5px; padding-right: 5px; position: absolute; bottom: -10px; right: -5px; transform: translate(100%, 0);margin-left: 50px; text-align: start;color: #000000; background: #ffffff"
+                  :style="{background:value2 > 50 ? '#cd9367' : '#ffffff', color:value2 > 50 ? '#ffffff' : '#000000'}">{{bottomBarInstruction}}</span>
+          </div>
+
+          <div style="height: 3px; width: 100%; background: black"></div>
+
           <v-textarea
             dense
             hide-details
@@ -33,19 +67,33 @@
             ref="input2"
             @click="selectAllText('input2')"
             @change="emitInput2"
-            style="width: auto; text-align: center; padding-right: 10px; padding-left: 10px;"
+            style="width: auto; text-align: center; padding-right: 10px; padding-left: 0px;"
+            :style="{color:value2 > 50 ? '#cd9367' : '#000000', fontWeight:value2>50 ? 'bold' : 'normal'}"
+            no-resize
           ></v-textarea>
         </div>
 
     </v-container>
 
+    <div class="d-flex justify-center" v-if="value1 === 50" >
+      <!--      <v-chip variant="outlined" :color="value1 > 50 ? '#398064' : '#cd9367'" style="text-wrap: auto;" size="45">-->
+      <!--        <span style="font-weight: bold; padding-bottom: 20px; margin-top: 20px">{{ value1 > 50 ? option1 : option2 }} <span>{{ result }}</span> </span>-->
+      <!--      </v-chip>-->
+      <span class="badge-vert" style="border-color: #2c3d50; color: #2c3d50">
+        <span class="font-weight-regular">{{middleBarTextNormal}}</span>
+        <span class="font-weight-bold mr-1">{{middleBarTexBold}}</span>
+      </span>
 
-    <div class="d-flex justify-center" v-show="value1 !== 50" >
+
+    </div>
+
+    <div class="d-flex justify-center" v-if="value1 !== 50" >
 <!--      <v-chip variant="outlined" :color="value1 > 50 ? '#398064' : '#cd9367'" style="text-wrap: auto;" size="45">-->
 <!--        <span style="font-weight: bold; padding-bottom: 20px; margin-top: 20px">{{ value1 > 50 ? option1 : option2 }} <span>{{ result }}</span> </span>-->
 <!--      </v-chip>-->
 
-      <span class="badge-vert" :style="{borderColor: value1 > 50 ? '#398064':'#cd9367'}">
+      <span class="badge-vert" :style="{borderColor: value1 > 50 ? '#398064' : '#cd9367',
+  color:       value1 > 50 ? '#398064' : '#cd9367'}">
         <span class="font-weight-bold mr-1">{{ value1 > 50 ? option1 : option2 }}</span>
       <span class="font-weight-regular">{{ result }}</span>
       </span>
@@ -91,6 +139,22 @@ export default {
       type: String,
       required: true,
     },
+    topBarInstruction: {
+      type: String,
+      required: true,
+    },
+    bottomBarInstruction: {
+      type: String,
+      required: true,
+    },
+    middleBarTextNormal: {
+      type: String,
+      required: true,
+    },
+    middleBarTexBold: {
+      type: String,
+      required: true,
+    }
   },
   setup(props) {
     const value1 = ref(props.value1);
@@ -179,5 +243,45 @@ export default {
 
 
 }
+
+
+
+//
+///* Conteneur qui épouse la barre et sert de repère aux labels */
+//.bar-with-abs{
+//  position: relative;
+//  width: max-content;         /* s'ajuste à la largeur de la barre */
+//  height: var(--bar-h);       /* = hauteur de la barre VerticalProgress */
+//  display: flex;
+//  align-items: flex-end;      /* aligne le pied de la barre */
+//  justify-content: center;
+//}
+//
+///* Styles communs aux deux libellés */
+//.bar-with-abs .lbl{
+//  position: absolute;
+//  left: calc(100% + var(--label-gap)); /* place le texte à droite de la barre */
+//  white-space: nowrap;
+//  line-height: 1.1;
+//}
+//
+///* Libellé du haut */
+//.bar-with-abs .lbl-top{
+//  top: 0;
+//  transform: translateY(var(--top-nudge)); /* petit ajustement fin si besoin */
+//}
+//
+///* Libellé du bas (au niveau du pied de la barre) */
+//.bar-with-abs .lbl-bottom{
+//  bottom: 10px;
+//  transform: translateY(var(--bottom-nudge)); /* pousse légèrement vers la ligne noire */
+//}
+//
+///* Optionnel : responsive – augmente l'espace à droite de la barre sur grand écran */
+//@media (min-width: 960px){
+//  .bar-with-abs{ --label-gap: 24px; }
+//}
+
+
 </style>
 

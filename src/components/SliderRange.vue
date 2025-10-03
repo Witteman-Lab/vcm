@@ -15,7 +15,7 @@
         class="text-body text-justify"
       >
   <!--      Subtitle for desktop-->
-        {{ description1 }} {{ description2 }}
+        {{ description1 }} <br> {{ description2 }}
       </div>
 
       <div
@@ -46,31 +46,49 @@
 
 
 
-    <v-row no-gutters>
-      <v-col id="sliders-wrp" order-sm="first" style="background: rebeccapurple">
+    <v-row no-gutters >
+      <v-col id="sliders-wrp" order-sm="first" style="">
         <div
           class="d-flex flex-column"
           :style="width < 500 ? 'width: max-content' : ''"
+          style="margin-left: auto; margin-right: auto"
         >
-          <div class="d-flex justify-space-between mb-n9">
-            <div class="font-weight-bold mb-2 w-50">
-              <v-textarea
+          <div class="mb-n9;" style="display: flex; align-items: center; justify-content: space-between;"
+               :style="width < 500 ? 'width: 90vw' : ''">
+            <div class="font-weight-bold mb-2 w-33;" style="width: 33%">
+              <v-textarea style="overflow-wrap: break-word; word-break: break-word; white-space: normal;"
                 v-model="text1"
                 variant="plain"
-                rows="1"
-                no-resize
+                :rows="width < 500 ? '3' : '1'"
                 auto-grow
                 ref="input1"
                 @click="selectAllText('input1')"
                 @change="updateText1"
               ></v-textarea>
             </div>
-            <div class="font-weight-bold mb-2 w-50">
+
+
+            <div class="font-weight-bold mb-2" style="width: 34%">
               <v-textarea
+                color="#398064"
+                v-model="textCenter"
+                variant="plain"
+                :rows="width < 500 ? '3' : '1'"
+                no-resize
+                auto-grow
+                ref="input1"
+                @click="selectAllText('input1')"
+                @change="updateTextCenter"
+              ></v-textarea>
+            </div>
+
+
+
+            <div class="font-weight-bold mb-2" style="width: 33%">
+              <v-textarea style=""
                 v-model="text2"
                 variant="plain"
-                class="right-input"
-                rows="1"
+                class="right-input" :rows="width < 500 ? '3' : '1'"
                 no-resize
                 auto-grow
                 ref="input2"
@@ -81,7 +99,13 @@
           </div>
           <div class="mb-2" style="z-index: 10;">
             <div class="d-flex flex-column pa-4">
+<!--              <div class="text-caption">-->
+<!--                Custom thumb size-->
+<!--              </div>-->
               <v-slider
+                :ticks="{ 50: '' }"
+                tick-size="10"
+                show-ticks="always"
                 v-model="slider1"
                 color="#398064"
                 thumb-color="white"
@@ -93,7 +117,13 @@
                 @end="updateData1()"
                 @start="startValue1()"
                 @click="addData1()"
-              ></v-slider>
+                @update:modelValue="snapToClosestSliderOne"
+              >
+                <!-- Slot pour personnaliser le contenu -->
+<!--                <template v-slot:thumb-label="{}">-->
+<!--                 <span class="thumb-fill"> Neither matter nor doesn't matter</span>-->
+<!--                </template>-->
+              </v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
                   class="center-input"
@@ -109,9 +139,82 @@
               </div>
             </div>
           </div>
+          <div class="mb-n9;" style="display: flex; align-items: center; justify-content: space-between;"
+               :style="width < 500 ? 'width: 90vw' : ''">
+            <div class="font-weight-bold mb-2 w-33;" style="width: 33%">
+              <v-textarea style="overflow-wrap: break-word; word-break: break-word; white-space: normal;"
+                          v-model="text1"
+                          variant="plain"
+                          :rows="width < 500 ? '3' : '1'"
+                          auto-grow
+                          ref="input1"
+                          @click="selectAllText('input1')"
+                          @change="updateText1"
+              ></v-textarea>
+            </div>
+
+
+            <div class="font-weight-bold mb-2" style="width: 34%">
+              <v-textarea
+                v-model="textCenter"
+                variant="plain"
+                :rows="width < 500 ? '3' : '1'"
+                no-resize
+                auto-grow
+                ref="input1"
+                @click="selectAllText('input1')"
+                @change="updateTextCenter"
+              ></v-textarea>
+            </div>
+
+
+
+            <div class="font-weight-bold mb-2" style="width: 33%">
+              <v-textarea style=""
+                          v-model="text2"
+                          variant="plain"
+                          class="right-input" :rows="width < 500 ? '3' : '1'"
+                          no-resize
+                          auto-grow
+                          ref="input2"
+                          @click="selectAllText('input2')"
+                          @change="updateText2"
+              ></v-textarea>
+            </div>
+          </div>
+<!--          <div class="d-flex justify-space-between mb-n9">-->
+<!--            <div class="font-weight-bold mb-2 w-50">-->
+<!--              <v-textarea-->
+<!--                v-model="text1"-->
+<!--                variant="plain"-->
+<!--                rows="1"-->
+<!--                no-resize-->
+<!--                auto-grow-->
+<!--                ref="input1"-->
+<!--                @click="selectAllText('input1')"-->
+<!--                @change="updateText1"-->
+<!--              ></v-textarea>-->
+<!--            </div>-->
+<!--            <div class="font-weight-bold mb-2 w-50">-->
+<!--              <v-textarea-->
+<!--                v-model="text2"-->
+<!--                variant="plain"-->
+<!--                class="right-input"-->
+<!--                rows="1"-->
+<!--                no-resize-->
+<!--                auto-grow-->
+<!--                ref="input2"-->
+<!--                @click="selectAllText('input2')"-->
+<!--                @change="updateText2"-->
+<!--              ></v-textarea>-->
+<!--            </div>-->
+<!--          </div>-->
           <div>
             <div class="d-flex flex-column pa-4">
               <v-slider
+                :ticks="{ 50: '' }"
+                tick-size="10"
+                show-ticks="always"
                 v-model="slider2"
                 color="#cd9367"
                 thumb-color="white"
@@ -124,7 +227,12 @@
                 @start="startValue2()"
                 style="z-index: 100"
                 @click="addData2()"
-              ></v-slider>
+                @update:modelValue="snapToClosestSliderTwo"
+              >
+<!--                <template v-slot:thumb-label="{}">-->
+<!--                  <span class="thumb-fill"> Neither matter nor doesn't matter</span>-->
+<!--                </template>-->
+              </v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
                   class="center-input"
@@ -143,13 +251,17 @@
         </div>
       </v-col>
       <v-col order="first">
-        <div style="background: grey">
+        <div>
           <vertical-progress-bar
             :value1="slider1"
             :value2="slider2"
             :result="result"
             :leftBarText="leftBarText"
             :rightBarText="rightBarText"
+            :top-bar-instruction="topBarInstruction"
+            :bottom-bar-instruction="bottomBarInstruction"
+            :middle-bar-text-normal="middleBarTextNormal"
+            :middle-bar-tex-bold="middleBarTexBold"
             @input1="handleInput1"
             @input2="handleInput2"
           ></vertical-progress-bar>
@@ -210,6 +322,7 @@ export default {
     const description1 = ref(props.textData.description1);
     const description2 = ref(props.textData.description2);
     const leftScaleLabel = ref(props.textData.leftScaleLabel);
+    const centerScaleLabel = ref(props.textData.centerScaleLabel);
     const rightScaleLabel = ref(props.textData.rightScaleLabel);
     const topSliderLabel = ref(props.textData.topSliderLabel);
     const bottomSliderLabel = ref(props.textData.bottomSliderLabel);
@@ -217,6 +330,10 @@ export default {
     const instruction = ref(props.textData.instruction);
     const leftBarText = ref(props.textData.leftBarText);
     const rightBarText = ref(props.textData.rightBarText);
+    const topBarInstruction = ref(props.textData.topBarInstruction);
+    const bottomBarInstruction = ref(props.textData.bottomBarInstruction);
+    const middleBarTextNormal = ref(props.textData.middleBarTextNormal);
+    const middleBarTexBold = ref(props.textData.middleBarTexBold);
 
 
     watch(
@@ -226,6 +343,7 @@ export default {
         description1.value = newVal.description1;
         description2.value = newVal.description2;
         leftScaleLabel.value = newVal.leftScaleLabel;
+        centerScaleLabel.value = newVal.centerScaleLabel;
         rightScaleLabel.value = newVal.rightScaleLabel;
         topSliderLabel.value = newVal.topSliderLabel;
         bottomSliderLabel.value = newVal.bottomSliderLabel;
@@ -233,6 +351,10 @@ export default {
         instruction.value = newVal.instruction;
         leftBarText.value = newVal.leftBarText;
         rightBarText.value = newVal.rightBarText;
+        topBarInstruction.value = newVal.topBarInstruction;
+        bottomBarInstruction.value = newVal.bottomBarInstruction;
+        middleBarTextNormal.value = newVal.middleBarTextNormal;
+        middleBarTexBold.value = newVal.middleBarTexBold;
       },
       { immediate: true }
     );
@@ -245,6 +367,7 @@ export default {
     const slider1 = ref(50);
     const slider2 = ref(50);
     const text1 = ref(leftScaleLabel);
+    const textCenter = ref(centerScaleLabel);
     const text2 = ref(rightScaleLabel);
     const text3 = ref(topSliderLabel);
     const text4 = ref(bottomSliderLabel);
@@ -313,6 +436,7 @@ export default {
       EndTimeVCM: new Date(),
       sliders,
       leftScaleLabel: [],
+      centerScaleLabel: [],
       rightScaleLabel: [],
       topSliderLabel: [],
       bottomSliderLabel: [],
@@ -429,6 +553,12 @@ export default {
     /**
      * Updates the left scale label data with the current value of text1.
      */
+    const updateTextCenter = () => {
+      data.value.centerScaleLabel.push(textCenter.value);
+    };
+    /**
+     * Updates the left scale label data with the current value of text1.
+     */
     const updateText1 = () => {
       data.value.leftScaleLabel.push(text1.value);
     };
@@ -457,13 +587,14 @@ export default {
      * Converts the data object to JSON format and saves it as a text file.
      */
     const saveDataToFile = () => {
-      const endTimeVCM = new Date();
-      data.value.EndTimeVCM = endTimeVCM;
-      const duration = calculateDuration(startTimeApp.value, endTimeVCM);
-      data.value.duration_m_s = duration;
-      const jsonData = JSON.stringify(data.value, null, 2);
-      const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
-      saveAs(blob, "data.txt");
+      console.log("saveDataToFile");
+      // const endTimeVCM = new Date();
+      // data.value.EndTimeVCM = endTimeVCM;
+      // const duration = calculateDuration(startTimeApp.value, endTimeVCM);
+      // data.value.duration_m_s = duration;
+      // const jsonData = JSON.stringify(data.value, null, 2);
+      // const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
+      // saveAs(blob, "data.txt");
     };
     /**
      * Lifecycle hook executed before the component is destroyed.
@@ -532,6 +663,7 @@ export default {
       title,
       description1,
       description2,
+      centerScaleLabel,
       leftScaleLabel,
       rightScaleLabel,
       topSliderLabel,
@@ -543,6 +675,7 @@ export default {
       choice1,
       choice2,
       text1,
+      textCenter,
       text2,
       text3,
       text4,
@@ -552,6 +685,7 @@ export default {
       updateData1,
       updateData2,
       updateText1,
+      updateTextCenter,
       updateText2,
       updateText3,
       updateText4,
@@ -562,10 +696,38 @@ export default {
       addData2,
       addData1,
       leftBarText,
-      rightBarText
+      rightBarText,
+      bottomBarInstruction,
+      topBarInstruction,
+      middleBarTextNormal,
+      middleBarTexBold
     };
   },
   methods: {
+    snapToClosestSliderOne(val) {
+// Si la valeur est dans la plage 48-52, on force à 50
+      if (val >= 47 && val <= 53) {
+        this.slider1 = 50
+      } else {
+// Sinon, garder exactement la valeur saisie sans magnétisme
+        this.slider1 = val
+      }
+    },
+    snapToClosestSliderTwo(val) {
+// Si la valeur est dans la plage 48-52, on force à 50
+      if (val >= 47 && val <= 53) {
+        this.slider2 = 50
+      } else {
+// Sinon, garder exactement la valeur saisie sans magnétisme
+        this.slider2 = val
+      }
+    },
+    customLabel(value) {
+      if (value < 30) return "Bas";
+      if (value < 70) return "Moyen";
+      return "Élevé";
+    },
+
     /**
      * Selects all text within the specified reference.
      * @param {string} refName - The name of the reference.
@@ -605,4 +767,40 @@ export default {
 #sliders-wrp{
   align-content: center;
 }
+
+//:deep(.v-slider-thumb__label){
+//  //width: var(--v-slider-thumb-size);
+//  //height: var(--v-slider-thumb-size);
+//  min-width: 140px !important;  /* augmente ici */
+//  width: 140px !important;       /* force la largeur */
+//  height: var(--v-slider-thumb-size);
+//  padding: 20px !important;
+//  border-radius: 1px;
+//  display: flex;              /* utile si le slot est vide parfois */
+//  align-items: center;
+//  justify-content: center;   /* masque tout débordement */
+//}
+//:deep(.slider-a .v-slider-thumb__label){
+//  background: #398064;  /* bulle verte */
+//}
+//:deep(.slider-b .v-slider-thumb__label){
+//  background: #cd9367;  /* bulle verte */
+//}
+//.thumb-fill{
+//  display: flex;
+//  width: 100%;
+//  height: 100%;
+//  align-items: center;
+//  justify-content: center;
+//  text-align: center;
+//  padding: 2px;               /* un léger padding pour éviter que ça colle aux bords */
+//  line-height: 1.1;
+//  white-space: normal;        /* autorise les retours à la ligne */
+//  word-break: break-word;     /* coupe les mots longs */
+//  overflow: hidden;
+//  text-overflow: ellipsis;
+//  /* Taille du texte proportionnelle au thumb */
+//  font-size: calc(var(--v-slider-thumb-size) * 0.28);
+//}
+
 </style>

@@ -1,10 +1,11 @@
 {
   "currentLanguage" : "fr",
   "title" : "Ce qui compte pour vous",
-  "description1" : "Avant de choisir entre les deux options, veuillez prendre un instant pour considérer ce qui compte le plus pour vous.",
-  "description2" : "Utilisez le curseur ci-dessous pendant que vous considérez vos sentiments.",
+  "description1" : "Avant de faire votre choix entre les deux options, prenez un moment pour réfléchir à ce qui compte le plus pour vous. Utilisez les curseurs ci-dessous pendant que vous réfléchissez. N'oubliez pas qu'il n'y a pas de mauvaises réponses.",
+  "description2" : "Si les deux options ont la même importance pour vous, ou si vous n'êtes pas sûr, placez les curseurs au milieu. Les définitions sont données au bas de la page.",
   "language": "EN",
   "leftScaleLabel": "Pas important du tout",
+  "centerScaleLabel" : "Ni très important ni pas du tout important pour moi.",
   "rightScaleLabel": "Très important",
   "topSliderLabel":"Éviter de mourir du cancer du prostate",
   "bottomSliderLabel":"Éviter un faux diagnostic positif de cancer du prostate ou un surdiagnostic",
@@ -12,5 +13,9 @@
   "rightBarText" : "Ne pas faire un test de dépistage du cancer du prostate",
   "result":"correspond le mieux à ce qui vous importe",
   "instruction":["Afficher les instructions", "Cacher les instructions"],
-  "returnLabel": "Retour au sondage"
+  "returnLabel": "Retour au sondage",
+  "topBarInstruction": "Convient parfaitement",
+  "bottomBarInstruction": "Ne convient pas du tout",
+  "middleBarTextNormal": "Vos réponses suggèrent que ",
+  "middleBarTexBold": "vous n’êtes pas encore certain de vouloir passer ou non un test de dépistage du cancer de la prostate."
 }
