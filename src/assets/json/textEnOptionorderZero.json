@@ -2,13 +2,15 @@
   "currentLanguage" : "en",
   "title" : "What matters to you",
   "description1" : "Before you make a choice between the two options, please take a moment to consider what matters most to you. Use the sliders below while you consider your feelings. Remember that there are no wrong answers.",
+  "mobileDescription11" : "Before you make a choice between the two options, please take a moment to consider what matters most to you.",
+  "mobileDescription12" : "Use the sliders below while you consider your feelings. Remember that there are no wrong answers.",
   "description2" : "If they matter equally, or if you are not sure, put the sliders in the middle. Definitions are given at the bottom of the page.",
   "language": "FR",
   "leftScaleLabel": "Doesn’t matter at all",
-  "centerScaleLabel" : "Neither matter nor doesn't matter",
+  "centerScaleLabel" : "Neutral",
   "rightScaleLabel": "Matters a lot",
-  "topSliderLabel":"Chance of preventing breast cancer death",
-  "bottomSliderLabel":"Chance of getting a breast cancer false positive or getting overdiagnosed",
+  "topSliderLabel":"Chance of preventing prostate cancer death",
+  "bottomSliderLabel":"Chance of getting a prostate cancer false positive or getting overdiagnosed",
   "leftBarText" : "Getting a prostate cancer screening test",
   "rightBarText" : "Not getting a prostate cancer screening test",
   "result":"fits best with what matters to you",
@@ -17,6 +19,6 @@
   "topBarInstruction": "Fits perfectly",
   "bottomBarInstruction": "Doesn’t fit",
   "middleBarTextNormal": "Your answers suggest that ",
-  "middleBarTexBold": "you may be still unclear about whether or not to get a breast cancer screening test."
+  "middleBarTexBold": "you may be still unclear about whether or not to get a prostate cancer screening test."
 
 }

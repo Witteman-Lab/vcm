@@ -232,8 +232,8 @@ export default {
 }
 
 .badge-vert {
-  border: 1px solid; /* contour vert */
-  border-radius: 9999px; /* arrondi "pilule" */
+  //border: 1px solid; /* contour vert */
+  //border-radius: 9999px; /* arrondi "pilule" */
   padding: .25rem .6rem; /* marge interne */
   display: inline-block; /* garde la forme */
   line-height: 1.2;

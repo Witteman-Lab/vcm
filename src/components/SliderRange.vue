@@ -32,7 +32,7 @@
         <v-dialog v-model="dialog" width="auto">
           <v-card>
             <v-card-text>
-              {{ description1 }} {{ description2 }}
+              {{ mobileDescription11 }} <br> {{ mobileDescription12 }} <br><br> {{ description2 }}
             </v-card-text>
             <v-card-actions>
               <v-btn color="#398064" block @click="dialog = false">{{
@@ -55,11 +55,11 @@
         >
           <div class="mb-n9;" style="display: flex; align-items: center; justify-content: space-between;"
                :style="width < 500 ? 'width: 90vw' : ''">
-            <div class="font-weight-bold mb-2 w-33;" style="width: 33%">
+            <div class="font-weight-bold mb-2 w-33;" style="width: 33%;">
               <v-textarea style="overflow-wrap: break-word; word-break: break-word; white-space: normal;"
                 v-model="text1"
                 variant="plain"
-                :rows="width < 500 ? '3' : '1'"
+                :rows="width < 500 ? '2' : '1'"
                 auto-grow
                 ref="input1"
                 @click="selectAllText('input1')"
@@ -68,12 +68,13 @@
             </div>
 
 
-            <div class="font-weight-bold mb-2" style="width: 34%">
+            <div class="font-weight-bold mb-2" style="width: auto">
               <v-textarea
+                          class="text-center-textarea"
                 color="#398064"
                 v-model="textCenter"
                 variant="plain"
-                :rows="width < 500 ? '3' : '1'"
+                :rows="width < 500 ? '2' : '1'"
                 no-resize
                 auto-grow
                 ref="input1"
@@ -88,7 +89,7 @@
               <v-textarea style=""
                 v-model="text2"
                 variant="plain"
-                class="right-input" :rows="width < 500 ? '3' : '1'"
+                class="right-input" :rows="width < 500 ? '2' : '1'"
                 no-resize
                 auto-grow
                 ref="input2"
@@ -145,7 +146,7 @@
               <v-textarea style="overflow-wrap: break-word; word-break: break-word; white-space: normal;"
                           v-model="text1"
                           variant="plain"
-                          :rows="width < 500 ? '3' : '1'"
+                          :rows="width < 500 ? '2' : '1'"
                           auto-grow
                           ref="input1"
                           @click="selectAllText('input1')"
@@ -154,11 +155,11 @@
             </div>
 
 
-            <div class="font-weight-bold mb-2" style="width: 34%">
-              <v-textarea
+            <div class="font-weight-bold mb-2" style="width: auto">
+              <v-textarea  class="text-center-textarea"
                 v-model="textCenter"
                 variant="plain"
-                :rows="width < 500 ? '3' : '1'"
+                :rows="width < 500 ? '2' : '1'"
                 no-resize
                 auto-grow
                 ref="input1"
@@ -173,7 +174,7 @@
               <v-textarea style=""
                           v-model="text2"
                           variant="plain"
-                          class="right-input" :rows="width < 500 ? '3' : '1'"
+                          class="right-input" :rows="width < 500 ? '2' : '1'"
                           no-resize
                           auto-grow
                           ref="input2"
@@ -334,6 +335,8 @@ export default {
     const bottomBarInstruction = ref(props.textData.bottomBarInstruction);
     const middleBarTextNormal = ref(props.textData.middleBarTextNormal);
     const middleBarTexBold = ref(props.textData.middleBarTexBold);
+    const mobileDescription11 = ref(props.textData.mobileDescription11);
+    const mobileDescription12 = ref(props.textData.mobileDescription12);
 
 
     watch(
@@ -341,6 +344,8 @@ export default {
       (newVal) => {
         title.value = newVal.title;
         description1.value = newVal.description1;
+        mobileDescription11.value = newVal.mobileDescription11;
+        mobileDescription12.value = newVal.mobileDescription12;
         description2.value = newVal.description2;
         leftScaleLabel.value = newVal.leftScaleLabel;
         centerScaleLabel.value = newVal.centerScaleLabel;
@@ -663,6 +668,8 @@ export default {
       title,
       description1,
       description2,
+      mobileDescription11,
+      mobileDescription12,
       centerScaleLabel,
       leftScaleLabel,
       rightScaleLabel,
@@ -802,5 +809,7 @@ export default {
 //  /* Taille du texte proportionnelle au thumb */
 //  font-size: calc(var(--v-slider-thumb-size) * 0.28);
 //}
-
+.text-center-textarea ::v-deep textarea {
+  text-align: center !important;
+}
 </style>
