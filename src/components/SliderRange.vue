@@ -46,7 +46,7 @@
 
 
 
-    <v-row no-gutters >
+    <v-row no-gutters>
       <v-col id="sliders-wrp" order-sm="first" style="">
         <div
           class="d-flex flex-column"
@@ -248,6 +248,68 @@
                 ></v-textarea>
               </div>
             </div>
+          </div>
+        </div>
+        <!------------------------>
+        <div style="margin-bottom: 12px"> <b>Benefits and harms of breast cancer screening:</b></div>
+        <div style="display: flex; align-items: start; justify-content: space-between; flex-direction: row; width: 100%">
+          <div style="text-align: left; width: 50%">
+            <div style="margin-bottom: 12px">
+              <b>Chance of preventing breast cancer death</b>
+              <div>Screening may prevent breast cancer death.</div>
+            </div>
+
+            <div>
+              <b>Chance of false positives</b>
+            </div>
+            <div>
+              <div>
+                <ul style="margin-left: 25px;">
+                  <li>In breast cancer screening, a false positive means that the first test (blood test) is “positive” (meaning that there is a signal of a possible cancer) but further tests don’t confirm breast cancer. Further tests include biopsies, which are surgeries where tissue is removed from the body for testing.
+                  </li>
+                  <li>When people get a false positive, they aren’t diagnosed with breast cancer after all.
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>What can happen when people get a false positive</b>
+                <ul style="margin-left: 25px;">
+                  <li>Waiting for the results of further tests, not knowing if breast cancer will be diagnosed or not, can cause stress and anxiety.</li>
+                  <li>People get tests they didn’t need to have (for example, biopsies.)</li>
+                  <li>Biopsies may cause complications such as infections or bleeding.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!------------------------>
+          <div style="text-align: left; width: 50%">
+            <div>
+              <b>Chance of preventing breast cancer death</b>
+              <div>In breast cancer screening, overdiagnosis happens when breast cancer is diagnosed by healthcare professionals but the cancer is:
+              </div>
+                <ul style="margin-left: 25px;">
+                  <li>indolent (meaning it will not cause pain or harm),</li>
+                  <li>non-progressive (meaning it will not grow or get worse),</li>
+                  <li>not deadly (meaning it will not cause death)</li>
+                </ul>
+                <div>and when breast cancer treatments (for example, surgery, radiation, chemotherapy, or other treatments) have a low chance of helping the person. </div>
+              </div>
+              <div>
+                <b>What can happen when people are overdiagnosed</b>
+                <ul style="margin-left: 25px;">
+                  <li>Being labeled as a “cancer patient” can change how people feel and choices they make.</li>
+                  <li>breast cancer tests and treatments can:
+                    <ul style="margin-left: 25px;">
+                      <li>cause side effects (for example, surgery may cause pain and need recovery time)</li>
+                      <li>lower quality of life</li>
+                      <li>be a hassle (for example, going to a lot of appointments)</li>
+                      <li>cost people money (for example, parking costs, time unable to work)</li>
+                      <li>cost the health care system money and resources (for example, doctors’ time)</li>
+                      <li>contribute to the “overmedicalization” of society (that is, turning too many things into medical problems)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
           </div>
         </div>
       </v-col>

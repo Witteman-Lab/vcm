@@ -9,16 +9,15 @@
   "leftScaleLabel": "Doesn’t matter at all",
   "centerScaleLabel" : "Neutral",
   "rightScaleLabel": "Matters a lot",
-  "topSliderLabel":"Chance of preventing prostate cancer death",
-  "bottomSliderLabel":"Chance of getting a prostate cancer false positive or getting overdiagnosed",
-  "leftBarText" : "Getting a prostate cancer screening test",
-  "rightBarText" : "Not getting a prostate cancer screening test",
+  "topSliderLabel":"Chance of preventing breast cancer death",
+  "bottomSliderLabel":"Chance of getting a breast cancer false positive or getting overdiagnosed",
+  "leftBarText" : "Getting a breast cancer screening test",
+  "rightBarText" : "Not getting a breast cancer screening test",
   "result":"fits best with what matters to you",
   "instruction":["Show Instructions", "Hide Instructions"],
   "returnLabel": "Back to survey",
   "topBarInstruction": "Fits perfectly",
   "bottomBarInstruction": "Doesn’t fit",
   "middleBarTextNormal": "Your answers suggest that ",
-  "middleBarTexBold": "you may be still unclear about whether or not to get a prostate cancer screening test."
-
+  "middleBarTexBold": "you may be still unclear about whether or not to get a breast cancer screening test."
 }
