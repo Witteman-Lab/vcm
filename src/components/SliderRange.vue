@@ -53,10 +53,12 @@
           :style="width < 500 ? 'width: max-content' : ''"
           style="margin-left: auto; margin-right: auto"
         >
-          <div class="mb-n9;" style="display: flex; align-items: center; justify-content: space-between;"
+          <div class="" style="display: flex; align-items: center; justify-content: space-between; flex-direction: row; height: auto"
                :style="width < 500 ? 'width: 90vw' : ''">
             <div class="font-weight-bold mb-2 w-33;" style="width: 33%;">
               <v-textarea style="overflow-wrap: break-word; word-break: break-word; white-space: normal;"
+                          hide-details
+                          density="compact"
                 v-model="text1"
                 variant="plain"
                 :rows="width < 500 ? '2' : '1'"
@@ -67,9 +69,10 @@
               ></v-textarea>
             </div>
 
-
             <div class="font-weight-bold mb-2" style="width: auto">
               <v-textarea
+                hide-details
+                density="compact"
                           class="text-center-textarea"
                 color="#398064"
                 v-model="textCenter"
@@ -84,9 +87,11 @@
             </div>
 
 
-
             <div class="font-weight-bold mb-2" style="width: 33%">
-              <v-textarea style=""
+              <v-textarea
+                style=""
+                hide-details
+                density="compact"
                 v-model="text2"
                 variant="plain"
                 class="right-input" :rows="width < 500 ? '2' : '1'"
@@ -98,11 +103,10 @@
               ></v-textarea>
             </div>
           </div>
+
           <div class="mb-2" style="z-index: 10;">
             <div class="d-flex flex-column pa-4">
-<!--              <div class="text-caption">-->
-<!--                Custom thumb size-->
-<!--              </div>-->
+
               <v-slider
                 :ticks="{ 50: '' }"
                 tick-size="10"
@@ -120,10 +124,6 @@
                 @click="addData1()"
                 @update:modelValue="snapToClosestSliderOne"
               >
-                <!-- Slot pour personnaliser le contenu -->
-<!--                <template v-slot:thumb-label="{}">-->
-<!--                 <span class="thumb-fill"> Neither matter nor doesn't matter</span>-->
-<!--                </template>-->
               </v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -144,6 +144,8 @@
                :style="width < 500 ? 'width: 90vw' : ''">
             <div class="font-weight-bold mb-2 w-33;" style="width: 33%">
               <v-textarea style="overflow-wrap: break-word; word-break: break-word; white-space: normal;"
+                          hide-details
+                          density="compact"
                           v-model="text1"
                           variant="plain"
                           :rows="width < 500 ? '2' : '1'"
@@ -157,6 +159,8 @@
 
             <div class="font-weight-bold mb-2" style="width: auto">
               <v-textarea  class="text-center-textarea"
+                           hide-details
+                           density="compact"
                 v-model="textCenter"
                 variant="plain"
                 :rows="width < 500 ? '2' : '1'"
@@ -172,6 +176,8 @@
 
             <div class="font-weight-bold mb-2" style="width: 33%">
               <v-textarea style=""
+                          hide-details
+                          density="compact"
                           v-model="text2"
                           variant="plain"
                           class="right-input" :rows="width < 500 ? '2' : '1'"
@@ -251,67 +257,7 @@
           </div>
         </div>
         <!------------------------>
-        <div style="margin-bottom: 12px"> <b>Benefits and harms of breast cancer screening:</b></div>
-        <div style="display: flex; align-items: start; justify-content: space-between; flex-direction: row; width: 100%">
-          <div style="text-align: left; width: 50%">
-            <div style="margin-bottom: 12px">
-              <b>Chance of preventing breast cancer death</b>
-              <div>Screening may prevent breast cancer death.</div>
-            </div>
 
-            <div>
-              <b>Chance of false positives</b>
-            </div>
-            <div>
-              <div>
-                <ul style="margin-left: 25px;">
-                  <li>In breast cancer screening, a false positive means that the first test (blood test) is “positive” (meaning that there is a signal of a possible cancer) but further tests don’t confirm breast cancer. Further tests include biopsies, which are surgeries where tissue is removed from the body for testing.
-                  </li>
-                  <li>When people get a false positive, they aren’t diagnosed with breast cancer after all.
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <b>What can happen when people get a false positive</b>
-                <ul style="margin-left: 25px;">
-                  <li>Waiting for the results of further tests, not knowing if breast cancer will be diagnosed or not, can cause stress and anxiety.</li>
-                  <li>People get tests they didn’t need to have (for example, biopsies.)</li>
-                  <li>Biopsies may cause complications such as infections or bleeding.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!------------------------>
-          <div style="text-align: left; width: 50%">
-            <div>
-              <b>Chance of preventing breast cancer death</b>
-              <div>In breast cancer screening, overdiagnosis happens when breast cancer is diagnosed by healthcare professionals but the cancer is:
-              </div>
-                <ul style="margin-left: 25px;">
-                  <li>indolent (meaning it will not cause pain or harm),</li>
-                  <li>non-progressive (meaning it will not grow or get worse),</li>
-                  <li>not deadly (meaning it will not cause death)</li>
-                </ul>
-                <div>and when breast cancer treatments (for example, surgery, radiation, chemotherapy, or other treatments) have a low chance of helping the person. </div>
-              </div>
-              <div>
-                <b>What can happen when people are overdiagnosed</b>
-                <ul style="margin-left: 25px;">
-                  <li>Being labeled as a “cancer patient” can change how people feel and choices they make.</li>
-                  <li>breast cancer tests and treatments can:
-                    <ul style="margin-left: 25px;">
-                      <li>cause side effects (for example, surgery may cause pain and need recovery time)</li>
-                      <li>lower quality of life</li>
-                      <li>be a hassle (for example, going to a lot of appointments)</li>
-                      <li>cost people money (for example, parking costs, time unable to work)</li>
-                      <li>cost the health care system money and resources (for example, doctors’ time)</li>
-                      <li>contribute to the “overmedicalization” of society (that is, turning too many things into medical problems)</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-          </div>
-        </div>
       </v-col>
       <v-col order="first">
         <div>
@@ -332,8 +278,75 @@
       </v-col>
     </v-row>
 
+    <v-expansion-panels accordion focusable >
+      <v-expansion-panel style="width: 90vw">
+        <template #title>
+          <span> <b>{{expansionPanelsText.expansionPanelsTitle}}</b></span>
+          <!-- ou <span class="text-white">Title</span> si tu utilises les classes Vuetify -->
+        </template>
 
+        <template #text>
+          <div style="display: flex; align-items: start; justify-content: space-between; flex-direction: row;">
+            <div style="text-align: left;">
+              <div style="margin-bottom: 12px">
+                <b>{{expansionPanelsText.chancePreventTitle}}</b>
+                <div>{{expansionPanelsText.chancePreventText}}</div>
+              </div>
+              <div>
+                <b>{{expansionPanelsText.falsePositiveTitle}}</b>
+              </div>
+              <div>
+                <div>
+                  <ul style="margin-left: 25px;">
+                    <li>{{expansionPanelsText.falsePositiveDef1}}
+                    </li>
+                    <li>{{expansionPanelsText.falsePositiveDef2}}
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <b>{{expansionPanelsText.falsePositiveConsequencesTitle}}</b>
+                  <ul style="margin-left: 25px;">
+                    <li>{{expansionPanelsText.falsePositiveCons1}}</li>
+                    <li>{{expansionPanelsText.falsePositiveCons2}}</li>
+                    <li>{{expansionPanelsText.falsePositiveCons3}}</li>
+                  </ul>
+                </div>
+                <div>
+                  <b>{{expansionPanelsText.chancePreventTitle}}</b>
+                  <div>{{expansionPanelsText.overdiagnosisIntro}}
+                  </div>
+                  <ul style="margin-left: 25px;">
+                    <li>{{expansionPanelsText.overdiagnosisItem1}}</li>
+                    <li>{{expansionPanelsText.overdiagnosisItem2}}</li>
+                    <li>{{expansionPanelsText.overdiagnosisItem3}}</li>
+                  </ul>
+                  <div>{{expansionPanelsText.overdiagnosisEnding}}</div>
+                </div>
+                <div>
+                  <b>{{expansionPanelsText.overdiagnosisConsequencesTitle}}</b>
+                  <ul style="margin-left: 25px;">
+                    <li>{{expansionPanelsText.overdiagnosisConsIntro}}</li>
+                    <li>{{expansionPanelsText.overdiagnosisTestsIntro}}
+                      <ul style="margin-left: 25px;">
+                        <li>{{expansionPanelsText.overdiagnosisTestsItem1}}</li>
+                        <li>{{expansionPanelsText.overdiagnosisTestsItem2}}</li>
+                        <li>{{expansionPanelsText.overdiagnosisTestsItem3}}</li>
+                        <li>{{expansionPanelsText.overdiagnosisTestsItem4}}</li>
+                        <li>{{expansionPanelsText.overdiagnosisTestsItem5}}</li>
+                        <li>{{expansionPanelsText.overdiagnosisTestsItem6}}</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-container>
+
 </template>
 
 <script>
@@ -399,6 +412,7 @@ export default {
     const middleBarTexBold = ref(props.textData.middleBarTexBold);
     const mobileDescription11 = ref(props.textData.mobileDescription11);
     const mobileDescription12 = ref(props.textData.mobileDescription12);
+    const expansionPanelsText = ref(props.expansionPanelsText)
 
 
     watch(
@@ -408,6 +422,7 @@ export default {
         description1.value = newVal.description1;
         mobileDescription11.value = newVal.mobileDescription11;
         mobileDescription12.value = newVal.mobileDescription12;
+        expansionPanelsText.value = newVal.expansionPanelsText;
         description2.value = newVal.description2;
         leftScaleLabel.value = newVal.leftScaleLabel;
         centerScaleLabel.value = newVal.centerScaleLabel;
@@ -732,6 +747,7 @@ export default {
       description2,
       mobileDescription11,
       mobileDescription12,
+      expansionPanelsText,
       centerScaleLabel,
       leftScaleLabel,
       rightScaleLabel,

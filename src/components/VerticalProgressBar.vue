@@ -23,7 +23,6 @@
             @click="selectAllText('input1')"
             @change="emitInput1"
             style="width: auto; text-align: center; padding-right: 10px; padding-left: 0px;"
-            :style="{color:value1 > 50 ? '#398064' : '#000000', fontWeight:value1>50 ? 'bold' : 'normal'}"
             no-resize
             color="orange orange-darken-4"
           ></v-textarea>
@@ -49,11 +48,11 @@
 
           <div style="display: flex; align-items: center; justify-content: flex-start; flex-direction: row; position: relative;">
             <VerticalProgress :model-value="value2" color="#cd9367" :height="220" :thickness="90" :rounded="false"/>
-            <span style="position: absolute; top: -10px; right: -5px; transform: translate(100%, 0);margin-left: 50px; color: #ffffff; padding-left: 5px; padding-right: 5px; text-align: start;"
-            :style="{background:value1 > 50 ? '#398064' : '#ffffff', color:value1 > 50 ? '#ffffff' : '#000000'}">{{topBarInstruction}}</span>
+            <span style="position: absolute; top: -10px; right: -5px; transform: translate(100%, 0);margin-left: 50px; color: #000000; padding-left: 5px; padding-right: 5px; text-align: start;"
+            >{{topBarInstruction}}</span>
 
             <span style="padding-left: 5px; padding-right: 5px; position: absolute; bottom: -10px; right: -5px; transform: translate(100%, 0);margin-left: 50px; text-align: start;color: #000000; background: #ffffff"
-                  :style="{background:value2 > 50 ? '#cd9367' : '#ffffff', color:value2 > 50 ? '#ffffff' : '#000000'}">{{bottomBarInstruction}}</span>
+            >{{bottomBarInstruction}}</span>
           </div>
 
           <div style="height: 3px; width: 100%; background: black"></div>
@@ -68,7 +67,6 @@
             @click="selectAllText('input2')"
             @change="emitInput2"
             style="width: auto; text-align: center; padding-right: 10px; padding-left: 0px;"
-            :style="{color:value2 > 50 ? '#cd9367' : '#000000', fontWeight:value2>50 ? 'bold' : 'normal'}"
             no-resize
           ></v-textarea>
         </div>
