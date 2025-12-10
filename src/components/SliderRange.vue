@@ -305,15 +305,16 @@
                   </ul>
                 </div>
                 <div>
-                  <b>{{expansionPanelsText.falsePositiveConsequencesTitle}}</b>
+                  <b style="font-style: italic;">{{expansionPanelsText.falsePositiveConsequencesTitle}}</b>
                   <ul style="margin-left: 25px;">
                     <li>{{expansionPanelsText.falsePositiveCons1}}</li>
                     <li>{{expansionPanelsText.falsePositiveCons2}}</li>
                     <li>{{expansionPanelsText.falsePositiveCons3}}</li>
                   </ul>
                 </div>
+                <br>
                 <div>
-                  <b>{{expansionPanelsText.chancePreventTitle}}</b>
+                  <b>{{expansionPanelsText.overdiagnosisTitle}}</b>
                   <div>{{expansionPanelsText.overdiagnosisIntro}}
                   </div>
                   <ul style="margin-left: 25px;">
@@ -323,6 +324,7 @@
                   </ul>
                   <div>{{expansionPanelsText.overdiagnosisEnding}}</div>
                 </div>
+                <br>
                 <div>
                   <b>{{expansionPanelsText.overdiagnosisConsequencesTitle}}</b>
                   <ul style="margin-left: 25px;">

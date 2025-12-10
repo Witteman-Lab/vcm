@@ -10,7 +10,7 @@
   "centerScaleLabel" : "Neutral",
   "rightScaleLabel": "Matters a lot",
   "topSliderLabel":"Chance of preventing breast cancer death",
-  "bottomSliderLabel":"Chance of getting a breast cancer false positive or getting overdiagnosed",
+  "bottomSliderLabel":"Chance of getting a false positive or getting overdiagnosed with breast cancer",
   "leftBarText" : "Getting a breast cancer screening test",
   "rightBarText" : "Not getting a breast cancer screening test",
   "result":"fits best with what matters to you",
