@@ -4,7 +4,7 @@
     style=""
   >
     <v-container
-      style="width: auto; height: auto; background: #398064"
+      style="width: auto; height: auto;"
       fluid
       class="d-flex flex-row"
     >

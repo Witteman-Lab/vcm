@@ -458,7 +458,7 @@ export default {
     const choice1 = ref(slider1.value);
     const choice2 = ref(slider2.value);
     const { width, height } = useWindowSize();
-    const dialog = ref(false);
+    const dialog = ref(true);
     const text5 = ref("Option 1 ");
     const text6 = ref("Option 2");
     let startSlider1 = 50;
