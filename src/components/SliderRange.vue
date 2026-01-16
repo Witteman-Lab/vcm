@@ -15,7 +15,7 @@
         class="text-body text-justify"
       >
   <!--      Subtitle for desktop-->
-        {{ description1 }} <br> {{ description2 }}
+        {{ description1 }} {{ description2 }}
       </div>
 
       <div
@@ -290,7 +290,10 @@
             <div style="text-align: left;">
               <div style="margin-bottom: 12px">
                 <b>{{expansionPanelsText.chancePreventTitle}}</b>
-                <div>{{expansionPanelsText.chancePreventText}}</div>
+                <ul style="margin-left: 25px;">
+                  <li>{{expansionPanelsText.chancePreventText}}
+                  </li>
+                </ul>
               </div>
               <div>
                 <b>{{expansionPanelsText.falsePositiveTitle}}</b>
@@ -324,9 +327,8 @@
                   </ul>
                   <div>{{expansionPanelsText.overdiagnosisEnding}}</div>
                 </div>
-                <br>
                 <div>
-                  <b>{{expansionPanelsText.overdiagnosisConsequencesTitle}}</b>
+                  <b style="font-style: italic;">{{expansionPanelsText.overdiagnosisConsequencesTitle}}</b>
                   <ul style="margin-left: 25px;">
                     <li>{{expansionPanelsText.overdiagnosisConsIntro}}</li>
                     <li>{{expansionPanelsText.overdiagnosisTestsIntro}}
