@@ -106,11 +106,18 @@ export default {
     goBackToQualtrics() {
       // const fullUrl = `${this.returnUrl}?ResponseID=${this.uid}`;
       // window.location.href = fullUrl;
+
+      // Apparently not a good practice...
+      //SliderRange.methods.saveData();
+
+      console.log("Return to Qualtrics");
       window.location.href = this.returnUrl;
+
       // const fullUrl = `${this.returnUrl}${this.returnUrl.includes('?') ? '&' : '?'}Q_R=${this.uid}&Q_CHL=retake`;
       // window.location.href = fullUrl;
 
     },
+
     /**
      * Method: handleLogoClick
      * Description: Reloads the current page when the logo is clicked.

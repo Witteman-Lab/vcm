@@ -396,7 +396,7 @@ export default {
       required: true,
     }
   },
-  setup(props) {
+  setup: function (props) {
 
     const title = ref(props.textData.title);
     const description1 = ref(props.textData.description1);
@@ -442,13 +442,13 @@ export default {
         middleBarTextNormal.value = newVal.middleBarTextNormal;
         middleBarTexBold.value = newVal.middleBarTexBold;
       },
-      { immediate: true }
+      {immediate: true}
     );
 
     let activeSlider = null;
     const graph = ref({}); // Initialize the graph dictionary
     const startTimeApp = ref(new Date());
-    const startTime = ref(new Date());
+    let startTime = ref(new Date());
     const sliders = ref([]);
     const slider1 = ref(50);
     const slider2 = ref(50);
@@ -459,15 +459,12 @@ export default {
     const text4 = ref(bottomSliderLabel);
     const choice1 = ref(slider1.value);
     const choice2 = ref(slider2.value);
-    const { width, height } = useWindowSize();
+    const {width, height} = useWindowSize();
     const dialog = ref(true);
     const text5 = ref("Option 1 ");
     const text6 = ref("Option 2");
     let startSlider1 = 50;
     let startSlider2 = 50;
-
-
-
 
 
     /**
@@ -478,9 +475,9 @@ export default {
     const handleInput1 = (value) => {
       if (value !== text5.value) {
         text5.value = value;
-
       }
     };
+
     /**
      * Handles input for text input field 2.
      * If the input value is different from the current value, updates the value and pushes it to option2 array in data.
@@ -518,8 +515,12 @@ export default {
     const data = ref({
       userID: props.uid,
       returnUrl: props.returnUrl,
+      language: props.language,
+      optionOrder: props.optionOrder,
+
+      startTimeApp: startTimeApp.value,
+      endTimeApp: new Date(),
       duration_m_s: 0,
-      EndTimeVCM: new Date(),
       sliders,
       leftScaleLabel: [],
       centerScaleLabel: [],
@@ -528,10 +529,9 @@ export default {
       bottomSliderLabel: [],
       option1: [],
       option2: [],
-      language: props.language,
-      optionOrder: props.optionOrder,
-      graph:graph.value
+      graph: graph.value
     });
+
     /**
      * Generates an array of numbers within a specified range.
      * @param {number} start - The start of the range.
@@ -557,6 +557,7 @@ export default {
       }
       return result;
     }
+
     watch(slider1, (newValue) => {
       slider2.value = 100 - newValue;
     });
@@ -567,29 +568,32 @@ export default {
      * Calculates the duration between two timestamps.
      * @param {Date} startTime - The start timestamp.
      * @param {Date} endTime - The end timestamp.
-     * @returns {string} The duration formatted as "Xm Ys" or "Z ms".
+     //* @returns {string} The duration formatted as "Xm Ys" or "Z ms".
+     * @returns {number} The duration in milliseconds (ms)".
      */
     const calculateDuration = (startTime, endTime) => {
       const durationInMillis = endTime - startTime;
-      const minutes = Math.floor(durationInMillis / (1000 * 60));
-      const seconds = Math.floor((durationInMillis / 1000) % 60);
-      if (durationInMillis >= 1000) {
-        return `${minutes}m ${seconds}s`;
-      } else {
-        return `${durationInMillis} ms`;
-      }
+      //const minutes = Math.floor(durationInMillis / (1000 * 60));
+      //const seconds = Math.floor((durationInMillis / 1000) % 60);
+      //if (durationInMillis >= 1000) {
+        //return `${minutes}m ${seconds}s`;
+      //} else {
+        //return `${durationInMillis} ms`;
+      return durationInMillis;
+      //}
     };
     // Methods to update data and text labels
     const updateData1 = () => {
       activeSlider = null;
+
       if (startSlider1 < slider1.value) {
         const values = range(startSlider1, slider1.value + 1);
         const endTime = new Date();
         const duration = calculateDuration(startTime.value, endTime);
         sliders.value.push({
           name: "Slider_1",
-          values,
-          startTime,
+          values: values,
+          startTime: startTime.value,
           endTime: endTime,
           duration: duration,
         });
@@ -600,8 +604,8 @@ export default {
         const duration = calculateDuration(startTime.value, endTime);
         sliders.value.push({
           name: "Slider_1",
-          values,
-          startTime,
+          values: values,
+          startTime: startTime.value,
           endTime: endTime,
           duration: duration,
         });
@@ -617,8 +621,8 @@ export default {
         const duration = calculateDuration(startTime.value, endTime);
         sliders.value.push({
           name: "Slider_2",
-          values,
-          startTime,
+          values: values,
+          startTime: startTime.value,
           endTime: endTime,
           duration: duration,
         });
@@ -629,8 +633,8 @@ export default {
         const duration = calculateDuration(startTime.value, endTime);
         sliders.value.push({
           name: "Slider_2",
-          values,
-          startTime,
+          values: values,
+          startTime: startTime.value,
           endTime: endTime,
           duration: duration,
         });
@@ -666,6 +670,7 @@ export default {
     const updateText4 = () => {
       data.value.bottomSliderLabel.push(text4.value);
     };
+
     // Save the data to a file when the page is unloaded (refreshed or closed)
     /**
      * Saves the data to a file.
@@ -674,14 +679,45 @@ export default {
      */
     const saveDataToFile = () => {
       console.log("saveDataToFile");
-      // const endTimeVCM = new Date();
-      // data.value.EndTimeVCM = endTimeVCM;
-      // const duration = calculateDuration(startTimeApp.value, endTimeVCM);
-      // data.value.duration_m_s = duration;
-      // const jsonData = JSON.stringify(data.value, null, 2);
-      // const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
-      // saveAs(blob, "data.txt");
+
+      const endTimeApp = new Date();
+      data.value.startTimeApp = startTimeApp;
+      data.value.endTimeApp = endTimeApp;
+      const duration = calculateDuration(startTimeApp.value, endTimeApp);
+      data.value.duration_m_s = duration;
+      const jsonData = JSON.stringify(data.value, null, 2);
+      const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
+      saveAs(blob, "data_test.txt");
+
+      //console.log("Call to saveData()");
+      /*const userData = {
+        id: id, // Pour le moment, id = wlab_random_id, car je ne sais pas trop encore comment générer un auto-increment
+        wlab_random_id: wlab_random_id,
+        language: language,
+        returnUrl: return_url,
+        page_start_time: page_start_time,
+        page_end_time: page_end_time,
+        duration_ms: duration_ms
+        //created_at: created_at
+      };*/
+
+      //console.log("Fetch to PHP file");
+      /*
+      fetch('save_data.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      })
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.error('Error:', error));
+        */
+
+
     };
+
     /**
      * Lifecycle hook executed before the component is destroyed.
      */
@@ -703,13 +739,13 @@ export default {
       activeSlider = "Slider_2";
       const endTime = new Date();
       const duration = calculateDuration(startTime.value, endTime);
-      sliders.value.push({
+      /*sliders.value.push({
         name: "Slider_2",
         values: slider2.value,
-        startTime,
+        startTime: startTime.value,
         endTime: endTime,
         duration: duration,
-      });
+      });*/
     };
     /**
      * Adds data for Slider_1 to the sliders array.
@@ -721,25 +757,25 @@ export default {
       activeSlider = "Slider_1";
       const endTime = new Date();
       const duration = calculateDuration(startTime.value, endTime);
-      sliders.value.push({
+      /*sliders.value.push({
         name: "Slider_1",
         values: slider1.value,
-        startTime,
+        startTime: startTime.value,
         endTime: endTime,
         duration: duration,
-      });
+      });*/
     };
     let currentSecond = 0;
     // Set up a timer to check and reset activeSlider every second
     const timerInterval = setInterval(() => {
       currentSecond++;
       if (activeSlider) {
-        graph.value[currentSecond*500] = {
+        graph.value[currentSecond * 500] = {
           slider: activeSlider,
           value: activeSlider === "Slider_1" ? slider1.value : slider2.value,
         };
-      }else{
-        graph.value[currentSecond*500] = null
+      } else {
+        graph.value[currentSecond * 500] = null
       }
     }, 500);
     // const timerInterval = setInterval(() => {
@@ -825,6 +861,46 @@ export default {
       if (this.$refs[refName]) {
         this.$refs[refName].select();
       }
+    },
+
+    /**
+     * Method: saveData
+     * Description: Send data to the server using save_data.php file
+     */
+    saveData(id, wlab_random_id, language, return_url, page_start_time, page_end_time, duration_ms) {
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      console.log("Call to saveData()");
+      /*const userData = {
+        id: id, // Pour le moment, id = wlab_random_id, car je ne sais pas trop encore comment générer un auto-increment
+        wlab_random_id: wlab_random_id,
+        language: language,
+        returnUrl: return_url,
+        page_start_time: page_start_time,
+        page_end_time: page_end_time,
+        duration_ms: duration_ms
+        //created_at: created_at
+      };*/
+      /*
+      fetch('save_data.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      })
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.error('Error:', error));
+        */
     },
 
   },
