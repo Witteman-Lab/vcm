@@ -1,42 +1,42 @@
 {
   "currentLanguage" : "fr",
   "title" : "Ce qui compte pour vous",
-  "description1" : "Avant de faire votre choix entre les deux options, prenez un moment pour réfléchir à ce qui compte le plus pour vous. Utilisez les curseurs ci-dessous pendant que vous réfléchissez.N'oubliez pas qu'il n'y a pas de mauvaises réponses.",
+  "description1" : "Avant de faire votre choix entre les deux options, prenez un moment pour réfléchir à ce qui compte le plus pour vous. Utilisez les curseurs ci-dessous pendant que vous réfléchissez. N'oubliez pas qu'il n'y a pas de mauvaises réponses.",
   "mobileDescription11" : "Avant de faire votre choix entre les deux options, prenez un moment pour réfléchir à ce qui compte le plus pour vous.",
-  "mobileDescription12" : "Utilisez les curseurs ci-dessous pendant que vous réfléchissez.N'oubliez pas qu'il n'y a pas de mauvaises réponses.",
+  "mobileDescription12" : "Utilisez les curseurs ci-dessous pendant que vous réfléchissez. N'oubliez pas qu'il n'y a pas de mauvaises réponses.",
   "description2" : "Si les deux options ont la même importance pour vous, ou si vous n'êtes pas sûr, placez les curseurs au milieu. Les définitions sont données au bas de la page.",
   "language": "FR",
   "leftScaleLabel": "Pas important du tout",
   "centerScaleLabel" : "Neutre",
   "rightScaleLabel": "Très important",
-  "topSliderLabel":"Chance d’obtenir un faux positif ou d’être surdiagnostiquée d’un cancer du sein",
-  "bottomSliderLabel":"Chance d’éviter le décès par cancer du sein",
-  "leftBarText" : "Ne pas passer un test de dépistage du cancer du sein",
-  "rightBarText" : "Passer un test de dépistage du cancer du sein",
+  "topSliderLabel":"Chance d’obtenir un faux positif ou d’être surdiagnostiqué d’un cancer de la prostate",
+  "bottomSliderLabel":"Chance d’éviter le décès par cancer de la prostate",
+  "leftBarText" : "Ne pas passer un test de dépistage du cancer de la prostate",
+  "rightBarText" : "Passer un test de dépistage du cancer de la prostate",
   "result":"correspond le mieux à ce qui vous importe",
   "instruction":["Afficher les instructions", "Cacher les instructions"],
   "returnLabel": "Retour au sondage",
   "topBarInstruction": "Convient parfaitement",
   "bottomBarInstruction": "Ne convient pas du tout",
   "middleBarTextNormal": "Vos réponses suggèrent que ",
-  "middleBarTexBold": "vous n’êtes pas encore certain de vouloir passer un test de dépistage du cancer du sein.",
+  "middleBarTexBold": "vous n’êtes pas encore certain de vouloir passer un test de dépistage du cancer de la prostate.",
   "expansionPanelsText": {
-    "expansionPanelsTitle": "Bénéfices et préjudices du dépistage du cancer du sein:",
+    "expansionPanelsTitle": "Bénéfices et préjudices du dépistage du cancer de la prostate :",
 
-    "chancePreventTitle": "Chance d'éviter le décès par cancer du sein",
-    "chancePreventText": "Le dépistage peut éventuellement éviter le décès par cancer du sein.",
+    "chancePreventTitle": "Chance d'éviter le décès par cancer de la prostate",
+    "chancePreventText": "Le dépistage peut éventuellement éviter le décès par cancer de la prostate.",
 
     "falsePositiveTitle": "Chance de faux positifs",
-    "falsePositiveDef1": "Dans le cadre du dépistage du cancer du sein, un faux positif signifie que le premier test (mammographie) est « positif » (c’est-à-dire qu’il y a un signal potentiel de cancer) mais que les tests complémentaires ne confirment pas la présence du cancer du sein. Les tests complémentaires comprennent des biopsies, qui sont de petites interventions chirurgicales au cours desquelles des tissus sont prélevés sur le corps pour être analysés.",
-    "falsePositiveDef2": "En cas de faux positif, le diagnostic de cancer du sein n'est finalement pas posé.",
+    "falsePositiveDef1": "Dans le cadre du dépistage du cancer de la prostate, un faux positif signifie que le premier test (test sanguin) est « positif » (c’est-à-dire qu’il y a un signal potentiel de cancer) mais que les tests complémentaires ne confirment pas la présence du cancer de la prostate. Les tests complémentaires comprennent des biopsies, qui sont de petites interventions chirurgicales au cours desquelles des tissus sont prélevés sur le corps pour être analysés.",
+    "falsePositiveDef2": "En cas de faux positif, le diagnostic de cancer de la prostate n'est finalement pas posé.",
 
     "falsePositiveConsequencesTitle": "Ce qui peut se passer lorsqu’une personne reçoit un faux positif",
-    "falsePositiveCons1": "Attendre les résultats des tests complémentaires, sans savoir si le cancer du sein sera diagnostiqué ou non, a pu générer du stress et de l'anxiété.",
+    "falsePositiveCons1": "Attendre les résultats des tests complémentaires, sans savoir si le cancer de la prostate sera diagnostiqué ou non, a pu générer du stress et de l'anxiété.",
     "falsePositiveCons2": "Les personnes ont passé des tests qu’elles n’auraient pas eu besoin de faire (par exemple, des biopsies).",
     "falsePositiveCons3": "Les biopsies peuvent avoir causé des complications comme des infections ou des saignements.",
 
     "overdiagnosisTitle": "Chance de surdiagnostic",
-    "overdiagnosisIntro": "Dans le cadre du dépistage du cancer du sein, un surdiagnostic survient lorsque le cancer du sein est diagnostiqué par des professionnels de la santé alors que le cancer sera :",
+    "overdiagnosisIntro": "Dans le cadre du dépistage du cancer de la prostate, un surdiagnostic survient lorsque le cancer de la prostate est diagnostiqué par des professionnels de la santé alors que le cancer sera :",
     "overdiagnosisItem1": "indolent (c'est-à-dire qu'il ne causera pas de douleur ou de dommage),",
     "overdiagnosisItem2": "non progressif (c'est-à-dire qu'il ne s'aggravera pas)",
     "overdiagnosisItem3": "non mortel (c'est-à-dire qu'il ne causera pas la mort)",
@@ -44,7 +44,7 @@
 
     "overdiagnosisConsequencesTitle": "Ce qui peut arriver lorsqu'une personne est surdiagnostiquée",
     "overdiagnosisConsIntro": "Le fait d'être étiqueté comme « patient cancéreux » peut modifier la façon de se percevoir et de modifier ses choix.",
-    "overdiagnosisTestsIntro": "Les tests et les traitements contre le cancer du sein peuvent:",
+    "overdiagnosisTestsIntro": "Les tests et les traitements contre le cancer de la prostate peuvent :",
     "overdiagnosisTestsItem1": "provoquer des effets secondaires (par exemple, une intervention chirurgicale peut causer des douleurs et nécessiter un temps de récupération)",
     "overdiagnosisTestsItem2": "diminuer la qualité de vie",
     "overdiagnosisTestsItem3": "être une source de tracas (par exemple, se rendre à de nombreux rendez-vous)",
@@ -53,4 +53,3 @@
     "overdiagnosisTestsItem6": "contribuer à la « surmédicalisation » de la société (c'est-à-dire transformer trop de choses en problèmes de santé)"
   }
 }
-
