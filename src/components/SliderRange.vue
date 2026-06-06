@@ -446,7 +446,7 @@ export default {
     );
 
     let activeSlider = null;
-    const graph = ref({}); // Initialize the graph dictionary
+    let graph = ref({}); // Initialize the graph dictionary
     const startTimeApp = ref(new Date());
     let startTime = ref(new Date());
     const sliders = ref([]);
@@ -517,7 +517,7 @@ export default {
       returnUrl: props.returnUrl,
       language: props.language,
       optionOrder: props.optionOrder,
-
+      screening: "Prostate",
       startTimeApp: startTimeApp.value,
       endTimeApp: new Date(),
       duration_m_s: 0,
@@ -582,6 +582,7 @@ export default {
       return durationInMillis;
       //}
     };
+
     // Methods to update data and text labels
     const updateData1 = () => {
       activeSlider = null;
@@ -613,6 +614,7 @@ export default {
       // data.value.topSlider.push(slider1.value);
       // data.value.bottomSlider.push(slider2.value);
     };
+
     const updateData2 = () => {
       activeSlider = null;
       if (startSlider2 < slider2.value) {
@@ -673,7 +675,7 @@ export default {
 
     // Save the data to a file when the page is unloaded (refreshed or closed)
     /**
-     * Saves the data to a file.
+     * Saves the data to a file on the server.
      * Updates the end time and duration of the VCM session in the data object.
      * Converts the data object to JSON format and saves it as a text file.
      */
@@ -686,43 +688,30 @@ export default {
       const duration = calculateDuration(startTimeApp.value, endTimeApp);
       data.value.duration_m_s = duration;
       const jsonData = JSON.stringify(data.value, null, 2);
-      const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
-      saveAs(blob, "data_test.txt");
+      // That would save the file on the client side, we want on the server side (see fetch() below)
+      //const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
+      //saveAs(blob, "data_test.txt");
 
-      //console.log("Call to saveData()");
-      /*const userData = {
-        id: id, // Pour le moment, id = wlab_random_id, car je ne sais pas trop encore comment générer un auto-increment
-        wlab_random_id: wlab_random_id,
-        language: language,
-        returnUrl: return_url,
-        page_start_time: page_start_time,
-        page_end_time: page_end_time,
-        duration_ms: duration_ms
-        //created_at: created_at
-      };*/
-
-      //console.log("Fetch to PHP file");
-      /*
       fetch('save_data.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        //body: JSON.stringify(jsonData)
+        body: jsonData
       })
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.error('Error:', error));
-        */
-
-
     };
 
     /**
      * Lifecycle hook executed before the component is destroyed.
      */
     onBeforeUnmount(() => {
+      // Save data to file on server
       saveDataToFile();
+      // Delete the timer interval used to capture the use of the slidersß
       clearInterval(timerInterval);
     });
     // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
@@ -830,28 +819,30 @@ export default {
   },
   methods: {
     snapToClosestSliderOne(val) {
-// Si la valeur est dans la plage 48-52, on force à 50
+      // Si la valeur est dans la plage 47-53 inclusivement, on force à 50
       if (val >= 47 && val <= 53) {
         this.slider1 = 50
       } else {
-// Sinon, garder exactement la valeur saisie sans magnétisme
+        // Sinon, garder exactement la valeur saisie sans magnétisme
         this.slider1 = val
       }
     },
     snapToClosestSliderTwo(val) {
-// Si la valeur est dans la plage 48-52, on force à 50
+      // Si la valeur est dans la plage 47-53 inclusivement, on force à 50
       if (val >= 47 && val <= 53) {
         this.slider2 = 50
       } else {
-// Sinon, garder exactement la valeur saisie sans magnétisme
+        // Sinon, garder exactement la valeur saisie sans magnétisme
         this.slider2 = val
       }
     },
-    customLabel(value) {
+
+    // MTB : Not sure what that was supposed to be doing, but it is not used at the moment, so I commented it
+    /*customLabel(value) {
       if (value < 30) return "Bas";
       if (value < 70) return "Moyen";
       return "Élevé";
-    },
+    },*/
 
     /**
      * Selects all text within the specified reference.
@@ -862,47 +853,6 @@ export default {
         this.$refs[refName].select();
       }
     },
-
-    /**
-     * Method: saveData
-     * Description: Send data to the server using save_data.php file
-     */
-    saveData(id, wlab_random_id, language, return_url, page_start_time, page_end_time, duration_ms) {
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      console.log("Call to saveData()");
-      /*const userData = {
-        id: id, // Pour le moment, id = wlab_random_id, car je ne sais pas trop encore comment générer un auto-increment
-        wlab_random_id: wlab_random_id,
-        language: language,
-        returnUrl: return_url,
-        page_start_time: page_start_time,
-        page_end_time: page_end_time,
-        duration_ms: duration_ms
-        //created_at: created_at
-      };*/
-      /*
-      fetch('save_data.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData)
-      })
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.error('Error:', error));
-        */
-    },
-
   },
 };
 </script>

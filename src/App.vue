@@ -107,9 +107,6 @@ export default {
       // const fullUrl = `${this.returnUrl}?ResponseID=${this.uid}`;
       // window.location.href = fullUrl;
 
-      // Apparently not a good practice...
-      //SliderRange.methods.saveData();
-
       console.log("Return to Qualtrics");
       window.location.href = this.returnUrl;
 
@@ -157,12 +154,12 @@ export default {
      * @param {number} newOptionOrder - The new language code.
      */
     optionOrder(newOptionOrder) {
-      console.log(newOptionOrder, "je fais mon test");
+      //console.log(newOptionOrder, "je fais mon test");
       localStorage.setItem("optionOrder", newOptionOrder);
       const urlParams = new URLSearchParams(window.location.search);
       urlParams.set("optionOrder", newOptionOrder);
       window.history.replaceState({}, "", `${window.location.pathname}?${urlParams}`);
-      console.log(newOptionOrder, "autre test");
+      //console.log(newOptionOrder, "autre test");
     },
 
     /**
@@ -185,7 +182,7 @@ export default {
      * Description: Updates the user ID setting and URL parameters with the new user ID.
      * @param {string} newUid - The new user ID.
      */
-    uid(newUid) {
+    uid: function (newUid) {
       localStorage.setItem("uid", newUid);
       const urlParams = new URLSearchParams(window.location.search);
       urlParams.set("uid", newUid);
@@ -203,8 +200,10 @@ export default {
   created() {
     // Retrieve language from local storage on component creation
     const urlParams = new URLSearchParams(window.location.search);
+
     this.language =
       urlParams.get("lang") || localStorage.getItem("language") || "en";
+
     this.returnUrl =
       urlParams.get("returnURL") ||
       localStorage.getItem("returnUrl") ||
@@ -213,7 +212,10 @@ export default {
     // this.returnUrl =
     //   urlParams.get("returnUrl") || localStorage.getItem("returnUrl") ||
     //   "https://ulavalfmed.ca1.qualtrics.com/jfe/form/SV_acaVCp5rMgVtKLQ";
-    this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
+
+    //this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
+    this.uid = urlParams.get("wlab_random_id") || localStorage.getItem("uid") || "";
+
     this.optionOrder = urlParams.get("optionOrder") || localStorage.getItem("optionOrder") || 0;
     this.hasQueryParams = Array.from(urlParams.keys()).length > 0;
 
