@@ -38,18 +38,18 @@
     "overdiagnosisTitle": "Chance de surdiagnostic",
     "overdiagnosisIntro": "Dans le cadre du dépistage du cancer de la prostate, un surdiagnostic survient lorsque le cancer de la prostate est diagnostiqué par des professionnels de la santé alors que le cancer sera :",
     "overdiagnosisItem1": "indolent (c'est-à-dire qu'il ne causera pas de douleur ou de dommage),",
-    "overdiagnosisItem2": "non progressif (c'est-à-dire qu'il ne s'aggravera pas)",
+    "overdiagnosisItem2": "non progressif (c'est-à-dire qu'il ne s'aggravera pas),",
     "overdiagnosisItem3": "non mortel (c'est-à-dire qu'il ne causera pas la mort)",
     "overdiagnosisEnding": "et lorsque les traitements anticancéreux (par exemple, la chirurgie, la radiothérapie, la chimiothérapie ou d'autres traitements) ont peu de chance d'aider la personne.",
 
     "overdiagnosisConsequencesTitle": "Ce qui peut arriver lorsqu'une personne est surdiagnostiquée",
     "overdiagnosisConsIntro": "Le fait d'être étiqueté comme « patient cancéreux » peut modifier la façon de se percevoir et de modifier ses choix.",
     "overdiagnosisTestsIntro": "Les tests et les traitements contre le cancer de la prostate peuvent :",
-    "overdiagnosisTestsItem1": "provoquer des effets secondaires (par exemple, une intervention chirurgicale peut causer des douleurs et nécessiter un temps de récupération)",
-    "overdiagnosisTestsItem2": "diminuer la qualité de vie",
-    "overdiagnosisTestsItem3": "être une source de tracas (par exemple, se rendre à de nombreux rendez-vous)",
-    "overdiagnosisTestsItem4": "avoir un coût pour la personne diagnostiquée (par exemple, les frais de stationnement, l'incapacité de travailler pendant un certain temps)",
-    "overdiagnosisTestsItem5": "représenter une charge pour le système de santé (par exemple, temps passé par le médecin)",
-    "overdiagnosisTestsItem6": "contribuer à la « surmédicalisation » de la société (c'est-à-dire transformer trop de choses en problèmes de santé)"
+    "overdiagnosisTestsItem1": "provoquer des effets secondaires (par exemple, une intervention chirurgicale peut causer des douleurs et nécessiter un temps de récupération);",
+    "overdiagnosisTestsItem2": "diminuer la qualité de vie;",
+    "overdiagnosisTestsItem3": "être une source de tracas (par exemple, se rendre à de nombreux rendez-vous);",
+    "overdiagnosisTestsItem4": "avoir un coût pour la personne diagnostiquée (par exemple, les frais de stationnement, l'incapacité de travailler pendant un certain temps);",
+    "overdiagnosisTestsItem5": "représenter une charge pour le système de santé (par exemple, temps passé par le médecin);",
+    "overdiagnosisTestsItem6": "contribuer à la « surmédicalisation » de la société (c'est-à-dire transformer trop de choses en problèmes de santé)."
   }
 }
