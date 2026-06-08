@@ -119,9 +119,9 @@
                 track-color="#D2D2D2FF"
                 rounded="xl"
                 step="1"
-                @end="updateData1()"
-                @start="startValue1()"
-                @click="addData1()"
+                @start="activateSlider('slider_1')"
+                @end="deactivateSlider()"
+                @change="deactivateSlider()"
                 @update:modelValue="snapToClosestSliderOne"
               >
               </v-slider>
@@ -230,15 +230,15 @@
                 track-color="#D2D2D2FF"
                 rounded="xl"
                 step="1"
-                @end="updateData2()"
-                @start="startValue2()"
                 style="z-index: 100"
-                @click="addData2()"
+                @start="activateSlider('slider_2')"
+                @end="deactivateSlider()"
+                @change="deactivateSlider()"
                 @update:modelValue="snapToClosestSliderTwo"
               >
-<!--                <template v-slot:thumb-label="{}">-->
-<!--                  <span class="thumb-fill"> Neither matter nor doesn't matter</span>-->
-<!--                </template>-->
+              <!--<template v-slot:thumb-label="{}">
+              <span class="thumb-fill"> Neither matter nor doesn't matter</span>
+              </template>-->
               </v-slider>
               <div class="font-weight-regular my-n6">
                 <v-textarea
@@ -360,8 +360,8 @@
  * updating data, and managing the lifecycle of the component.
  */
 import VerticalProgressBar from "./VerticalProgressBar.vue";
-import {ref, watch, onBeforeUnmount, computed, reactive, } from "vue";
-import { useWindowSize } from "@vueuse/core";
+import {onBeforeUnmount, ref, watch,} from "vue";
+import {useWindowSize} from "@vueuse/core";
 import { saveAs } from "file-saver";
 
 export default {
@@ -397,7 +397,6 @@ export default {
     }
   },
   setup: function (props) {
-
     const title = ref(props.textData.title);
     const description1 = ref(props.textData.description1);
     const description2 = ref(props.textData.description2);
@@ -416,8 +415,7 @@ export default {
     const middleBarTexBold = ref(props.textData.middleBarTexBold);
     const mobileDescription11 = ref(props.textData.mobileDescription11);
     const mobileDescription12 = ref(props.textData.mobileDescription12);
-    const expansionPanelsText = ref(props.expansionPanelsText)
-
+    const expansionPanelsText = ref(props.expansionPanelsText);
 
     watch(
       () => props.textData,
@@ -445,11 +443,9 @@ export default {
       {immediate: true}
     );
 
-    let activeSlider = null;
-    let graph = ref({}); // Initialize the graph dictionary
+    const activeSlider = ref(null);
+    const graph = ref({}); // Initialize the graph dictionary
     const startTimeApp = ref(new Date());
-    let startTime = ref(new Date());
-    const sliders = ref([]);
     const slider1 = ref(50);
     const slider2 = ref(50);
     const text1 = ref(leftScaleLabel);
@@ -463,9 +459,8 @@ export default {
     const dialog = ref(true);
     const text5 = ref("Option 1 ");
     const text6 = ref("Option 2");
-    let startSlider1 = 50;
-    let startSlider2 = 50;
-
+    // Change this value to false before compiling for effective deployment
+    const isDevMode = false;
 
     /**
      * Handles input for text input field 1.
@@ -489,24 +484,7 @@ export default {
         data.value.option2.push(text6.value);
       }
     };
-    /**
-     * Sets the activeSlider to Slider_1 and updates the startSlider1 and startTime values.
-     * @param {number} value - The initial value of slider1.
-     */
-    const startValue1 = (value) => {
-      activeSlider = "Slider_1";
-      startSlider1 = slider1.value;
-      startTime.value = new Date();
-    };
-    /**
-     * Sets the activeSlider to Slider_2 and updates the startSlider2 and startTime values.
-     * @param {number} value - The initial value of slider2.
-     */
-    const startValue2 = (value) => {
-      activeSlider = "Slider_2";
-      startSlider2 = slider2.value;
-      startTime.value = new Date();
-    };
+
     // Create dictionaries to store the arrays
     /**
      * Initializes the data object with the provided props and other default values.
@@ -517,46 +495,21 @@ export default {
       returnUrl: props.returnUrl,
       language: props.language,
       optionOrder: props.optionOrder,
-      screening: "Prostate",
+      branch: "Prostate",
       startTimeApp: startTimeApp.value,
       endTimeApp: new Date(),
-      duration_m_s: 0,
-      sliders,
-      leftScaleLabel: [],
-      centerScaleLabel: [],
-      rightScaleLabel: [],
-      topSliderLabel: [],
-      bottomSliderLabel: [],
-      option1: [],
-      option2: [],
+      duration_ms: 0,
+      slider1_value: slider1.value,
+      slider2_value: slider2.value,
+      leftScaleLabel: leftScaleLabel.value,
+      centerScaleLabel: centerScaleLabel.value,
+      rightScaleLabel: rightScaleLabel.value,
+      topSliderLabel: topSliderLabel.value,
+      bottomSliderLabel: bottomSliderLabel.value,
+      option1: leftBarText.value,
+      option2: rightBarText.value,
       graph: graph.value
     });
-
-    /**
-     * Generates an array of numbers within a specified range.
-     * @param {number} start - The start of the range.
-     * @param {number} stop - The end of the range.
-     * @param {number} step - The step size between numbers in the range.
-     * @returns {number[]} The array of numbers within the specified range.
-     */
-    function range(start, stop, step) {
-      if (typeof stop == "undefined") {
-        // one param defined
-        stop = start;
-        start = 0;
-      }
-      if (typeof step == "undefined") {
-        step = 1;
-      }
-      if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
-        return [];
-      }
-      var result = [];
-      for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
-        result.push(i);
-      }
-      return result;
-    }
 
     watch(slider1, (newValue) => {
       slider2.value = 100 - newValue;
@@ -564,6 +517,7 @@ export default {
     watch(slider2, (newValue) => {
       slider1.value = 100 - newValue;
     });
+
     /**
      * Calculates the duration between two timestamps.
      * @param {Date} startTime - The start timestamp.
@@ -572,76 +526,17 @@ export default {
      * @returns {number} The duration in milliseconds (ms)".
      */
     const calculateDuration = (startTime, endTime) => {
-      const durationInMillis = endTime - startTime;
-      //const minutes = Math.floor(durationInMillis / (1000 * 60));
-      //const seconds = Math.floor((durationInMillis / 1000) % 60);
-      //if (durationInMillis >= 1000) {
-        //return `${minutes}m ${seconds}s`;
-      //} else {
-        //return `${durationInMillis} ms`;
-      return durationInMillis;
-      //}
+      return (endTime - startTime);
     };
 
-    // Methods to update data and text labels
-    const updateData1 = () => {
-      activeSlider = null;
+    const activateSlider = (slider) => {
+      activeSlider.value = slider;
+    }
 
-      if (startSlider1 < slider1.value) {
-        const values = range(startSlider1, slider1.value + 1);
-        const endTime = new Date();
-        const duration = calculateDuration(startTime.value, endTime);
-        sliders.value.push({
-          name: "Slider_1",
-          values: values,
-          startTime: startTime.value,
-          endTime: endTime,
-          duration: duration,
-        });
-      }
-      if (startSlider1 > slider1.value) {
-        const values = range(slider1.value, startSlider1 + 1).reverse();
-        const endTime = new Date();
-        const duration = calculateDuration(startTime.value, endTime);
-        sliders.value.push({
-          name: "Slider_1",
-          values: values,
-          startTime: startTime.value,
-          endTime: endTime,
-          duration: duration,
-        });
-      }
-      // data.value.topSlider.push(slider1.value);
-      // data.value.bottomSlider.push(slider2.value);
+    const deactivateSlider = () => {
+      activeSlider.value = null;
     };
 
-    const updateData2 = () => {
-      activeSlider = null;
-      if (startSlider2 < slider2.value) {
-        const values = range(startSlider2, slider2.value + 1);
-        const endTime = new Date();
-        const duration = calculateDuration(startTime.value, endTime);
-        sliders.value.push({
-          name: "Slider_2",
-          values: values,
-          startTime: startTime.value,
-          endTime: endTime,
-          duration: duration,
-        });
-      }
-      if (startSlider2 > slider2.value) {
-        const values = range(slider2.value, startSlider2 + 1).reverse();
-        const endTime = new Date();
-        const duration = calculateDuration(startTime.value, endTime);
-        sliders.value.push({
-          name: "Slider_2",
-          values: values,
-          startTime: startTime.value,
-          endTime: endTime,
-          duration: duration,
-        });
-      }
-    };
     /**
      * Updates the left scale label data with the current value of text1.
      */
@@ -683,93 +578,70 @@ export default {
       console.log("saveDataToFile");
 
       const endTimeApp = new Date();
-      data.value.startTimeApp = startTimeApp;
-      data.value.endTimeApp = endTimeApp;
-      const duration = calculateDuration(startTimeApp.value, endTimeApp);
-      data.value.duration_m_s = duration;
-      const jsonData = JSON.stringify(data.value, null, 2);
-      // That would save the file on the client side, we want on the server side (see fetch() below)
-      //const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
-      //saveAs(blob, "data_test.txt");
 
-      fetch('save_data.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        //body: JSON.stringify(jsonData)
-        body: jsonData
-      })
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.error('Error:', error));
+      // Update values in the dictionary
+      data.value.startTimeApp = startTimeApp.value;
+      data.value.endTimeApp = endTimeApp;
+      data.value.duration_ms = calculateDuration(startTimeApp.value, endTimeApp);
+      data.value.slider1_value = slider1.value;
+      data.value.slider2_value = slider2.value;
+
+      // Make the JSON object to send to server
+      const jsonData = JSON.stringify(data.value, null, 2);
+
+      // If in dev mode, save to local/client/dev computer (for data validation purpose)
+      if(isDevMode) {
+        //const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
+        const blob = new Blob([jsonData], { type: "application/json" });
+        saveAs(blob, "data_test.json");
+      } else {
+        fetch('save_data.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          //body: JSON.stringify(jsonData)
+          body: jsonData
+        })
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.error('Error:', error));
+      }
     };
 
     /**
      * Lifecycle hook executed before the component is destroyed.
      */
     onBeforeUnmount(() => {
-      // Save data to file on server
-      saveDataToFile();
-      // Delete the timer interval used to capture the use of the slidersß
+      console.log("onBeforeUnmount");
+
+      // Delete the timer interval used to capture the use of the sliders
       clearInterval(timerInterval);
     });
+
     // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
+    // So we can simply reload the page to save data in dev mode
     window.onbeforeunload = () => {
+      console.log("window.onbeforeunload");
+
+      // Save data to file on server
       saveDataToFile();
     };
-    /**
-     * Adds data for Slider_2 to the sliders array.
-     * Sets activeSlider to "Slider_2".
-     * Calculates duration based on the start and end time.
-     * Pushes a new object containing slider information to the sliders array.
-     */
-    const addData2 = () => {
-      activeSlider = "Slider_2";
-      const endTime = new Date();
-      const duration = calculateDuration(startTime.value, endTime);
-      /*sliders.value.push({
-        name: "Slider_2",
-        values: slider2.value,
-        startTime: startTime.value,
-        endTime: endTime,
-        duration: duration,
-      });*/
-    };
-    /**
-     * Adds data for Slider_1 to the sliders array.
-     * Sets activeSlider to "Slider_1".
-     * Calculates duration based on the start and end time.
-     * Pushes a new object containing slider information to the sliders array.
-     */
-    const addData1 = () => {
-      activeSlider = "Slider_1";
-      const endTime = new Date();
-      const duration = calculateDuration(startTime.value, endTime);
-      /*sliders.value.push({
-        name: "Slider_1",
-        values: slider1.value,
-        startTime: startTime.value,
-        endTime: endTime,
-        duration: duration,
-      });*/
-    };
-    let currentSecond = 0;
+
+    let interval = 100;
+    let currentStep = 0;
+
     // Set up a timer to check and reset activeSlider every second
     const timerInterval = setInterval(() => {
-      currentSecond++;
-      if (activeSlider) {
-        graph.value[currentSecond * 500] = {
-          slider: activeSlider,
-          value: activeSlider === "Slider_1" ? slider1.value : slider2.value,
-        };
-      } else {
-        graph.value[currentSecond * 500] = null
-      }
-    }, 500);
-    // const timerInterval = setInterval(() => {
-    //   console.log(activeSlider) // Reset activeSlider to null every second
-    // }, 1000);
+      currentStep++;
+
+      graph.value[currentStep * interval] = {
+        active_slider: activeSlider.value,
+        slider1_value: slider1.value,
+        slider2_value: slider2.value
+      };
+    }, interval);
+
     return {
       title,
       description1,
@@ -796,8 +668,8 @@ export default {
       width,
       height,
       dialog,
-      updateData1,
-      updateData2,
+      activateSlider,
+      deactivateSlider,
       updateText1,
       updateTextCenter,
       updateText2,
@@ -805,10 +677,6 @@ export default {
       updateText4,
       handleInput1,
       handleInput2,
-      startValue1,
-      startValue2,
-      addData2,
-      addData1,
       leftBarText,
       rightBarText,
       bottomBarInstruction,
@@ -836,13 +704,6 @@ export default {
         this.slider2 = val
       }
     },
-
-    // MTB : Not sure what that was supposed to be doing, but it is not used at the moment, so I commented it
-    /*customLabel(value) {
-      if (value < 30) return "Bas";
-      if (value < 70) return "Moyen";
-      return "Élevé";
-    },*/
 
     /**
      * Selects all text within the specified reference.
