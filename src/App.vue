@@ -87,7 +87,7 @@ export default {
       language: "",
       returnUrl: "",
       uid: "",
-      languageItems, // Use the constant for language items
+      languageItems: languageItems, // Use the constant for language items
       optionOrder: 0,
       hasQueryParams: false,
       returnLabel: "",
@@ -104,15 +104,8 @@ export default {
   },
   methods: {
     goBackToQualtrics() {
-      // const fullUrl = `${this.returnUrl}?ResponseID=${this.uid}`;
-      // window.location.href = fullUrl;
-
       console.log("Return to Qualtrics");
       window.location.href = this.returnUrl;
-
-      // const fullUrl = `${this.returnUrl}${this.returnUrl.includes('?') ? '&' : '?'}Q_R=${this.uid}&Q_CHL=retake`;
-      // window.location.href = fullUrl;
-
     },
 
     /**
