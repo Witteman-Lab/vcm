@@ -27,7 +27,7 @@
     "chancePreventText": "Screening may prevent breast cancer death.",
 
     "falsePositiveTitle": "Chance of false positives",
-    "falsePositiveDef1": "In breast cancer screening, a false positive means that the first test (blood test) is “positive” (meaning that there is a signal of a possible cancer) but further tests don’t confirm breast cancer. Further tests include biopsies, which are surgeries where tissue is removed from the body for testing.",
+    "falsePositiveDef1": "In breast cancer screening, a false positive means that the first test (mammogram) is “positive” (meaning that there is a signal of a possible cancer) but further tests don’t confirm breast cancer. Further tests include biopsies, which are surgeries where tissue is removed from the body for testing.",
     "falsePositiveDef2": "When people get a false positive, they aren’t diagnosed with breast cancer after all.",
 
     "falsePositiveConsequencesTitle": "What can happen when people get a false positive",
@@ -45,11 +45,11 @@
     "overdiagnosisConsequencesTitle": "What can happen when people are overdiagnosed",
     "overdiagnosisConsIntro": "Being labeled as a “cancer patient” can change how people feel and choices they make.",
     "overdiagnosisTestsIntro": "Breast cancer tests and treatments can:",
-    "overdiagnosisTestsItem1": "cause side effects (for example, surgery may cause pain and need recovery time);",
-    "overdiagnosisTestsItem2": "lower quality of life;",
-    "overdiagnosisTestsItem3": "be a hassle (for example, going to a lot of appointments);",
-    "overdiagnosisTestsItem4": "cost people money (for example, parking costs, time unable to work);",
-    "overdiagnosisTestsItem5": "cost the health care system money and resources (for example, doctors’ time);",
-    "overdiagnosisTestsItem6": "contribute to the \"overmedicalization\" of society (that is, turning too many things into medical problems)."
+    "overdiagnosisTestsItem1": "cause side effects (for example, surgery may cause pain and need recovery time)",
+    "overdiagnosisTestsItem2": "lower quality of life",
+    "overdiagnosisTestsItem3": "be a hassle (for example, going to a lot of appointments)",
+    "overdiagnosisTestsItem4": "cost people money (for example, parking costs, time unable to work)",
+    "overdiagnosisTestsItem5": "cost the health care system money and resources (for example, doctors’ time)",
+    "overdiagnosisTestsItem6": "contribute to the “overmedicalization” of society (that is, turning too many things into medical problems)"
   }
 }
