@@ -104,12 +104,7 @@ export default {
   },
   methods: {
     goBackToQualtrics() {
-      // const fullUrl = `${this.returnUrl}?ResponseID=${this.uid}`;
-      // window.location.href = fullUrl;
       window.location.href = this.returnUrl;
-      // const fullUrl = `${this.returnUrl}${this.returnUrl.includes('?') ? '&' : '?'}Q_R=${this.uid}&Q_CHL=retake`;
-      // window.location.href = fullUrl;
-
     },
     /**
      * Method: handleLogoClick
@@ -150,12 +145,10 @@ export default {
      * @param {number} newOptionOrder - The new language code.
      */
     optionOrder(newOptionOrder) {
-      console.log(newOptionOrder, "je fais mon test");
       localStorage.setItem("optionOrder", newOptionOrder);
       const urlParams = new URLSearchParams(window.location.search);
       urlParams.set("optionOrder", newOptionOrder);
       window.history.replaceState({}, "", `${window.location.pathname}?${urlParams}`);
-      console.log(newOptionOrder, "autre test");
     },
 
     /**
@@ -196,8 +189,10 @@ export default {
   created() {
     // Retrieve language from local storage on component creation
     const urlParams = new URLSearchParams(window.location.search);
+
     this.language =
       urlParams.get("lang") || localStorage.getItem("language") || "en";
+
     this.returnUrl =
       urlParams.get("returnURL") ||
       localStorage.getItem("returnUrl") ||
@@ -206,7 +201,10 @@ export default {
     // this.returnUrl =
     //   urlParams.get("returnUrl") || localStorage.getItem("returnUrl") ||
     //   "https://ulavalfmed.ca1.qualtrics.com/jfe/form/SV_acaVCp5rMgVtKLQ";
-    this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
+
+    //this.uid = urlParams.get("uid") || localStorage.getItem("uid") || "";
+    this.uid = urlParams.get("wlab_random_id") || localStorage.getItem("uid") || "";
+
     this.optionOrder = urlParams.get("optionOrder") || localStorage.getItem("optionOrder") || 0;
     this.hasQueryParams = Array.from(urlParams.keys()).length > 0;
 
