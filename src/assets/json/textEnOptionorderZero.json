@@ -13,7 +13,7 @@
   "bottomSliderLabel":"Chance of getting a false positive or getting overdiagnosed with breast cancer",
   "leftBarText" : "Getting a breast cancer screening test",
   "rightBarText" : "Not getting a breast cancer screening test",
-  "result":"fits best with what matters to you",
+  "result":"fits best with what matters to you.",
   "instruction":["Show Instructions", "Hide Instructions"],
   "returnLabel": "Back to survey",
   "topBarInstruction": "Fits perfectly",

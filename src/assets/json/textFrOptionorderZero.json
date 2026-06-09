@@ -13,7 +13,7 @@
   "bottomSliderLabel":"Chance d’obtenir un faux positif ou d’être surdiagnostiquée d’un cancer du sein",
   "leftBarText" : "Passer un test de dépistage du cancer du sein",
   "rightBarText" : "Ne pas passer un test de dépistage du cancer du sein",
-  "result":"correspond le mieux à ce qui vous importe",
+  "result":"correspond le mieux à ce qui vous importe.",
   "instruction":["Afficher les instructions", "Cacher les instructions"],
   "returnLabel": "Retour au sondage",
   "topBarInstruction": "Convient parfaitement",
