@@ -601,7 +601,8 @@ export default {
             'Content-Type': 'application/json'
           },
           //body: JSON.stringify(jsonData)
-          body: jsonData
+          body: jsonData,
+          keepalive: true
         })
           .then(response => response.text())
           .then(result => console.log(result))
