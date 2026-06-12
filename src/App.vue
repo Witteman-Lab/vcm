@@ -25,6 +25,7 @@
       </v-app-bar>
       <v-main id="main">
         <slider-range
+          ref="slidersRef"
           :language="language"
           :uid="uid"
           :returnUrl="returnUrl"
@@ -41,31 +42,18 @@
         rounded
         x-large
         v-if="hasQueryParams"
-        @click="goBackToQualtrics"
+        @click="saveData"
       >
   <span :style="{ display: isMobile ? 'none' : 'inline-block' }">
     {{ textData.returnLabel }}
   </span>
       </v-btn>
-      <!--      <v-btn-->
-      <!--        class="montserratSemiBoldBtn"-->
-      <!--        color="#398064"-->
-      <!--        variant="outlined"-->
-      <!--        rounded-->
-      <!--        x-large-->
-      <!--        v-if="hasQueryParams"-->
-      <!--      >-->
-      <!--        <span :style="{ display: isMobile ? 'none' : 'inline-block' }"-->
-      <!--          ><a style="color: #398064" :href="this.returnUrl"-->
-      <!--            >{{ textData.returnLabel }}</a-->
-      <!--          ></span-->
-      <!--        >-->
-      <!--      </v-btn>-->
     </div>
   </v-container>
 </template>
 
 <script>
+//import { ref } from 'vue';
 import SliderRange from "./components/SliderRange.vue";
 import textEnOptionorderZero from "../src/assets/json/textEnOptionorderZero.json";
 import textFrOptionorderZero from "../src//assets/json/textFrOptionorderZero.json";
@@ -77,6 +65,14 @@ export default {
   components: {
     SliderRange,
   },
+
+  /**
+   *
+   */
+  setup() {
+
+  },
+
   /**
    * Method: data
    * Description: Returns the initial data for the component.
@@ -87,7 +83,7 @@ export default {
       language: "",
       returnUrl: "",
       uid: "",
-      languageItems, // Use the constant for language items
+      languageItems: languageItems, // Use the constant for language items
       optionOrder: 0,
       hasQueryParams: false,
       returnLabel: "",
@@ -102,10 +98,21 @@ export default {
       }
     },
   },
+
   methods: {
-    goBackToQualtrics() {
-      window.location.href = this.returnUrl;
+    /**
+     *
+     */
+    saveData () {
+      // 1. Ensure the child component reference exists
+      if (!this.$refs.slidersRef) return
+
+      // 2. Call the exposed method from the child component
+      // The parent App component should be doing this, but can't make it work
+      // So for now, the Sliders will deal with the redirection
+      this.$refs.slidersRef.saveDataToFile()
     },
+
     /**
      * Method: handleLogoClick
      * Description: Reloads the current page when the logo is clicked.
@@ -114,12 +121,13 @@ export default {
       window.location.reload();
     },
 
-    syncOptionOrderFromUrl() {
+    // Unused so commented out
+    /*syncOptionOrderFromUrl() {
       const val = new URLSearchParams(location.search).get('optionOrder') || 0;
       if (this.optionOrder !== val) {     // ③ met à jour la data Vue
         this.optionOrder = val;
       }
-    },
+    },*/
 
   },
   watch: {
