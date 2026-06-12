@@ -56,9 +56,9 @@
 //import { ref } from 'vue';
 import SliderRange from "./components/SliderRange.vue";
 import textEnOptionorderZero from "../src/assets/json/textEnOptionorderZero.json";
-import textFrOptionorderZero from "../src//assets/json/textFrOptionorderZero.json";
-import textEnOptionorderOne from "../src//assets/json/textEnOptionorderOne.json";
-import textFrOptionorderOne from "../src//assets/json/textFrOptionorderOne.json";
+import textFrOptionorderZero from "../src/assets/json/textFrOptionorderZero.json";
+import textEnOptionorderOne from "../src/assets/json/textEnOptionorderOne.json";
+import textFrOptionorderOne from "../src/assets/json/textFrOptionorderOne.json";
 const languageItems = ["en", "fr"]; // Define language items as a constant
 
 export default {
