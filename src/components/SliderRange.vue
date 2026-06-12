@@ -15,7 +15,7 @@
         class="text-body text-justify"
       >
   <!--      Subtitle for desktop-->
-        {{ description1 }} {{ description2 }}
+        {{ description1 }} <br> {{ description2 }}
       </div>
 
       <div
@@ -43,8 +43,6 @@
         </v-dialog>
       </div>
     </div>
-
-
 
     <v-row no-gutters>
       <v-col id="sliders-wrp" order-sm="first" style="">
@@ -350,7 +348,6 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </v-container>
-
 </template>
 
 <script>
@@ -360,15 +357,33 @@
  * updating data, and managing the lifecycle of the component.
  */
 import VerticalProgressBar from "./VerticalProgressBar.vue";
-import {onBeforeUnmount, ref, watch,} from "vue";
+import {onBeforeUnmount, ref, watch, defineExpose, /*defineEmits*/} from "vue";
 import {useWindowSize} from "@vueuse/core";
 import { saveAs } from "file-saver";
+
+
+/**
+ * This should apparently be the best way to make the parent component trigger this child component
+ * But couldn't make it work. Kept here for further reference.
+ */
+// Define the event the parent will listen to for navigation
+//const emit = defineEmits(['data-saved']);
 
 export default {
   components: {
     VerticalProgressBar
   },
+
   props: {
+    /**
+     * This should apparently be the best way to make the parent component trigger this child component
+     * But couldn't make it work. Kept here for further reference.
+     */
+    // saveTrigger: {
+    //   type: Boolean,
+    //   default: false
+    // },
+
     /**
      * The language of the text data.
      */
@@ -385,17 +400,27 @@ export default {
     returnUrl: {
       type: URL,
     },
-
+    /**
+     *
+     */
     optionOrder: {
       type: Number,
       default: 0,
     },
-
+    /**
+     *
+     */
     textData: {
       type: Object,
       required: true,
     }
   },
+
+  /**
+   *
+   * @param props
+   * @returns {{title: Ref, description1: Ref, description2: Ref, mobileDescription11: Ref, mobileDescription12: Ref, expansionPanelsText: Ref, centerScaleLabel: *, leftScaleLabel: *, rightScaleLabel: *, topSliderLabel: *, bottomSliderLabel: *, result: Ref, instruction: Ref, slider1: Ref<UnwrapRef<number>>, slider2: Ref<UnwrapRef<number>>, choice1: Ref<UnwrapRef<number>>, choice2: Ref<UnwrapRef<number>>, text1: *, textCenter: *, text2: *, text3: *, text4: *, width: vue_demi.Ref<number>, height: vue_demi.Ref<number>, dialog: Ref<UnwrapRef<boolean>>, activateSlider: activateSlider, deactivateSlider: deactivateSlider, updateText1: updateText1, updateTextCenter: updateTextCenter, updateText2: updateText2, updateText3: updateText3, updateText4: updateText4, handleInput1: handleInput1, handleInput2: handleInput2, saveDataToFile: ((function(): Promise<void>)|*), leftBarText: ({type: String | StringConstructor, required: boolean}|*), rightBarText: ({type: String | StringConstructor, required: boolean}|*), bottomBarInstruction: ({type: String | StringConstructor, required: boolean}|*), topBarInstruction: ({type: String | StringConstructor, required: boolean}|*), middleBarTextNormal: ({type: String | StringConstructor, required: boolean}|*), middleBarTexBold: ({type: String | StringConstructor, required: boolean}|*)}}
+   */
   setup: function (props) {
     const title = ref(props.textData.title);
     const description1 = ref(props.textData.description1);
@@ -416,6 +441,19 @@ export default {
     const mobileDescription11 = ref(props.textData.mobileDescription11);
     const mobileDescription12 = ref(props.textData.mobileDescription12);
     const expansionPanelsText = ref(props.expansionPanelsText);
+
+    /**
+     * This should apparently be the best way to make the parent component trigger this child component
+     * But couldn't make it work. Kept here for further reference.
+     */
+    // watch(
+    //   () => props.saveTrigger,
+    //   (newValue) => {
+    //     console.log("watch props.saveTrigger");
+    //     if (newValue === true) {
+    //       saveDataToFile()
+    //     }
+    //   }, { immediate: true })
 
     watch(
       () => props.textData,
@@ -439,8 +477,7 @@ export default {
         bottomBarInstruction.value = newVal.bottomBarInstruction;
         middleBarTextNormal.value = newVal.middleBarTextNormal;
         middleBarTexBold.value = newVal.middleBarTexBold;
-      },
-      {immediate: true}
+      }, {immediate: true}
     );
 
     const activeSlider = ref(null);
@@ -511,6 +548,9 @@ export default {
       graph: graph.value
     });
 
+    /**
+     * Watch sliders and adjust their values
+     */
     watch(slider1, (newValue) => {
       slider2.value = 100 - newValue;
     });
@@ -522,17 +562,23 @@ export default {
      * Calculates the duration between two timestamps.
      * @param {Date} startTime - The start timestamp.
      * @param {Date} endTime - The end timestamp.
-     //* @returns {string} The duration formatted as "Xm Ys" or "Z ms".
      * @returns {number} The duration in milliseconds (ms)".
      */
     const calculateDuration = (startTime, endTime) => {
       return (endTime - startTime);
     };
 
+    /**
+     *
+     * @param slider
+     */
     const activateSlider = (slider) => {
       activeSlider.value = slider;
     }
 
+    /**
+     *
+     */
     const deactivateSlider = () => {
       activeSlider.value = null;
     };
@@ -543,24 +589,29 @@ export default {
     const updateTextCenter = () => {
       data.value.centerScaleLabel.push(textCenter.value);
     };
+
     /**
      * Updates the left scale label data with the current value of text1.
      */
     const updateText1 = () => {
       data.value.leftScaleLabel.push(text1.value);
     };
+
     /**
      * Updates the right scale label data with the current value of text2.
      */
     const updateText2 = () => {
       data.value.rightScaleLabel.push(text2.value);
     };
+
     /**
      * Updates the top slider label data with the current value of text3.
      */
+
     const updateText3 = () => {
       data.value.topSliderLabel.push(text3.value);
     };
+
     /**
      * Updates the bottom slider label data with the current value of text4.
      */
@@ -568,15 +619,23 @@ export default {
       data.value.bottomSliderLabel.push(text4.value);
     };
 
-    // Save the data to a file when the page is unloaded (refreshed or closed)
+    /**
+     * Lifecycle hook executed before the component is destroyed.
+     * Not really fired now, don't know why...
+     * Action is also performed in window.onbeforeunload below.
+     */
+    onBeforeUnmount(() => {
+      // Delete the timer interval used to capture the use of the sliders
+      clearInterval(timerInterval);
+    });
+
     /**
      * Saves the data to a file on the server.
      * Updates the end time and duration of the VCM session in the data object.
      * Converts the data object to JSON format and saves it as a text file.
      */
-    const saveDataToFile = () => {
-      console.log("saveDataToFile");
-
+    const saveDataToFile = async () => {
+      // End of app use
       const endTimeApp = new Date();
 
       // Update values in the dictionary
@@ -590,43 +649,50 @@ export default {
       const jsonData = JSON.stringify(data.value, null, 2);
 
       // If in dev mode, save to local/client/dev computer (for data validation purpose)
+      // MAKE SURE TO MAKE FALSE BEFORE COMPILING/BUILDING !!!!!
       if(isDevMode) {
-        //const blob = new Blob([jsonData], { type: "text/plain;charset=utf-8" });
         const blob = new Blob([jsonData], { type: "application/json" });
+
+        // Save to client-side (for testing)
         saveAs(blob, "data_test.json");
+
+        // Redirect to returnURL
+        window.location.href = data.value.returnUrl;
       } else {
-        fetch('save_data.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          //body: JSON.stringify(jsonData)
-          body: jsonData,
-          keepalive: true
-        })
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.error('Error:', error));
+        try {
+          const response = await fetch('save_data.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: jsonData
+            // This limits the JSON files to be 64KB or less, otherwise it stops... so better not use this
+            //keepalive: true
+          });
+
+          // If request (saving data) succeeded
+          if (response.ok) {
+            // Redirect to survey
+            window.location.href = data.value.returnUrl;
+          } else {
+            console.error('Server returned an error status');
+          }
+        } catch (error) {
+          console.error('Network error occurred:', error);
+        }
       }
-    };
+    }
 
     /**
-     * Lifecycle hook executed before the component is destroyed.
+     * Exposes the method saveDataToFile to the App.vue parent
+     * Might not be the best approach, but has to do for the time being
      */
-    onBeforeUnmount(() => {
-      console.log("onBeforeUnmount");
+    defineExpose({ saveDataToFile });
 
+    // Register the window.onbeforeunload event to clear the timer interval used to capture the use of the sliders
+    window.onbeforeunload = () => {
       // Delete the timer interval used to capture the use of the sliders
       clearInterval(timerInterval);
-    });
-
-    // Register the window.onbeforeunload event to save the data when the page is refreshed or closed
-    // So we can simply reload the page to save data in dev mode
-    window.onbeforeunload = () => {
-      console.log("window.onbeforeunload");
-
-      // Save data to file on server
-      saveDataToFile();
     };
 
     let interval = 100;
@@ -678,6 +744,7 @@ export default {
       updateText4,
       handleInput1,
       handleInput2,
+      saveDataToFile,
       leftBarText,
       rightBarText,
       bottomBarInstruction,

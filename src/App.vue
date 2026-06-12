@@ -25,6 +25,7 @@
       </v-app-bar>
       <v-main id="main">
         <slider-range
+          ref="slidersRef"
           :language="language"
           :uid="uid"
           :returnUrl="returnUrl"
@@ -41,31 +42,18 @@
         rounded
         x-large
         v-if="hasQueryParams"
-        @click="goBackToQualtrics"
+        @click="saveData"
       >
   <span :style="{ display: isMobile ? 'none' : 'inline-block' }">
     {{ textData.returnLabel }}
   </span>
       </v-btn>
-      <!--      <v-btn-->
-      <!--        class="montserratSemiBoldBtn"-->
-      <!--        color="#398064"-->
-      <!--        variant="outlined"-->
-      <!--        rounded-->
-      <!--        x-large-->
-      <!--        v-if="hasQueryParams"-->
-      <!--      >-->
-      <!--        <span :style="{ display: isMobile ? 'none' : 'inline-block' }"-->
-      <!--          ><a style="color: #398064" :href="this.returnUrl"-->
-      <!--            >{{ textData.returnLabel }}</a-->
-      <!--          ></span-->
-      <!--        >-->
-      <!--      </v-btn>-->
     </div>
   </v-container>
 </template>
 
 <script>
+//import { ref } from 'vue';
 import SliderRange from "./components/SliderRange.vue";
 import textEnOptionorderZero from "../src/assets/json/textEnOptionorderZero.json";
 import textFrOptionorderZero from "../src//assets/json/textFrOptionorderZero.json";
@@ -77,6 +65,14 @@ export default {
   components: {
     SliderRange,
   },
+
+  /**
+   *
+   */
+  setup() {
+
+  },
+
   /**
    * Method: data
    * Description: Returns the initial data for the component.
@@ -102,10 +98,19 @@ export default {
       }
     },
   },
+
   methods: {
-    goBackToQualtrics() {
-      console.log("Return to Qualtrics");
-      window.location.href = this.returnUrl;
+    /**
+     *
+     */
+    saveData () {
+      // 1. Ensure the child component reference exists
+      if (!this.$refs.slidersRef) return
+
+      // 2. Call the exposed method from the child component
+      // The parent App component should be doing this, but can't make it work
+      // So for now, the Sliders will deal with the redirection
+      this.$refs.slidersRef.saveDataToFile()
     },
 
     /**
@@ -116,12 +121,13 @@ export default {
       window.location.reload();
     },
 
-    syncOptionOrderFromUrl() {
+    // Unused so commented out
+    /*syncOptionOrderFromUrl() {
       const val = new URLSearchParams(location.search).get('optionOrder') || 0;
       if (this.optionOrder !== val) {     // ③ met à jour la data Vue
         this.optionOrder = val;
       }
-    },
+    },*/
 
   },
   watch: {
@@ -147,12 +153,10 @@ export default {
      * @param {number} newOptionOrder - The new language code.
      */
     optionOrder(newOptionOrder) {
-      //console.log(newOptionOrder, "je fais mon test");
       localStorage.setItem("optionOrder", newOptionOrder);
       const urlParams = new URLSearchParams(window.location.search);
       urlParams.set("optionOrder", newOptionOrder);
       window.history.replaceState({}, "", `${window.location.pathname}?${urlParams}`);
-      //console.log(newOptionOrder, "autre test");
     },
 
     /**
@@ -175,7 +179,7 @@ export default {
      * Description: Updates the user ID setting and URL parameters with the new user ID.
      * @param {string} newUid - The new user ID.
      */
-    uid: function (newUid) {
+    uid(newUid) {
       localStorage.setItem("uid", newUid);
       const urlParams = new URLSearchParams(window.location.search);
       urlParams.set("uid", newUid);
