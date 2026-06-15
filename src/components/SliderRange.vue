@@ -481,7 +481,7 @@ export default {
     );
 
     const activeSlider = ref(null);
-    const graph = ref({}); // Initialize the graph dictionary
+    const graph = ref([]); // Initialize the graph dictionary
     const startTimeApp = ref(new Date());
     const slider1 = ref(50);
     const slider2 = ref(50);
@@ -702,11 +702,12 @@ export default {
     const timerInterval = setInterval(() => {
       currentStep++;
 
-      graph.value[currentStep * interval] = {
+      graph.value.push({
+        time_ms: (currentStep * interval),
         active_slider: activeSlider.value,
         slider1_value: slider1.value,
         slider2_value: slider2.value
-      };
+      });
     }, interval);
 
     return {
